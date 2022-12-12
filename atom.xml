@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-09-25T02:32:10.889Z</updated>
+  <updated>2022-12-12T12:49:59.077Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>re求学之路</title>
+    <link href="http://example.com/2022/12/12/re%E6%B1%82%E5%AD%A6%E4%B9%8B%E8%B7%AF/"/>
+    <id>http://example.com/2022/12/12/re%E6%B1%82%E5%AD%A6%E4%B9%8B%E8%B7%AF/</id>
+    <published>2022-12-12T12:45:19.000Z</published>
+    <updated>2022-12-12T12:49:59.077Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;简单介绍，其实只是想试试新搭建的博客能不能用&lt;/p&gt;
+&lt;p&gt;Reverse即软件逆向工程，是对编译成型的二进制程序进行代码、逻辑和功能分析的过程。在CTF中主要&lt;/p&gt;
+&lt;p&gt;考察软件静态分析和动态调试能力，常见的逆向目标为Windows、Linux平台下x86、x64二进</summary>
+        
+      
+    
+    
+    
+    <category term="re" scheme="http://example.com/categories/re/"/>
+    
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
