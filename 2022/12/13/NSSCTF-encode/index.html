@@ -81,20 +81,22 @@
 
 
 
-<meta name="description" content="在NSS中的一些做题记录 [BJDCTF 2020]encode查壳，upx简单脱壳 主要逻辑：   可以简单分析出他的逻辑">
+<meta name="description" content="在NSS中的一些做题记录 [BJDCTF 2020]encode查壳，upx简单脱壳 主要逻辑：  跟进两个加密函数，可以发现一个是变表的base64，一个是RC4加密   所以整个思路就是：  对输入的flag进行变表的base64加密 进行一个异或操作 进行RC4加密（密钥为Flag{This_a_Flag}） 最后进行一个验证  RC4在线解密：http:&#x2F;&#x2F;www.hiencode.com">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NSSCTF encode">
 <meta property="og:url" content="http://example.com/2022/12/13/NSSCTF-encode/index.html">
 <meta property="og:site_name" content="Reverse">
-<meta property="og:description" content="在NSS中的一些做题记录 [BJDCTF 2020]encode查壳，upx简单脱壳 主要逻辑：   可以简单分析出他的逻辑">
+<meta property="og:description" content="在NSS中的一些做题记录 [BJDCTF 2020]encode查壳，upx简单脱壳 主要逻辑：  跟进两个加密函数，可以发现一个是变表的base64，一个是RC4加密   所以整个思路就是：  对输入的flag进行变表的base64加密 进行一个异或操作 进行RC4加密（密钥为Flag{This_a_Flag}） 最后进行一个验证  RC4在线解密：http:&#x2F;&#x2F;www.hiencode.com">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/12/13/NSSCTF-encode/image-20221213083908814.png">
+<meta property="og:image" content="http://example.com/NSSCTF-encode/image-20221213085151395.png">
+<meta property="og:image" content="http://example.com/NSSCTF-encode/image-20221213085441778.png">
+<meta property="og:image" content="http://example.com/NSSCTF-encode/image-20221213085537087.png">
 <meta property="article:published_time" content="2022-12-13T00:33:31.000Z">
-<meta property="article:modified_time" content="2022-12-13T00:43:57.015Z">
+<meta property="article:modified_time" content="2022-12-13T01:43:47.140Z">
 <meta property="article:author" content="An0rak">
 <meta property="article:tag" content="ctf">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/12/13/NSSCTF-encode/image-20221213083908814.png">
+<meta name="twitter:image" content="http://example.com/NSSCTF-encode/image-20221213085151395.png">
 
 
 
@@ -393,9 +395,27 @@
         <p>在NSS中的一些做题记录</p>
 <h1 id="BJDCTF-2020-encode"><a href="#BJDCTF-2020-encode" class="headerlink" title="[BJDCTF 2020]encode"></a>[BJDCTF 2020]encode</h1><p>查壳，upx简单脱壳</p>
 <p>主要逻辑：</p>
-<img src="/2022/12/13/NSSCTF-encode/image-20221213083908814.png" class title="This is an example image">
+<p><img src="/NSSCTF-encode/image-20221213085151395.png" alt="image-20221213085151395"></p>
+<p>跟进两个加密函数，可以发现一个是变表的base64，一个是RC4加密</p>
+<p><img src="/NSSCTF-encode/image-20221213085441778.png" alt="image-20221213085441778"></p>
+<p><img src="/NSSCTF-encode/image-20221213085537087.png" alt="image-20221213085537087"></p>
+<p>所以整个思路就是：</p>
+<ul>
+<li>对输入的flag进行变表的base64加密</li>
+<li>进行一个异或操作</li>
+<li>进行RC4加密（密钥为Flag{This_a_Flag}）</li>
+<li>最后进行一个验证</li>
+</ul>
+<p>RC4在线解密：<a target="_blank" rel="noopener" href="http://www.hiencode.com/rc4.html">http://www.hiencode.com/rc4.html</a></p>
+<p>解密后明文：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">23152553081a5938126a3931275b0b1313085c330b356101511f105c</span><br></pre></td></tr></table></figure>
 
-<p>可以简单分析出他的逻辑</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">str1=<span class="string">&quot;23152553081a5938126a3931275b0b1313085c330b356101511f105c&quot;</span></span><br><span class="line">str2=<span class="string">&quot;Flag&#123;This_a_Flag&#125;&quot;</span></span><br><span class="line"><span class="built_in">str</span>=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(str1),<span class="number">2</span>):</span><br><span class="line">    <span class="built_in">str</span>.append(<span class="built_in">int</span>(<span class="string">&quot;0x&quot;</span>+str1[i:i+<span class="number">2</span>],<span class="number">16</span>))</span><br><span class="line"><span class="comment">#这里由于原来数据都是16进制的，所以进行了一个两位一组分组</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)</span><br><span class="line">base64_encode=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">str</span>)):</span><br><span class="line">    base64_encode+=<span class="built_in">chr</span>(<span class="built_in">str</span>[i]^<span class="built_in">ord</span>(str2[i%<span class="built_in">len</span>(str2)]))</span><br><span class="line"><span class="built_in">print</span>(base64_encode)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">str1 = <span class="string">&quot;eyD4sN1Qa5Xna7jtnN0RlN5i8lO=&quot;</span>   <span class="comment">#str1是要解密的代码</span></span><br><span class="line">string1 = <span class="string">&quot;0123456789+/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>   <span class="comment">#string1是改过之后的base64表</span></span><br><span class="line">string2 = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line"><span class="built_in">print</span>(base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string1,string2))))</span><br><span class="line"><span class="comment">#BJD&#123;0v0_Y0u_g07_1T!&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39542714/article/details/106834866">https://blog.csdn.net/qq_39542714/article/details/106834866</a></p>
 
       
     </div>
