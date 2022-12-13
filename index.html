@@ -393,10 +393,16 @@
             <p>在NSS中的一些做题记录</p>
 <h1 id="BJDCTF-2020-encode"><a href="#BJDCTF-2020-encode" class="headerlink" title="[BJDCTF 2020]encode"></a>[BJDCTF 2020]encode</h1><p>查壳，upx简单脱壳</p>
 <p>主要逻辑：</p>
-<p><img src="/NSSCTF-encode/image-20221213085151395.png" alt="image-20221213085151395"></p>
+<p>_posts&#x2F;post_name&#x2F;image-20221213085151395.png</p>
+<img src="/2022/12/13/NSSCTF-encode/image-20221213085151395.png" class title="This is an image">
+
 <p>跟进两个加密函数，可以发现一个是变表的base64，一个是RC4加密</p>
-<p><img src="/NSSCTF-encode/image-20221213085441778.png" alt="image-20221213085441778"></p>
-<p><img src="/NSSCTF-encode/image-20221213085537087.png" alt="image-20221213085537087"></p>
+<p>_posts&#x2F;post_name&#x2F;image-20221213085441778.png</p>
+<img src="/2022/12/13/NSSCTF-encode/image-20221213085441778.png" class title="This is an image">
+
+<p>_posts&#x2F;post_name&#x2F;image-20221213085537087.png</p>
+<img src="/2022/12/13/NSSCTF-encode/image-20221213085537087.png" class title="This is an image">
+
 <p>所以整个思路就是：</p>
 <ul>
 <li>对输入的flag进行变表的base64加密</li>
