@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>NSSCTF encode</title>
+    <url>/2022/12/13/NSSCTF-encode/</url>
+    <content><![CDATA[<p>在NSS中的一些做题记录</p>
+<h1 id="BJDCTF-2020-encode"><a href="#BJDCTF-2020-encode" class="headerlink" title="[BJDCTF 2020]encode"></a>[BJDCTF 2020]encode</h1><p>查壳，upx简单脱壳</p>
+<p>主要逻辑：</p>
+<img src="/2022/12/13/NSSCTF-encode/image-20221213083908814.png" class title="This is an example image">
+
+<p>可以简单分析出他的逻辑</p>
+]]></content>
+      <categories>
+        <category>re</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2022/09/25/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -33,7 +50,6 @@
 <p>静态分析法是在不执行代码文件的情况下，对代码进行静态分析的一种方法，主要观察代码文件的外部特性，包括文件类型分析和静态反汇编、反编译。通常使用反汇编工具查看内部代码，分析代码结构。</p>
 <p><strong>动态分析法</strong></p>
 <p>动态分析法是在程序文件的执行过程中对代码进行动态分析的一种方法，其通过调试来分析代码、获取内存的状态等，目的在于定位关键代码后，在程序运行的过程中，借由输出信息（寄存器，内存变化，程序输出）等来验证自己的推断或是理解程序功能。通常使用调试器来分析程序的内部结构和实现原理。</p>
-<p><img src="C:/Users/duodu/AppData/Roaming/Typora/typora-user-images/image-20221212230223517.png" alt="image-20221212230223517"></p>
 ]]></content>
       <categories>
         <category>re</category>
