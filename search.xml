@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>re求学之路</title>
-    <url>/2022/12/12/re%E6%B1%82%E5%AD%A6%E4%B9%8B%E8%B7%AF/</url>
-    <content><![CDATA[<p>简单介绍，其实只是想试试新搭建的博客能不能用</p>
-<p>Reverse即软件逆向工程，是对编译成型的二进制程序进行代码、逻辑和功能分析的过程。在CTF中主要</p>
-<p>考察软件静态分析和动态调试能力，常见的逆向目标为Windows、Linux平台下x86、x64二进制可执行</p>
-<p>程序。</p>
-<p><strong>能力要求</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">熟悉如操作系统，汇编语言，加解密等相关知识。</span><br><span class="line"></span><br><span class="line">具有丰富的多种高级语言的编程经验。</span><br><span class="line"></span><br><span class="line">熟悉多种编译器的编译原理。</span><br><span class="line"></span><br><span class="line">较强的程序理解和逆向分析能力。</span><br></pre></td></tr></table></figure>
-
-<p><strong>逆向分析的主要方法</strong></p>
-<p><strong>静态分析法</strong></p>
-<p>静态分析法是在不执行代码文件的情况下，对代码进行静态分析的一种方法，主要观察代码文件的外部特性，包括文件类型分析和静态反汇编、反编译。通常使用反汇编工具查看内部代码，分析代码结构。</p>
-<p><strong>动态分析法</strong></p>
-<p>动态分析法是在程序文件的执行过程中对代码进行动态分析的一种方法，其通过调试来分析代码、获取内存的状态等，目的在于定位关键代码后，在程序运行的过程中，借由输出信息（寄存器，内存变化，程序输出）等来验证自己的推断或是理解程序功能。通常使用调试器来分析程序的内部结构和实现原理。</p>
-]]></content>
-      <categories>
-        <category>re</category>
-      </categories>
-      <tags>
-        <tag>ctf</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NSSCTF encode</title>
     <url>/2022/12/13/NSSCTF-encode/</url>
     <content><![CDATA[<p>在NSS中的一些做题记录</p>
@@ -81,5 +58,92 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>re求学之路</title>
+    <url>/2022/12/12/re%E6%B1%82%E5%AD%A6%E4%B9%8B%E8%B7%AF/</url>
+    <content><![CDATA[<p>简单介绍，其实只是想试试新搭建的博客能不能用</p>
+<p>Reverse即软件逆向工程，是对编译成型的二进制程序进行代码、逻辑和功能分析的过程。在CTF中主要</p>
+<p>考察软件静态分析和动态调试能力，常见的逆向目标为Windows、Linux平台下x86、x64二进制可执行</p>
+<p>程序。</p>
+<p><strong>能力要求</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">熟悉如操作系统，汇编语言，加解密等相关知识。</span><br><span class="line"></span><br><span class="line">具有丰富的多种高级语言的编程经验。</span><br><span class="line"></span><br><span class="line">熟悉多种编译器的编译原理。</span><br><span class="line"></span><br><span class="line">较强的程序理解和逆向分析能力。</span><br></pre></td></tr></table></figure>
+
+<p><strong>逆向分析的主要方法</strong></p>
+<p><strong>静态分析法</strong></p>
+<p>静态分析法是在不执行代码文件的情况下，对代码进行静态分析的一种方法，主要观察代码文件的外部特性，包括文件类型分析和静态反汇编、反编译。通常使用反汇编工具查看内部代码，分析代码结构。</p>
+<p><strong>动态分析法</strong></p>
+<p>动态分析法是在程序文件的执行过程中对代码进行动态分析的一种方法，其通过调试来分析代码、获取内存的状态等，目的在于定位关键代码后，在程序运行的过程中，借由输出信息（寄存器，内存变化，程序输出）等来验证自己的推断或是理解程序功能。通常使用调试器来分析程序的内部结构和实现原理。</p>
+]]></content>
+      <categories>
+        <category>re</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈python逆向</title>
+    <url>/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="pyc文件结构解析"><a href="#pyc文件结构解析" class="headerlink" title="pyc文件结构解析"></a>pyc文件结构解析</h2><p>pyc文件是python在编译过程中出现的主要中间过程文件，pyc文件是二进制的，可以由python虚拟机直接执行的程序，要注意的是pyc的内容和python版本是密切相关的</p>
+<p>Python代码的编译结果就是PyCodeObject对象。PyCodeObject对象可以由虚拟机加载后直接运行，而pyc文件就是PyCodeObject对象在硬盘上的保存形式</p>
+<p>pyc文件结构主要包括两部分：pyc文件头部表示和PyCodeObject对象部分</p>
+<p>完整的pyc文件结构：</p>
+<img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221015182903419.png" class title="This is an image">
+
+<p>我们可以通过运行实例，来理解pyc文件</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#源码：</span></span><br><span class="line">s=<span class="string">&#x27;hello&#x27;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    a=<span class="number">3</span></span><br><span class="line">    <span class="built_in">print</span>(s)</span><br><span class="line">func()</span><br></pre></td></tr></table></figure>
+
+<p>执行一下指令生成pyc文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python2 -m py_compile test.py</span><br></pre></td></tr></table></figure>
+
+<p>用二进制打开生成的test.pyc文件</p>
+<img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221015212226821.png" class title="This is an image">
+
+<p>前4个字节：03f3 0d0a  表示python版本</p>
+<p>第5-8个字节：9eb2 4a63  表示pyc文件修改时间</p>
+<h2 id="pyc字节码是什么"><a href="#pyc字节码是什么" class="headerlink" title="pyc字节码是什么"></a>pyc字节码是什么</h2><p>Python实际上将源代码编译为一组虚拟机指令，Python的解释器就是该虚拟机的一个具体实现。这种跑在虚拟机内部的中间格式被称为“字节码”。</p>
+<p><strong>补</strong>：因为python很吃环境，所以我们可以使用anaconda进行环境的切换</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda create --name my_test python=3.7 #创建环境</span><br><span class="line">conda activate 环境名  #切换环境</span><br><span class="line">conda info --env #查看所创建的环境列表</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221014203637627.png" class title="This is an image">
+
+<h2 id="如何使用anaconda读取pyc文件的字节码？"><a href="#如何使用anaconda读取pyc文件的字节码？" class="headerlink" title="如何使用anaconda读取pyc文件的字节码？"></a>如何使用anaconda读取pyc文件的字节码？</h2><p>注意对应的环境</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import dis,marshal    #导入两个库</span><br><span class="line">f=open(&#x27;tmp.pyc&#x27;,&#x27;rb&#x27;).read()  #以二进制的形式读取</span><br><span class="line">code=marshal.loads(f[16:])  #装载，注意看py2还是py3</span><br><span class="line">code</span><br><span class="line">dis.dis(code)</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221014204406181.png" class title="This is an image">
+
+<img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221014205000618.png" class title="This is an image">
+
+<p><strong>补：</strong></p>
+<ul>
+<li>python2的magic number为前8个字节，python3的magic number为前16个字节</li>
+<li>python2是三个字节为一个指令，python3是两个字节为一个指令</li>
+</ul>
+<p>所以一般来说我们会遇到几种类型题：</p>
+<p>1.直接给出txt文件，让你翻译字节码</p>
+<ul>
+<li>读py字节码</li>
+<li>根据opcode文件查询意思</li>
+</ul>
+<p>2.给出pyinstaller打包的exe文件</p>
+<ul>
+<li>pyinstxtractor工具解包</li>
+<li>uncompyle6反编译</li>
+</ul>
+<p>3.给出pyc文件，加花或者没加花，后面会详细介绍加花的题目</p>
+<h3 id="这里先给大家看一个最简单的例子："><a href="#这里先给大家看一个最简单的例子：" class="headerlink" title="这里先给大家看一个最简单的例子："></a>这里先给大家看一个最简单的例子：</h3><img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221227162243135.png" class title="This is an image">
+
+<p>这里直接给了一个pyc文件，但无法进行反编译。我们仔细观察可以发现这个pyc文件缺少了时间戳，所以我们补上四字节就可以正常反编译了。</p>
+<img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221227163112058.png" class title="This is an image">
+
+<p>无法反编译的情况，也有可能是因为加了花，我们后续再继续介绍。</p>
+]]></content>
+      <categories>
+        <category>re</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
   </entry>
 </search>

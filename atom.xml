@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-12-13T01:55:56.043Z</updated>
+  <updated>2022-12-27T08:34:03.032Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅谈python逆向</title>
+    <link href="http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/"/>
+    <id>http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/</id>
+    <published>2022-12-27T08:11:51.000Z</published>
+    <updated>2022-12-27T08:34:03.032Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;h2 id=&quot;pyc文件结构解析&quot;&gt;&lt;a href=&quot;#pyc文件结构解析&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="re" scheme="http://example.com/categories/re/"/>
+    
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
+    
+  </entry>
   
   <entry>
     <title>NSSCTF encode</title>

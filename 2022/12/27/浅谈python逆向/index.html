@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ctf," />
 
 
 
@@ -81,15 +81,26 @@
 
 
 
-<meta name="description" content="开心就好">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Reverse">
-<meta property="og:url" content="http://example.com/archives/index.html">
+<meta name="description" content="前言pyc文件结构解析pyc文件是python在编译过程中出现的主要中间过程文件，pyc文件是二进制的，可以由python虚拟机直接执行的程序，要注意的是pyc的内容和python版本是密切相关的 Python代码的编译结果就是PyCodeObject对象。PyCodeObject对象可以由虚拟机加载后直接运行，而pyc文件就是PyCodeObject对象在硬盘上的保存形式 pyc文件结构主要包括">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈python逆向">
+<meta property="og:url" content="http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/index.html">
 <meta property="og:site_name" content="Reverse">
-<meta property="og:description" content="开心就好">
+<meta property="og:description" content="前言pyc文件结构解析pyc文件是python在编译过程中出现的主要中间过程文件，pyc文件是二进制的，可以由python虚拟机直接执行的程序，要注意的是pyc的内容和python版本是密切相关的 Python代码的编译结果就是PyCodeObject对象。PyCodeObject对象可以由虚拟机加载后直接运行，而pyc文件就是PyCodeObject对象在硬盘上的保存形式 pyc文件结构主要包括">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221015182903419.png">
+<meta property="og:image" content="http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221015212226821.png">
+<meta property="og:image" content="http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221014203637627.png">
+<meta property="og:image" content="http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221014204406181.png">
+<meta property="og:image" content="http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221014205000618.png">
+<meta property="og:image" content="http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221227162243135.png">
+<meta property="og:image" content="http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221227163112058.png">
+<meta property="article:published_time" content="2022-12-27T08:11:51.000Z">
+<meta property="article:modified_time" content="2022-12-27T08:34:03.032Z">
 <meta property="article:author" content="An0rak">
+<meta property="article:tag" content="ctf">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221015182903419.png">
 
 
 
@@ -119,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/archives/"/>
+  <link rel="canonical" href="http://example.com/2022/12/27/浅谈python逆向/"/>
 
 
 
 
 
-  <title>Archive | Reverse</title>
+  <title>浅谈python逆向 | Reverse</title>
   
 
 
@@ -144,7 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -282,185 +293,221 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">浅谈python逆向</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-27T16:11:51+08:00">
+                2022-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 4 posts in total. Keep on posting.
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/re/" itemprop="url" rel="index">
+                    <span itemprop="name">re</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2022">2022</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/" itemprop="url">
-              
-                <span itemprop="name">浅谈python逆向</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-12-27T16:11:51+08:00"
-              content="2022-12-27" >
-          12-27
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/12/13/NSSCTF-encode/" itemprop="url">
-              
-                <span itemprop="name">NSSCTF encode</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-12-13T08:33:31+08:00"
-              content="2022-12-13" >
-          12-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="pyc文件结构解析"><a href="#pyc文件结构解析" class="headerlink" title="pyc文件结构解析"></a>pyc文件结构解析</h2><p>pyc文件是python在编译过程中出现的主要中间过程文件，pyc文件是二进制的，可以由python虚拟机直接执行的程序，要注意的是pyc的内容和python版本是密切相关的</p>
+<p>Python代码的编译结果就是PyCodeObject对象。PyCodeObject对象可以由虚拟机加载后直接运行，而pyc文件就是PyCodeObject对象在硬盘上的保存形式</p>
+<p>pyc文件结构主要包括两部分：pyc文件头部表示和PyCodeObject对象部分</p>
+<p>完整的pyc文件结构：</p>
+<img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221015182903419.png" class title="This is an image">
 
-        
-        
+<p>我们可以通过运行实例，来理解pyc文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#源码：</span></span><br><span class="line">s=<span class="string">&#x27;hello&#x27;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    a=<span class="number">3</span></span><br><span class="line">    <span class="built_in">print</span>(s)</span><br><span class="line">func()</span><br></pre></td></tr></table></figure>
 
-        
+<p>执行一下指令生成pyc文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 -m py_compile test.py</span><br></pre></td></tr></table></figure>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>用二进制打开生成的test.pyc文件</p>
+<img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221015212226821.png" class title="This is an image">
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/12/12/re%E6%B1%82%E5%AD%A6%E4%B9%8B%E8%B7%AF/" itemprop="url">
-              
-                <span itemprop="name">re求学之路</span>
-              
-            </a>
-        
-      </h2>
+<p>前4个字节：03f3 0d0a  表示python版本</p>
+<p>第5-8个字节：9eb2 4a63  表示pyc文件修改时间</p>
+<h2 id="pyc字节码是什么"><a href="#pyc字节码是什么" class="headerlink" title="pyc字节码是什么"></a>pyc字节码是什么</h2><p>Python实际上将源代码编译为一组虚拟机指令，Python的解释器就是该虚拟机的一个具体实现。这种跑在虚拟机内部的中间格式被称为“字节码”。</p>
+<p><strong>补</strong>：因为python很吃环境，所以我们可以使用anaconda进行环境的切换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create --name my_test python=3.7 #创建环境</span><br><span class="line">conda activate 环境名  #切换环境</span><br><span class="line">conda info --env #查看所创建的环境列表</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-12-12T20:45:19+08:00"
-              content="2022-12-12" >
-          12-12
-        </time>
-      </div>
+<img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221014203637627.png" class title="This is an image">
 
-    </header>
-  </article>
+<h2 id="如何使用anaconda读取pyc文件的字节码？"><a href="#如何使用anaconda读取pyc文件的字节码？" class="headerlink" title="如何使用anaconda读取pyc文件的字节码？"></a>如何使用anaconda读取pyc文件的字节码？</h2><p>注意对应的环境</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import dis,marshal    #导入两个库</span><br><span class="line">f=open(&#x27;tmp.pyc&#x27;,&#x27;rb&#x27;).read()  #以二进制的形式读取</span><br><span class="line">code=marshal.loads(f[16:])  #装载，注意看py2还是py3</span><br><span class="line">code</span><br><span class="line">dis.dis(code)</span><br></pre></td></tr></table></figure>
 
+<img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221014204406181.png" class title="This is an image">
 
+<img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221014205000618.png" class title="This is an image">
+
+<p><strong>补：</strong></p>
+<ul>
+<li>python2的magic number为前8个字节，python3的magic number为前16个字节</li>
+<li>python2是三个字节为一个指令，python3是两个字节为一个指令</li>
+</ul>
+<p>所以一般来说我们会遇到几种类型题：</p>
+<p>1.直接给出txt文件，让你翻译字节码</p>
+<ul>
+<li>读py字节码</li>
+<li>根据opcode文件查询意思</li>
+</ul>
+<p>2.给出pyinstaller打包的exe文件</p>
+<ul>
+<li>pyinstxtractor工具解包</li>
+<li>uncompyle6反编译</li>
+</ul>
+<p>3.给出pyc文件，加花或者没加花，后面会详细介绍加花的题目</p>
+<h3 id="这里先给大家看一个最简单的例子："><a href="#这里先给大家看一个最简单的例子：" class="headerlink" title="这里先给大家看一个最简单的例子："></a>这里先给大家看一个最简单的例子：</h3><img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221227162243135.png" class title="This is an image">
+
+<p>这里直接给了一个pyc文件，但无法进行反编译。我们仔细观察可以发现这个pyc文件缺少了时间戳，所以我们补上四字节就可以正常反编译了。</p>
+<img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221227163112058.png" class title="This is an image">
+
+<p>无法反编译的情况，也有可能是因为加了花，我们后续再继续介绍。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2022/09/25/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2022-09-25T10:32:10+08:00"
-              content="2022-09-25" >
-          09-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ctf/" rel="tag"># ctf</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/12/13/NSSCTF-encode/" rel="next" title="NSSCTF encode">
+                <i class="fa fa-chevron-left"></i> NSSCTF encode
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -468,6 +515,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -488,8 +539,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -556,6 +616,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pyc%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E8%A7%A3%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">pyc文件结构解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pyc%E5%AD%97%E8%8A%82%E7%A0%81%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.2.</span> <span class="nav-text">pyc字节码是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8anaconda%E8%AF%BB%E5%8F%96pyc%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">如何使用anaconda读取pyc文件的字节码？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%99%E9%87%8C%E5%85%88%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">这里先给大家看一个最简单的例子：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -698,6 +774,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
