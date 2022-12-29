@@ -297,6 +297,180 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/29/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/12/29/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F/" itemprop="url">从汇编角度看程序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-29T19:32:02+08:00">
+                2022-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/re/" itemprop="url" rel="index">
+                    <span itemprop="name">re</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="if-else-单分支识别"><a href="#if-else-单分支识别" class="headerlink" title="if else 单分支识别"></a>if else 单分支识别</h1><p>OD载入，找到main函数</p>
+<img src="/2022/12/29/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F/image-20221229194153894.png" class title="This is an image">
+
+<p>关键逻辑其实就是下面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">| mov dword ptr ss:[ebp-C],0                    | 声明一个局部变量 flag=0</span><br><span class="line">| lea eax,dword ptr ss:[ebp-C]                  | 将ebp-c的地址赋给eax</span><br><span class="line">| push eax                                      | 将eax压栈</span><br><span class="line">| push test.18FE60                              | 18FE60:&quot;%d&quot;   </span><br><span class="line">| call test.E54EF                               | 调用函数scanf(&quot;%d&quot;,&amp;flag);</span><br><span class="line">| add esp,8                                     | 平衡堆栈</span><br><span class="line">| cmp dword ptr ss:[ebp-C],5                    | 将flag的值与0x5进行一个比较</span><br><span class="line">| jne test.EA282                                | 等于就顺序执行，不等于就跳转</span><br><span class="line">| push test.18FE64                              | 18FE64:&quot;nFlag = 5!\n&quot;</span><br><span class="line">| call test.E6516                               | 调用函数printf</span><br><span class="line">| add esp,4                                     | 平栈</span><br><span class="line">| jmp test.EA28F                                |</span><br><span class="line">| push test.18FE74                              | 18FE74:&quot;nFlag != 5!\n&quot;</span><br><span class="line">| call test.E6516                               | 调用函数printf</span><br><span class="line">| add esp,4                                     |</span><br></pre></td></tr></table></figure>
+
+<h1 id="switch多分支识别"><a href="#switch多分支识别" class="headerlink" title="switch多分支识别"></a>switch多分支识别</h1>
+
+<p>其实switch多分支有个很明显的特征就是分支表</p>
+<img src="/2022/12/29/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F/image-20221229205352666.png" class title="This is an image">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">| mov dword ptr ss:[ebp-C],0                    | 声明一个局部变量 flag=0</span><br><span class="line">| lea eax,dword ptr ss:[ebp-C]                  | 将ebp-c的地址赋给eax</span><br><span class="line">| push eax                                      |</span><br><span class="line">| push switch多分支样本.4AFE50                       | 4AFE50:&quot;%d&quot;</span><br><span class="line">| call switch多分支样本.4054EF                       | 调用函数scanf</span><br><span class="line">| add esp,8                                     | 平栈</span><br><span class="line">| mov eax,dword ptr ss:[ebp-C]                  | eax=flag=0</span><br><span class="line">| mov dword ptr ss:[ebp-D4],eax                 | </span><br><span class="line">| cmp dword ptr ss:[ebp-D4],6                   | 比较</span><br><span class="line">| ja switch多分支样本.40A2E6                     | 如果flag&gt;0x6,就跳出分支,否则顺序执行</span><br><span class="line">| mov ecx,dword ptr ss:[ebp-D4]                 | ecx:EntryPoint</span><br><span class="line">| jmp dword ptr ds:[ecx*4+40A334]               | 根据输入的数的条件进行跳转</span><br><span class="line">| push switch多分支样本.4AFE54                       | case 0</span><br><span class="line">| call switch多分支样本.406516                       |</span><br><span class="line">| add esp,4                                     |</span><br><span class="line">| jmp switch多分支样本.40A2E6                        |</span><br><span class="line">| push switch多分支样本.4AFE58                       | case 1</span><br><span class="line">| call switch多分支样本.406516                       |</span><br><span class="line">| add esp,4                                     |</span><br><span class="line">| jmp switch多分支样本.40A2E6                        |</span><br><span class="line">| push switch多分支样本.4AFE5C                       | case 2</span><br><span class="line">| call switch多分支样本.406516                       |</span><br><span class="line">| add esp,4                                     |</span><br><span class="line">| jmp switch多分支样本.40A2E6                        |</span><br><span class="line">| push switch多分支样本.4AFE60                       | case 3</span><br><span class="line">| call switch多分支样本.406516                       |</span><br><span class="line">| add esp,4                                     |</span><br><span class="line">| jmp switch多分支样本.40A2E6                        |</span><br><span class="line">| push switch多分支样本.4AFE64                       | case 4</span><br><span class="line">| call switch多分支样本.406516                       |</span><br><span class="line">| add esp,4                                     |</span><br><span class="line">| jmp switch多分支样本.40A2E6                        |</span><br><span class="line">| push switch多分支样本.4AFE68                       | case 5</span><br><span class="line">| call switch多分支样本.406516                       |</span><br><span class="line">| add esp,4                                     |</span><br><span class="line">| jmp switch多分支样本.40A2E6                        |</span><br><span class="line">| push switch多分支样本.4AFE6C                       | case 6</span><br><span class="line">| call switch多分支样本.406516                       |</span><br><span class="line">| add esp,4                                     |</span><br></pre></td></tr></table></figure>
+
+<h1 id="for循环识别"><a href="#for循环识别" class="headerlink" title="for循环识别"></a>for循环识别</h1><img src="/2022/12/29/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F/image-20221229210431415.png" class title="This is an image">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">| mov dword ptr ss:[ebp-8],0                    | flag=0</span><br><span class="line">| jmp 17.for循环识别.88D3D0                         |无条件转跳至cmp</span><br><span class="line">| mov eax,dword ptr ss:[ebp-8]                  | eax=flag eax=0</span><br><span class="line">| add eax,1                                     | 自增 eax++</span><br><span class="line">| mov dword ptr ss:[ebp-8],eax                  | flag=eax flag=1</span><br><span class="line">| cmp dword ptr ss:[ebp-8],64                   | 对比flag与0x64</span><br><span class="line">| jge 17.for循环识别.88D3E9                         | 如果&gt;=0x64就跳出循环</span><br><span class="line">| mov eax,dword ptr ss:[ebp-8]                  | eax=flag eax=0</span><br><span class="line">| push eax                                      |</span><br><span class="line">| push 17.for循环识别.91BE50                        | 91BE50:&quot;%d&quot;</span><br><span class="line">| call 17.for循环识别.889E81                        | printf</span><br><span class="line">| add esp,8                                     |</span><br><span class="line">| jmp 17.for循环识别.88D3C7                         | 无条件跳转至第三行</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//源码：</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="启动函数"><a href="#启动函数" class="headerlink" title="启动函数"></a>启动函数</h1><p>在编写Win32应用程序时，都必须在源码里实现一个WinMain函数，但windows程序的执行并不是从WinMain函数开始的，首先被执行的是启动函数的相关代码，这段代码由编译器生成，在启动代码初始化进程完成后，才会调用WinMain函数</p>
+<p>启动函数的作用基本相同，包括检索指向新进程的命令行指针，检索指向新进程的环境变量指针，全局变量初始化，内存栈初始化等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">00401180 &gt;/$  55            push ebp</span><br><span class="line">00401181  |.  8BEC          mov ebp,esp</span><br><span class="line">00401183  |.  6A FF         push -0x1</span><br><span class="line">00401185  |.  68 D0404000   push ReverseM.004040D0</span><br><span class="line">0040118A  |.  68 B41C4000   push ReverseM.00401CB4                         ;  SE 处理程序安装</span><br><span class="line">0040118F  |.  64:A1 0000000&gt;mov eax,dword ptr fs:[0]</span><br><span class="line">00401195  |.  50            push eax</span><br><span class="line">00401196  |.  64:8925 00000&gt;mov dword ptr fs:[0],esp</span><br><span class="line">0040119D  |.  83EC 58       sub esp,0x58</span><br><span class="line">004011A0  |.  53            push ebx</span><br><span class="line">004011A1  |.  56            push esi                                       ;  ReverseM.&lt;ModuleEntryPoint&gt;</span><br><span class="line">004011A2  |.  57            push edi                                       ;  ReverseM.&lt;ModuleEntryPoint&gt;</span><br><span class="line">004011A3  |.  8965 E8       mov [local.6],esp</span><br><span class="line">004011A6  |.  FF15 40404000 call dword ptr ds:[&lt;&amp;KERNEL32.GetVersion&gt;]     ;  确定系统的版本</span><br><span class="line">...</span><br><span class="line">004011F4  |.  FF15 3C404000 call dword ptr ds:[&lt;&amp;KERNEL32.GetCommandLineA&gt;&gt;; 指向进程的完整命令行指针</span><br><span class="line">004011FA  |.  A3 D8594000   mov dword ptr ds:[0x4059D8],eax</span><br><span class="line">004011FF  |.  E8 9F060000   call ReverseM.004018A3</span><br><span class="line">00401204  |.  A3 C0544000   mov dword ptr ds:[0x4054C0],eax</span><br><span class="line">00401209  |.  E8 48040000   call ReverseM.00401656</span><br><span class="line">0040120E  |.  E8 8A030000   call ReverseM.0040159D</span><br><span class="line">00401213  |.  E8 A7000000   call ReverseM.004012BF</span><br><span class="line">00401218  |.  8975 D0       mov [local.12],esi                             ;  ReverseM.&lt;ModuleEntryPoint&gt;</span><br><span class="line">0040121B  |.  8D45 A4       lea eax,[local.23]                             ;  </span><br><span class="line">0040121E  |.  50            push eax                                       ; /pStartupinfo = 0019FFCC</span><br><span class="line">0040121F  |.  FF15 38404000 call dword ptr ds:[&lt;&amp;KERNEL32.GetStartupInfoA&gt;&gt;; \GetStartupInfoA     获取一个进程的启动信息</span><br><span class="line">...</span><br><span class="line">00401241  |.  56            push esi                                       ; /pModule = &quot;U嬱jh蠤@&quot;</span><br><span class="line">00401242  |.  FF15 34404000 call dword ptr ds:[&lt;&amp;KERNEL32.GetModuleHandleA&gt;; \GetModuleHandleA    返回进程地址空间执行文件基地址</span><br><span class="line">00401248  |.  50            push eax</span><br><span class="line">00401249  |.  E8 B2FDFFFF   call ReverseM.00401000                         ;  调用用户编写的进入点函数Winmain</span><br><span class="line">0040124E  |.  8945 A0       mov [local.24],eax</span><br><span class="line">00401251  |.  50            push eax</span><br><span class="line">00401252  |.  E8 95000000   call ReverseM.004012EC                         ;  exit或者ExitProcess</span><br></pre></td></tr></table></figure>
+
+<h1 id="函数识别"><a href="#函数识别" class="headerlink" title="函数识别"></a>函数识别</h1><p>程序来源于《加密与解密》的附件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//源码</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Add</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>;</span><br><span class="line">main( )</span><br><span class="line">&#123;</span><br><span class="line">	 	<span class="type">int</span> a=<span class="number">5</span>,b=<span class="number">6</span>;</span><br><span class="line">		Add(a,b);</span><br><span class="line">	 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">Add(<span class="type">int</span> x,<span class="type">int</span> y)</span><br><span class="line">&#123;</span><br><span class="line">		<span class="keyword">return</span>(x+y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/12/29/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F/image-20221229213037815.png" class title="This is an image">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">这里跟进了函数401000</span><br><span class="line">| push 6                            | 参数1</span><br><span class="line">| push 5                            | 参数2</span><br><span class="line">| call add.401010                   | 调用的函数 call=push eip jmp 401010</span><br><span class="line">| add esp,8                         |</span><br><span class="line">| xor eax,eax                       | 对eax进行一个清零</span><br><span class="line"> ret                               |</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">函数 401010</span><br><span class="line">| mov eax,dword ptr ss:[esp+8]      | [esp+8]:&amp;&quot;C:\\Users\\duodu\\Desktop\\add.exe&quot;</span><br><span class="line">| mov ecx,dword ptr ss:[esp+4]      |</span><br><span class="line">| add eax,ecx                       | eax:&amp;&quot;ALLUSERSPROFILE=C:\\ProgramData&quot;</span><br><span class="line">| ret                               |</span><br><span class="line">加完存在了eax里</span><br></pre></td></tr></table></figure>
+
+<p>以上过程还是自己多动手调调比较好，光看文字是无法理解的，作为一个刚入门的小白，re的挨打之路才刚刚开始</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/28/sql%E6%B3%A8%E5%85%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1299,7 +1473,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

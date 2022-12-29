@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-12-29T08:23:24.826Z</updated>
+  <updated>2022-12-29T13:47:21.060Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从汇编角度看程序</title>
+    <link href="http://example.com/2022/12/29/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F/"/>
+    <id>http://example.com/2022/12/29/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F/</id>
+    <published>2022-12-29T11:32:02.000Z</published>
+    <updated>2022-12-29T13:47:21.060Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;if-else-单分支识别&quot;&gt;&lt;a href=&quot;#if-else-单分支识别&quot; class=&quot;headerlink&quot; title=&quot;if else 单分支识别&quot;&gt;&lt;/a&gt;if else 单分支识别&lt;/h1&gt;&lt;p&gt;OD载入，找到main函数&lt;/p&gt;
+&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="re" scheme="http://example.com/categories/re/"/>
+    
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
+    
+  </entry>
   
   <entry>
     <title>sql注入</title>
