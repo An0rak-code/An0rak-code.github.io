@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-12-27T08:34:03.032Z</updated>
+  <updated>2022-12-29T08:23:24.826Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sql注入</title>
+    <link href="http://example.com/2022/12/28/sql%E6%B3%A8%E5%85%A5/"/>
+    <id>http://example.com/2022/12/28/sql%E6%B3%A8%E5%85%A5/</id>
+    <published>2022-12-28T12:44:00.000Z</published>
+    <updated>2022-12-29T08:23:24.826Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;SQL注入漏洞形成的原因：&quot;&gt;&lt;a href=&quot;#SQL注入漏洞形成的原因：&quot; class=&quot;headerlink&quot; title=&quot;SQL注入漏洞形成的原因：&quot;&gt;&lt;/a&gt;SQL注入漏洞形成的原因：&lt;/h1&gt;&lt;h2 id=&quot;动态字符串构建引起&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="web" scheme="http://example.com/categories/web/"/>
+    
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
+    
+  </entry>
   
   <entry>
     <title>浅谈python逆向</title>
