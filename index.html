@@ -297,6 +297,210 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/" itemprop="url">初识壳以及DASCTF三月春季挑战赛easyre的复现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-30T15:39:54+08:00">
+                2022-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/re/" itemprop="url" rel="index">
+                    <span itemprop="name">re</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="壳的加载过程"><a href="#壳的加载过程" class="headerlink" title="壳的加载过程"></a>壳的加载过程</h2><p>壳修改了原程序执行文件的组织结构，从而能够比原程序代码早获得控制权，而且不会影响原程序的正常进行。</p>
+<p>1.保存入口参数</p>
+<p>加壳程序在初始化时会保存各寄存器的值，待外壳执行完毕，再恢复各寄存器的内容，最后跳到原程序执行。通常用pushad&#x2F;popad、pushfd&#x2F;popfd指令对来保存与恢复现场环境</p>
+<p>2.获取壳本身需要使用的API地址</p>
+<p>3.解密原程序各个区块的数据</p>
+<p>出于保护原程序代码和数据的目的，壳一般会加密原程序文件的各个区块。在程序执行时，外壳将解密这些区块数据，从而使程序能够正常运行。</p>
+<p>4.IAT的初始化</p>
+<p>5.重定位项的处理</p>
+<p>6.Hook API</p>
+<p>7.跳转到程序入口点（OEP）</p>
+<p>这个时候起，壳就将控制权还给原程序了。</p>
+<h1 id="根据栈平衡原理寻找OEP"><a href="#根据栈平衡原理寻找OEP" class="headerlink" title="根据栈平衡原理寻找OEP"></a>根据栈平衡原理寻找OEP</h1><p>在编写加壳软件时，必须保证外壳初始化的现场环境（即各寄存器值）与原程序的现场环境是相同的。加壳程序在初始化时保存各寄存器的值，待外壳执行完毕恢复各寄存器的内容，最后跳转到原程序执行。</p>
+<p><strong>1.如果要返回父程序，则当我们在堆栈中进行堆栈操作的时候，一定要保证在RET这条指令之前，ESP指向的是我们压入栈中的地址</strong></p>
+<p>2.如果通过堆栈传递参数了，那么在函数执行完毕后，要平衡参数导致的堆栈变化所以由于在程序自解密或者自解压过程中，不少壳会先将当前寄存器内容压栈，如使用pushad，在解压结束后，会将之前的寄存器值出栈，如使用popad。因此在寄存器出栈时，往往程序代码被自动恢复，此时硬件断点触发。然后在程序当前位置，只需要少许单步跟踪，就很容易到达正确的OEP位置。</p>
+<h1 id="DASCTF三月春季挑战赛"><a href="#DASCTF三月春季挑战赛" class="headerlink" title="DASCTF三月春季挑战赛"></a>DASCTF三月春季挑战赛</h1><h5 id="easyre"><a href="#easyre" class="headerlink" title="easyre"></a>easyre</h5><p>查壳</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230165238825.png" class title="This is an image">
+
+<p>发现有壳，用esp定律可以很快脱壳</p>
+
+
+<p>在这个位置把程序dump出来</p>
+<p>主逻辑：</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230170601273.png" class title="This is an image">
+
+<p>经过分析，大致逻辑：</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230170840417.png" class title="This is an image">
+
+<p>也就是对我们输入的flag先作两个判断，看是不是长度为42，flag头为DASCTF{}</p>
+<p>然后进行两种方式的加密处理，很明显有一种得出的flag是假的</p>
+<p>跟进函数sub_4019BE，发现是一个base58</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230171241637.png" class title="This is an image">
+
+<p>跟进另一个加密函数sub_401771，发现是一个魔改的RC4加密</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230171540200.png" class title="This is an image">
+
+<p>密文已经给出来了，就是数组v2，所以我们只要想办法将流密钥（dword_492940）拿到就行</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230171906728.png" class title="This is an image">
+
+<p>方法一：</p>
+<p>通过OD动调获取</p>
+<p>自行构造一个字符串输入</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230172723496.png" class title="This is an image">
+
+<p>F7进入函数401771，再进入函数401619，因为最后使用密钥的位置在这个函数里</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230173003830.png" class title="This is an image">
+
+<p>然后这个key的地址是40174E，在这里设置断点,就可以获取流秘钥的值</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230173151987.png" class title="This is an image">
+
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230173654733.png" class title="This is an image">
+
+<p>最后exp</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> enflag[] = &#123; <span class="number">0xC3</span>,<span class="number">0x80</span>,<span class="number">0xd5</span>,<span class="number">0xf2</span>,<span class="number">0x9b</span>,<span class="number">0x30</span>,<span class="number">0xb</span>,<span class="number">0xb4</span>,<span class="number">0x55</span>,<span class="number">0xde</span>,<span class="number">0x22</span>,<span class="number">0x83</span>,<span class="number">0x2f</span>,<span class="number">0x97</span>,</span><br><span class="line">      <span class="number">0xb8</span>,<span class="number">0x20</span>,<span class="number">0x1d</span>,<span class="number">0x74</span>,<span class="number">0xd1</span>,<span class="number">1</span>,<span class="number">0x73</span>,<span class="number">0x1a</span>,<span class="number">0xb2</span>,<span class="number">0xc8</span>,<span class="number">0xc5</span>,<span class="number">0x74</span>,<span class="number">0xc0</span>,<span class="number">0x5b</span>,</span><br><span class="line">      <span class="number">0xf7</span>,<span class="number">0xf</span>,<span class="number">0xd3</span>,<span class="number">1</span>,<span class="number">0x55</span>,<span class="number">0xb2</span>,<span class="number">0xa4</span>,<span class="number">0xae</span>,<span class="number">0x7b</span>,<span class="number">0xac</span>,<span class="number">0x5c</span>,<span class="number">0x56</span>,<span class="number">0xbc</span>,<span class="number">0x23</span> &#125;;</span><br><span class="line">    <span class="type">int</span> xorKey[] = &#123; <span class="number">0x38</span>,<span class="number">0x78</span>,<span class="number">0xdd</span>,<span class="number">0xe8</span>,<span class="number">0</span>,<span class="number">0xaf</span>,<span class="number">0xbf</span>,<span class="number">0x3a</span>,<span class="number">0x6b</span>,<span class="number">0xFB</span>,<span class="number">0xB8</span>,<span class="number">0x0C</span>,<span class="number">0x85</span>,<span class="number">0x35</span>,</span><br><span class="line">      <span class="number">0x5C</span>,<span class="number">0xAD</span>,<span class="number">0xe6</span>,<span class="number">0</span>,<span class="number">0xe0</span>,<span class="number">0x8a</span>,<span class="number">0x1d</span>,<span class="number">0xbd</span>,<span class="number">0x46</span>,<span class="number">0xd2</span>,<span class="number">0x2b</span>,<span class="number">0</span>,<span class="number">0x15</span>,<span class="number">0x24</span></span><br><span class="line">      ,<span class="number">0xc6</span>,<span class="number">0xad</span>,<span class="number">0xa1</span>,<span class="number">0xc9</span>,<span class="number">0x7b</span>,<span class="number">0x12</span>,<span class="number">0x28</span>,<span class="number">0</span>,<span class="number">0x05</span>,<span class="number">0</span>,<span class="number">0x72</span>,<span class="number">0x3e</span>,<span class="number">0x10</span>,<span class="number">0xa1</span> &#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">42</span>; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, xorKey[i] ^ (enflag[i] - <span class="number">71</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//DASCTF&#123;Welc0me-t0-j01n-SU-l0ve-suyug1eg1e&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里提取数据的时候，可以使用ida脚本，分两次取，快捷键是shift+F2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;idc.idc&gt;</span><br><span class="line">static main()</span><br><span class="line">&#123;</span><br><span class="line">    auto addr=0x401801;</span><br><span class="line">    auto i;</span><br><span class="line">    for(i=addr;i&lt;0x4018E1;i=i+10)</span><br><span class="line">    &#123;</span><br><span class="line">        Message(&quot;0x%X,&quot;,Byte(i));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0xC3,0x80,0xD5,0xF2,0x9B,0x30,0xB,0xB4,0x55,0xDE,0x22,0x83,0x2F,0x97,0xB8,0x20,0x1D,0x74,0xD1,0x1,0x73,0x1A,0xB2,</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230180134840.png" class title="This is an image">
+
+<p>另外一段数据同理</p>
+<p>还有一种方法下次补充吧</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/29/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1465,7 +1669,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
