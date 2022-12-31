@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-12-31T10:27:12.018Z</updated>
+  <updated>2022-12-31T16:04:38.297Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>moectf2022 re复现</title>
+    <link href="http://example.com/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/"/>
+    <id>http://example.com/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/</id>
+    <published>2022-12-31T11:38:07.000Z</published>
+    <updated>2022-12-31T16:04:38.297Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;chicken-soup&quot;&gt;&lt;a href=&quot;#chicken-soup&quot; class=&quot;headerlink&quot; title=&quot;chicken_soup&quot;&gt;&lt;/a&gt;chicken_soup&lt;/h1&gt;&lt;p&gt;主要考察去除花指令以及位移操作&lt;/p&gt;
+&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="re" scheme="http://example.com/categories/re/"/>
+    
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
     <title>初识壳、RC4加密算法以及DASCTF三月春季挑战赛easyre的复现</title>
     <link href="http://example.com/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/"/>
     <id>http://example.com/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/</id>
     <published>2022-12-30T07:39:54.000Z</published>
-    <updated>2022-12-31T10:27:12.018Z</updated>
+    <updated>2022-12-31T10:59:38.590Z</updated>
     
     
       
