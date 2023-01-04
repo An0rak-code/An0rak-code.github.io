@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="ctf," />
+  <meta name="keywords" content="buu做题记录," />
 
 
 
@@ -81,22 +81,18 @@
 
 
 
-<meta name="description" content="在NSS中的一些做题记录 [BJDCTF 2020]encode查壳，upx简单脱壳 主要逻辑： _posts&#x2F;post_name&#x2F;image-20221213085151395.png   跟进两个加密函数，可以发现一个是变表的base64，一个是RC4加密 _posts&#x2F;post_name&#x2F;image-20221213085441778.png   _p">
+<meta name="description" content="伪代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152  strcpy(v12, &quot;Qsw3sj_lz4_Ujw@l&quot;);  printf(&quot;Please input:&quot;);  scanf(&quot;%s&quot;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NSSCTF encode">
-<meta property="og:url" content="http://example.com/2022/12/13/NSSCTF-encode/index.html">
+<meta property="og:title" content="ACTF新生赛2020-rome">
+<meta property="og:url" content="http://example.com/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-rome/index.html">
 <meta property="og:site_name" content="Reverse">
-<meta property="og:description" content="在NSS中的一些做题记录 [BJDCTF 2020]encode查壳，upx简单脱壳 主要逻辑： _posts&#x2F;post_name&#x2F;image-20221213085151395.png   跟进两个加密函数，可以发现一个是变表的base64，一个是RC4加密 _posts&#x2F;post_name&#x2F;image-20221213085441778.png   _p">
+<meta property="og:description" content="伪代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152  strcpy(v12, &quot;Qsw3sj_lz4_Ujw@l&quot;);  printf(&quot;Please input:&quot;);  scanf(&quot;%s&quot;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/12/13/NSSCTF-encode/image-20221213085151395.png">
-<meta property="og:image" content="http://example.com/2022/12/13/NSSCTF-encode/image-20221213085441778.png">
-<meta property="og:image" content="http://example.com/2022/12/13/NSSCTF-encode/image-20221213085537087.png">
-<meta property="article:published_time" content="2022-12-13T00:33:31.000Z">
-<meta property="article:modified_time" content="2022-12-13T01:55:56.043Z">
+<meta property="article:published_time" content="2023-01-04T03:14:05.000Z">
+<meta property="article:modified_time" content="2023-01-04T04:41:55.708Z">
 <meta property="article:author" content="An0rak">
-<meta property="article:tag" content="ctf">
+<meta property="article:tag" content="buu做题记录">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/12/13/NSSCTF-encode/image-20221213085151395.png">
 
 
 
@@ -126,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2022/12/13/NSSCTF-encode/"/>
+  <link rel="canonical" href="http://example.com/2023/01/04/ACTF新生赛2020-rome/"/>
 
 
 
 
 
-  <title>NSSCTF encode | Reverse</title>
+  <title>ACTF新生赛2020-rome | Reverse</title>
   
 
 
@@ -303,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/13/NSSCTF-encode/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-rome/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -320,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">NSSCTF encode</h1>
+          <h1 class="post-title" itemprop="name headline">ACTF新生赛2020-rome</h1>
         
 
         <div class="post-meta">
@@ -332,8 +328,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-13T08:33:31+08:00">
-                2022-12-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-04T11:14:05+08:00">
+                2023-01-04
               </time>
             
 
@@ -397,36 +393,16 @@
       
 
       
-        <p>在NSS中的一些做题记录</p>
-<h1 id="BJDCTF-2020-encode"><a href="#BJDCTF-2020-encode" class="headerlink" title="[BJDCTF 2020]encode"></a>[BJDCTF 2020]encode</h1><p>查壳，upx简单脱壳</p>
-<p>主要逻辑：</p>
-<p>_posts&#x2F;post_name&#x2F;image-20221213085151395.png</p>
-<img src="/2022/12/13/NSSCTF-encode/image-20221213085151395.png" class title="This is an image">
+        <h1 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">  strcpy(v12, &quot;Qsw3sj_lz4_Ujw@l&quot;);</span><br><span class="line">  printf(&quot;Please input:&quot;);</span><br><span class="line">  scanf(&quot;%s&quot;, &amp;flag);</span><br><span class="line">  result = flag;</span><br><span class="line">  if ( flag == &#x27;A&#x27; )</span><br><span class="line">  &#123;</span><br><span class="line">    result = v3;</span><br><span class="line">    if ( v3 == &#x27;C&#x27; )</span><br><span class="line">    &#123;</span><br><span class="line">      result = v4;</span><br><span class="line">      if ( v4 == &#x27;T&#x27; )</span><br><span class="line">      &#123;</span><br><span class="line">        result = v5;</span><br><span class="line">        if ( v5 == &#x27;F&#x27; )</span><br><span class="line">        &#123;</span><br><span class="line">          result = v6;</span><br><span class="line">          if ( v6 == &#x27;&#123;&#x27; )</span><br><span class="line">          &#123;</span><br><span class="line">            result = v11;</span><br><span class="line">            if ( v11 == &#x27;&#125;&#x27; )</span><br><span class="line">            &#123;</span><br><span class="line">              v1[0] = v7;</span><br><span class="line">              v1[1] = v8;</span><br><span class="line">              v1[2] = v9;</span><br><span class="line">              v1[3] = v10;</span><br><span class="line">              *(_DWORD *)&amp;v12[17] = 0;</span><br><span class="line">              while ( *(int *)&amp;v12[17] &lt;= 15 )</span><br><span class="line">              &#123;</span><br><span class="line">                if ( *((char *)v1 + *(_DWORD *)&amp;v12[17]) &gt; 64 &amp;&amp; *((char *)v1 + *(_DWORD *)&amp;v12[17]) &lt;= 90 )// 大写字母</span><br><span class="line">                              </span><br><span class="line">                  *((_BYTE *)v1 + *(_DWORD *)&amp;v12[17]) = (*((char *)v1 + *(_DWORD *)&amp;v12[17]) - 51) % 26 + 65;</span><br><span class="line">                if ( *((char *)v1 + *(_DWORD *)&amp;v12[17]) &gt; 96 &amp;&amp; *((char *)v1 + *(_DWORD *)&amp;v12[17]) &lt;= 122 )// 小写字母</span><br><span class="line">                  *((_BYTE *)v1 + *(_DWORD *)&amp;v12[17]) = (*((char *)v1 + *(_DWORD *)&amp;v12[17]) - 79) % 26 + 97;</span><br><span class="line">                ++*(_DWORD *)&amp;v12[17];</span><br><span class="line">              &#125;</span><br><span class="line">              *(_DWORD *)&amp;v12[17] = 0;</span><br><span class="line">              while ( *(int *)&amp;v12[17] &lt;= 15 )</span><br><span class="line">              &#123;</span><br><span class="line">                result = (unsigned __int8)v12[*(_DWORD *)&amp;v12[17]];</span><br><span class="line">                if ( *((_BYTE *)v1 + *(_DWORD *)&amp;v12[17]) != (_BYTE)result )</span><br><span class="line">                  return result;</span><br><span class="line">                ++*(_DWORD *)&amp;v12[17];</span><br><span class="line">              &#125;</span><br><span class="line">              return printf(&quot;You are correct!&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>跟进两个加密函数，可以发现一个是变表的base64，一个是RC4加密</p>
-<p>_posts&#x2F;post_name&#x2F;image-20221213085441778.png</p>
-<img src="/2022/12/13/NSSCTF-encode/image-20221213085441778.png" class title="This is an image">
+<p>明显是一个变异凯撒，小写字母移动14位，大写字母移动18位</p>
+<p>对凯撒的详细介绍可参考：<a target="_blank" rel="noopener" href="https://an0rak-code.github.io/2023/01/04/%E5%87%AF%E6%92%92%E5%AF%86%E7%A0%81/">https://an0rak-code.github.io/2023/01/04/%E5%87%AF%E6%92%92%E5%AF%86%E7%A0%81/</a></p>
+<h4 id="两种方法："><a href="#两种方法：" class="headerlink" title="两种方法："></a>两种方法：</h4><h5 id="暴力求解"><a href="#暴力求解" class="headerlink" title="暴力求解"></a>暴力求解</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">v12 = <span class="string">&#x27;Qsw3sj_lz4_Ujw@l&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">16</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">127</span>):</span><br><span class="line">        k = j</span><br><span class="line">        <span class="keyword">if</span> j &gt; <span class="number">64</span> <span class="keyword">and</span> j &lt;= <span class="number">90</span>:</span><br><span class="line">            j = (j - <span class="number">51</span>) % <span class="number">26</span> + <span class="number">65</span></span><br><span class="line">        <span class="keyword">if</span> j &gt; <span class="number">96</span> <span class="keyword">and</span> j &lt;= <span class="number">122</span>:</span><br><span class="line">            j = (j - <span class="number">79</span>) % <span class="number">26</span> + <span class="number">97</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> j == <span class="built_in">ord</span>(v12[i]):</span><br><span class="line">            flag += <span class="built_in">chr</span>(k)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
 
-<p>_posts&#x2F;post_name&#x2F;image-20221213085537087.png</p>
-<img src="/2022/12/13/NSSCTF-encode/image-20221213085537087.png" class title="This is an image">
+<h5 id="直接解密"><a href="#直接解密" class="headerlink" title="直接解密"></a>直接解密</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line">s1=string.ascii_lowercase   <span class="comment">#返回所有小写字母</span></span><br><span class="line">s2=string.ascii_uppercase   <span class="comment">#返回所有大写字母</span></span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line">password =[<span class="number">81</span>,<span class="number">115</span>,<span class="number">119</span>,<span class="number">51</span>,<span class="number">115</span>,<span class="number">106</span>,<span class="number">95</span>,<span class="number">108</span>,<span class="number">122</span>,<span class="number">52</span>,<span class="number">95</span>,<span class="number">85</span>,<span class="number">106</span>,<span class="number">119</span>,<span class="number">64</span>,<span class="number">108</span>]</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> password:</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;a&#x27;</span> &lt;= <span class="built_in">chr</span>(p) &lt;= <span class="string">&#x27;z&#x27;</span>:</span><br><span class="line">        flag+=s1[p-<span class="number">18</span>-<span class="number">97</span>]</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;A&#x27;</span> &lt;= <span class="built_in">chr</span>(p) &lt;= <span class="string">&#x27;Z&#x27;</span>:</span><br><span class="line">        flag+=s2[p-<span class="number">14</span>-<span class="number">65</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        flag+=<span class="built_in">chr</span>(p)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
 
-<p>所以整个思路就是：</p>
-<ul>
-<li>对输入的flag进行变表的base64加密</li>
-<li>进行一个异或操作</li>
-<li>进行RC4加密（密钥为Flag{This_a_Flag}）</li>
-<li>最后进行一个验证</li>
-</ul>
-<p>RC4在线解密：<a target="_blank" rel="noopener" href="http://www.hiencode.com/rc4.html">http://www.hiencode.com/rc4.html</a></p>
-<p>解密后明文：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">23152553081a5938126a3931275b0b1313085c330b356101511f105c</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">password = <span class="string">&quot;Qsw3sj_lz4_Ujw@l&quot;</span></span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> password:</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;a&#x27;</span> &lt;= p &lt;= <span class="string">&#x27;z&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>) + (<span class="built_in">ord</span>(p) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>) - <span class="number">18</span>) % <span class="number">26</span>), end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;A&#x27;</span> &lt;= p &lt;= <span class="string">&#x27;Z&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>) + (<span class="built_in">ord</span>(p) - <span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>) - <span class="number">14</span>) % <span class="number">26</span>), end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(p, end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment">#flag&#123;Cae3ar_th4_Gre@t&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>exp</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">str1=<span class="string">&quot;23152553081a5938126a3931275b0b1313085c330b356101511f105c&quot;</span></span><br><span class="line">str2=<span class="string">&quot;Flag&#123;This_a_Flag&#125;&quot;</span></span><br><span class="line"><span class="built_in">str</span>=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(str1),<span class="number">2</span>):</span><br><span class="line">    <span class="built_in">str</span>.append(<span class="built_in">int</span>(<span class="string">&quot;0x&quot;</span>+str1[i:i+<span class="number">2</span>],<span class="number">16</span>))</span><br><span class="line"><span class="comment">#这里由于原来数据都是16进制的，所以进行了一个两位一组分组</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)</span><br><span class="line">base64_encode=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">str</span>)):</span><br><span class="line">    base64_encode+=<span class="built_in">chr</span>(<span class="built_in">str</span>[i]^<span class="built_in">ord</span>(str2[i%<span class="built_in">len</span>(str2)]))</span><br><span class="line"><span class="built_in">print</span>(base64_encode)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">str1 = <span class="string">&quot;eyD4sN1Qa5Xna7jtnN0RlN5i8lO=&quot;</span>   <span class="comment">#str1是要解密的代码</span></span><br><span class="line">string1 = <span class="string">&quot;0123456789+/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>   <span class="comment">#string1是改过之后的base64表</span></span><br><span class="line">string2 = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line"><span class="built_in">print</span>(base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string1,string2))))</span><br><span class="line"><span class="comment">#BJD&#123;0v0_Y0u_g07_1T!&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39542714/article/details/106834866">https://blog.csdn.net/qq_39542714/article/details/106834866</a></p>
 
       
     </div>
@@ -444,7 +420,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ctf/" rel="tag"># ctf</a>
+            <a href="/tags/buu%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/" rel="tag"># buu做题记录</a>
           
         </div>
       
@@ -457,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/12/12/re%E6%B1%82%E5%AD%A6%E4%B9%8B%E8%B7%AF/" rel="next" title="re求学之路">
-                <i class="fa fa-chevron-left"></i> re求学之路
+              <a href="/2023/01/04/%E5%87%AF%E6%92%92%E5%AF%86%E7%A0%81/" rel="next" title="凯撒密码">
+                <i class="fa fa-chevron-left"></i> 凯撒密码
               </a>
             
           </div>
@@ -466,10 +442,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/" rel="prev" title="浅谈python逆向">
-                浅谈python逆向 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -608,7 +580,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BJDCTF-2020-encode"><span class="nav-number">1.</span> <span class="nav-text">[BJDCTF 2020]encode</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">伪代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">两种方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E6%B1%82%E8%A7%A3"><span class="nav-number">1.0.0.1.1.</span> <span class="nav-text">暴力求解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E8%A7%A3%E5%AF%86"><span class="nav-number">1.0.0.1.2.</span> <span class="nav-text">直接解密</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
