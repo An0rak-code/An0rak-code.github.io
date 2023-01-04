@@ -666,4 +666,31 @@
         <tag>python</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ACTF新生赛2020-usualCrypt</title>
+    <url>/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/</url>
+    <content><![CDATA[<h2 id="伪代码分析"><a href="#伪代码分析" class="headerlink" title="伪代码分析"></a>伪代码分析</h2><p>有个明显的base64表，交叉引用，会发现使用多次</p>
+<img src="/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/image-20230104160550446.png" class title="This is an image">
+
+<p>一个个跟进去会发现函数sub_401000对码表进行了变表处理</p>
+<img src="/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/image-20230104160845152.png" class title="This is an image">
+
+<p>跟进函数sub_401030，发现进行了一个大小写转换</p>
+<img src="/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/image-20230104161054534.png" class title="This is an image">
+
+<p>所以我们只要先对密文进行大小写转换，用变表base64解密就能拿到flag</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="string">&quot;zMXHz3TIgnxLxJhFAdtZn2fFk3lYCrtPC2l9&quot;</span></span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)):</span><br><span class="line">    <span class="keyword">if</span> <span class="number">65</span>&lt;=<span class="built_in">ord</span>(a[i]) <span class="keyword">and</span> <span class="built_in">ord</span>(a[i])&lt;=<span class="number">90</span>:</span><br><span class="line">        flag+=<span class="built_in">chr</span>(<span class="built_in">ord</span>(a[i])+<span class="number">32</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="number">97</span>&lt;=<span class="built_in">ord</span>(a[i]) <span class="keyword">and</span> <span class="built_in">ord</span>(a[i])&lt;=<span class="number">122</span>:</span><br><span class="line">        flag+=<span class="built_in">chr</span>(<span class="built_in">ord</span>(a[i])-<span class="number">32</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        flag+=a[i]</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment">#ZmxhZ3tiGNXlXjHfaDTzN2FfK3LycRTpc2L9</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">str1 = <span class="string">&quot;ZmxhZ3tiGNXlXjHfaDTzN2FfK3LycRTpc2L9&quot;</span>   <span class="comment">#str1是要解密的代码</span></span><br><span class="line">string1 = <span class="string">&quot;ABCDEFQRSTUVWXYPGHIJKLMNOZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span>   <span class="comment">#string1是改过之后的base64表</span></span><br><span class="line">string2 = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line"><span class="built_in">print</span>(base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string1,string2))))</span><br><span class="line"><span class="comment">#flag&#123;bAse64_h2s_a_Surprise&#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">Str = <span class="built_in">list</span>(<span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span>)</span><br><span class="line">model = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>,<span class="number">15</span>):</span><br><span class="line">    Str[i],Str[i+<span class="number">10</span>] = Str[i+<span class="number">10</span>],Str[i]</span><br><span class="line">Str = <span class="string">&#x27;&#x27;</span>.join(Str)</span><br><span class="line">enc = <span class="string">&quot;zMXHz3TIgnxLxJhFAdtZn2fFk3lYCrtPC2l9&quot;</span>.swapcase()</span><br><span class="line">dec = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(enc)):</span><br><span class="line">    dec += model[Str.find(enc[i])]</span><br><span class="line"><span class="built_in">print</span>(dec)</span><br><span class="line"><span class="built_in">print</span>(Str)</span><br><span class="line"><span class="built_in">print</span>(base64.b64decode(dec))</span><br><span class="line"><span class="comment">#网上的脚本，更明了</span></span><br><span class="line"><span class="comment">#Python swapcase() 方法用于对字符串的大小写字母进行转换，即将大写字母转换为小写字母，小写字母会转换为大写字母。</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>re</category>
+      </categories>
+      <tags>
+        <tag>buu做题记录</tag>
+      </tags>
+  </entry>
 </search>
