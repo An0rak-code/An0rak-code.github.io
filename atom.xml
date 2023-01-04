@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-01-04T04:41:55.708Z</updated>
+  <updated>2023-01-04T05:14:50.663Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python学习</title>
+    <link href="http://example.com/2023/01/04/python%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://example.com/2023/01/04/python%E5%AD%A6%E4%B9%A0/</id>
+    <published>2023-01-04T04:54:46.000Z</published>
+    <updated>2023-01-04T05:14:50.663Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Python-字符串-ascii-uppercase&quot;&gt;&lt;a href=&quot;#Python-字符串-ascii-uppercase&quot; class=&quot;headerlink&quot; title=&quot;Python 字符串 |</summary>
+        
+      
+    
+    
+    
+    <category term="随笔" scheme="http://example.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="python" scheme="http://example.com/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>ACTF新生赛2020-rome</title>
