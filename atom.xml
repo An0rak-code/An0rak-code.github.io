@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-01-04T08:16:31.831Z</updated>
+  <updated>2023-01-05T04:11:01.061Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>绿城杯2021-easy_re</title>
+    <link href="http://example.com/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/"/>
+    <id>http://example.com/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/</id>
+    <published>2023-01-05T03:15:37.000Z</published>
+    <updated>2023-01-05T04:11:01.061Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;跟着PZ师傅复现一下绿城杯的easy_re&lt;/p&gt;
+&lt;h2 id=&quot;伪代码分析&quot;&gt;&lt;a href=&quot;#伪代码分析&quot; class=&quot;headerlink&quot; title=&quot;伪代码分析&quot;&gt;&lt;/a&gt;伪代码分析&lt;/h2&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="re" scheme="http://example.com/categories/re/"/>
+    
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
+    
+  </entry>
   
   <entry>
     <title>ACTF新生赛2020-usualCrypt</title>
