@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-01-06T06:01:23.430Z</updated>
+  <updated>2023-01-07T04:50:36.933Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>0xGame2022复现</title>
+    <link href="http://example.com/2023/01/07/0xGame2022%E5%A4%8D%E7%8E%B0/"/>
+    <id>http://example.com/2023/01/07/0xGame2022%E5%A4%8D%E7%8E%B0/</id>
+    <published>2023-01-07T01:59:34.000Z</published>
+    <updated>2023-01-07T04:50:36.933Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Week1&quot;&gt;&lt;a href=&quot;#Week1&quot; class=&quot;headerlink&quot; title=&quot;Week1&quot;&gt;&lt;/a&gt;Week1&lt;/h1&gt;&lt;h2 id=&quot;re4&quot;&gt;&lt;a href=&quot;#re4&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="re" scheme="http://example.com/categories/re/"/>
+    
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
+    
+  </entry>
   
   <entry>
     <title>Tea加密</title>
