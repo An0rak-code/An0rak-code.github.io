@@ -805,4 +805,64 @@
         <tag>ctf</tag>
       </tags>
   </entry>
+  <entry>
+    <title>树的基本概念</title>
+    <url>/2023/01/07/%E6%A0%91/</url>
+    <content><![CDATA[<p>树是一种非线性的数据结构，用它能很好地描述有分支和层次特性的数据结构</p>
+<h1 id="树的概念"><a href="#树的概念" class="headerlink" title="树的概念"></a>树的概念</h1><h2 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h2><p>一棵树是由n(n&gt;0)个元素组成的有限集合</p>
+<ul>
+<li>每个元素称为结点(node)</li>
+<li>有一个特定的结点，称为根结点或树根(root)</li>
+<li>除根结点外，其余结点能分成m(m&gt;&#x3D;0)个互不相交的有限集合T0,T1,T2….其中的每个子集又都是一颗树，这些集合称为这颗树的子树。</li>
+</ul>
+<h2 id="树的基本术语"><a href="#树的基本术语" class="headerlink" title="树的基本术语"></a>树的基本术语</h2><ul>
+<li>结点(node)：树中的元素</li>
+<li>边：根结点与它的子树根之间形成边</li>
+<li>路径(path)：从某个结点沿树中的边可到达另一个结点，则称这两个结点之间存在一条路径</li>
+<li>双亲(parent)：若一个结点有子树，那么该结点称为子树根的双亲（父结点）</li>
+<li>孩子(child)：某结点的子树的根称为该结点的孩子</li>
+<li>兄弟(sibling)：有相同双亲的结点互为兄弟</li>
+<li>后裔(descendant)：某结点的所有子树上任何结点都是该结点的后裔</li>
+<li>祖先(ancester)：从根结点到某个结点的路径上的所有结点都是该结点的祖先</li>
+<li>结点的度(degree)：结点拥有的子树数</li>
+<li>叶子(leaf)：度为零的结点</li>
+<li>分支结点(branch)：度不为零的结点</li>
+<li>树的度：树中各结点度的最大值</li>
+<li>结点的层次：根结点的层次为为1，其余结点的层次等于其双亲结点的层次加1</li>
+<li>树的高度：树中结点的最大层次</li>
+<li>森林：树的集合，0棵或多棵不相交的树组成森林</li>
+</ul>
+<h1 id="二叉树的定义及性质"><a href="#二叉树的定义及性质" class="headerlink" title="二叉树的定义及性质"></a>二叉树的定义及性质</h1><h2 id="二叉树的定义"><a href="#二叉树的定义" class="headerlink" title="二叉树的定义"></a>二叉树的定义</h2><p>二叉树(binary tree)是结点的有限集合，该集合或者为空集，或者由一个根和两个互不相交的、称为该根的左子树和右子树的二叉树组成</p>
+<h3 id="树与二叉树的区别"><a href="#树与二叉树的区别" class="headerlink" title="树与二叉树的区别"></a>树与二叉树的区别</h3><ul>
+<li>树中结点的子树之间可以是无序的，而二叉树中结点的子树要区分左右子树</li>
+<li>树中每个结点可以有0棵或若干子树，而二叉树的每个结点最多只能有2棵子树</li>
+</ul>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
+<li>二叉树的第i(i&gt;&#x3D;1)层上至多有2的(i-1)次方个结点</li>
+<li>高度为h的二叉树上至多有2的h次方减一个结点（等比数列证明）</li>
+<li>包含n个结点的二叉树的高度最矮为log2(n+1)，最高为n（当每层只有一个结点的时候最高）</li>
+<li>任意一棵二叉树中，若叶节点数量为n0，度为2的结点数量为n2，则有：n0&#x3D;n2+1</li>
+</ul>
+<h2 id="特殊二叉树"><a href="#特殊二叉树" class="headerlink" title="特殊二叉树"></a>特殊二叉树</h2><h4 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a>满二叉树</h4><p>每一层的结点数量都达到饱和状态</p>
+<h4 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h4><ul>
+<li><p>只有最下面两层结点的度可以小于2，其它层中结点的度均等于2</p>
+</li>
+<li><p>最下一层的叶结点均依次集中在靠左的若干位置上</p>
+<h5 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h5></li>
+</ul>
+<p>具有n个结点的完全二叉树的高度为log2(n+1) </p>
+
+
+<h4 id="扩充二叉树"><a href="#扩充二叉树" class="headerlink" title="扩充二叉树"></a>扩充二叉树</h4><p>除叶子结点外，其余结点都必须有两个孩子，也称为2-树（仅存在度有2和0的结点）</p>
+<h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><img src="/2023/01/07/%E6%A0%91/20230107212356.jpg" class title="This is an image">
+
+<p> 满二叉树一定是完全二叉树，也是扩充二叉树</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>树</tag>
+      </tags>
+  </entry>
 </search>

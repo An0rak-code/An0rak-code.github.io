@@ -297,6 +297,258 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/" itemprop="url">初识壳、RC4加密算法以及DASCTF三月春季挑战赛easyre的复现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-30T15:39:54+08:00">
+                2022-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/re/" itemprop="url" rel="index">
+                    <span itemprop="name">re</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="壳的加载过程"><a href="#壳的加载过程" class="headerlink" title="壳的加载过程"></a>壳的加载过程</h2><p>壳修改了原程序执行文件的组织结构，从而能够比原程序代码早获得控制权，而且不会影响原程序的正常进行。</p>
+<p>1.保存入口参数</p>
+<p>加壳程序在初始化时会保存各寄存器的值，待外壳执行完毕，再恢复各寄存器的内容，最后跳到原程序执行。通常用pushad&#x2F;popad、pushfd&#x2F;popfd指令对来保存与恢复现场环境</p>
+<p>2.获取壳本身需要使用的API地址</p>
+<p>3.解密原程序各个区块的数据</p>
+<p>出于保护原程序代码和数据的目的，壳一般会加密原程序文件的各个区块。在程序执行时，外壳将解密这些区块数据，从而使程序能够正常运行。</p>
+<p>4.IAT的初始化</p>
+<p>5.重定位项的处理</p>
+<p>6.Hook API</p>
+<p>7.跳转到程序入口点（OEP）</p>
+<p>这个时候起，壳就将控制权还给原程序了。</p>
+<h1 id="根据栈平衡原理寻找OEP"><a href="#根据栈平衡原理寻找OEP" class="headerlink" title="根据栈平衡原理寻找OEP"></a>根据栈平衡原理寻找OEP</h1><p>在编写加壳软件时，必须保证外壳初始化的现场环境（即各寄存器值）与原程序的现场环境是相同的。加壳程序在初始化时保存各寄存器的值，待外壳执行完毕恢复各寄存器的内容，最后跳转到原程序执行。</p>
+<p><strong>1.如果要返回父程序，则当我们在堆栈中进行堆栈操作的时候，一定要保证在RET这条指令之前，ESP指向的是我们压入栈中的地址</strong></p>
+<p>2.如果通过堆栈传递参数了，那么在函数执行完毕后，要平衡参数导致的堆栈变化所以由于在程序自解密或者自解压过程中，不少壳会先将当前寄存器内容压栈，如使用pushad，在解压结束后，会将之前的寄存器值出栈，如使用popad。因此在寄存器出栈时，往往程序代码被自动恢复，此时硬件断点触发。然后在程序当前位置，只需要少许单步跟踪，就很容易到达正确的OEP位置。</p>
+<h1 id="DASCTF三月春季挑战赛"><a href="#DASCTF三月春季挑战赛" class="headerlink" title="DASCTF三月春季挑战赛"></a>DASCTF三月春季挑战赛</h1><h5 id="easyre"><a href="#easyre" class="headerlink" title="easyre"></a>easyre</h5><p>查壳</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230165238825.png" class title="This is an image">
+
+<p>发现有壳，用esp定律可以很快脱壳</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230172541689.png" class title="This is an image">
+
+<p>在这个位置把程序dump出来</p>
+<p>主逻辑：</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230170601273.png" class title="This is an image">
+
+<p>经过分析，大致逻辑：</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230170840417.png" class title="This is an image">
+
+<p>也就是对我们输入的flag先作两个判断，看是不是长度为42，flag头为DASCTF{}</p>
+<p>然后进行两种方式的加密处理，很明显有一种得出的flag是假的</p>
+<p>跟进函数sub_4019BE，发现是一个base58</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230171241637.png" class title="This is an image">
+
+<p>跟进另一个加密函数sub_401771，发现是一个魔改的RC4加密</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230171540200.png" class title="This is an image">
+
+<p>密文已经给出来了，就是数组v2，所以我们只要想办法将密钥流（dword_492940）拿到就行</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230171906728.png" class title="This is an image">
+
+<p>通过OD动调获取</p>
+<p>自行构造一个字符串输入</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230172723496.png" class title="This is an image">
+
+<p>F7进入函数401771，再进入函数401619，因为最后使用密钥的位置在这个函数里</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230173003830.png" class title="This is an image">
+
+<p>然后这个key的地址是40174E，在这里设置断点,就可以获取密钥流的值</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230173151987.png" class title="This is an image">
+
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230173654733.png" class title="This is an image">
+
+<p>最后exp</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> enflag[] = &#123; <span class="number">0xC3</span>,<span class="number">0x80</span>,<span class="number">0xd5</span>,<span class="number">0xf2</span>,<span class="number">0x9b</span>,<span class="number">0x30</span>,<span class="number">0xb</span>,<span class="number">0xb4</span>,<span class="number">0x55</span>,<span class="number">0xde</span>,<span class="number">0x22</span>,<span class="number">0x83</span>,<span class="number">0x2f</span>,<span class="number">0x97</span>,</span><br><span class="line">      <span class="number">0xb8</span>,<span class="number">0x20</span>,<span class="number">0x1d</span>,<span class="number">0x74</span>,<span class="number">0xd1</span>,<span class="number">1</span>,<span class="number">0x73</span>,<span class="number">0x1a</span>,<span class="number">0xb2</span>,<span class="number">0xc8</span>,<span class="number">0xc5</span>,<span class="number">0x74</span>,<span class="number">0xc0</span>,<span class="number">0x5b</span>,</span><br><span class="line">      <span class="number">0xf7</span>,<span class="number">0xf</span>,<span class="number">0xd3</span>,<span class="number">1</span>,<span class="number">0x55</span>,<span class="number">0xb2</span>,<span class="number">0xa4</span>,<span class="number">0xae</span>,<span class="number">0x7b</span>,<span class="number">0xac</span>,<span class="number">0x5c</span>,<span class="number">0x56</span>,<span class="number">0xbc</span>,<span class="number">0x23</span> &#125;;</span><br><span class="line">    <span class="type">int</span> xorKey[] = &#123; <span class="number">0x38</span>,<span class="number">0x78</span>,<span class="number">0xdd</span>,<span class="number">0xe8</span>,<span class="number">0</span>,<span class="number">0xaf</span>,<span class="number">0xbf</span>,<span class="number">0x3a</span>,<span class="number">0x6b</span>,<span class="number">0xFB</span>,<span class="number">0xB8</span>,<span class="number">0x0C</span>,<span class="number">0x85</span>,<span class="number">0x35</span>,</span><br><span class="line">      <span class="number">0x5C</span>,<span class="number">0xAD</span>,<span class="number">0xe6</span>,<span class="number">0</span>,<span class="number">0xe0</span>,<span class="number">0x8a</span>,<span class="number">0x1d</span>,<span class="number">0xbd</span>,<span class="number">0x46</span>,<span class="number">0xd2</span>,<span class="number">0x2b</span>,<span class="number">0</span>,<span class="number">0x15</span>,<span class="number">0x24</span></span><br><span class="line">      ,<span class="number">0xc6</span>,<span class="number">0xad</span>,<span class="number">0xa1</span>,<span class="number">0xc9</span>,<span class="number">0x7b</span>,<span class="number">0x12</span>,<span class="number">0x28</span>,<span class="number">0</span>,<span class="number">0x05</span>,<span class="number">0</span>,<span class="number">0x72</span>,<span class="number">0x3e</span>,<span class="number">0x10</span>,<span class="number">0xa1</span> &#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">42</span>; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, xorKey[i] ^ (enflag[i] - <span class="number">71</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//DASCTF&#123;Welc0me-t0-j01n-SU-l0ve-suyug1eg1e&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里提取数据的时候，可以使用ida脚本，分两次取，快捷键是shift+F2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;idc.idc&gt;</span><br><span class="line">static main()</span><br><span class="line">&#123;</span><br><span class="line">    auto addr=0x401801;</span><br><span class="line">    auto i;</span><br><span class="line">    for(i=addr;i&lt;0x4018E1;i=i+10)</span><br><span class="line">    &#123;</span><br><span class="line">        Message(&quot;0x%X,&quot;,Byte(i));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0xC3,0x80,0xD5,0xF2,0x9B,0x30,0xB,0xB4,0x55,0xDE,0x22,0x83,0x2F,0x97,0xB8,0x20,0x1D,0x74,0xD1,0x1,0x73,0x1A,0xB2,</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221230180134840.png" class title="This is an image">
+
+<p>另外一段数据同理</p>
+<h2 id="补充一下RC4算法"><a href="#补充一下RC4算法" class="headerlink" title="补充一下RC4算法"></a>补充一下RC4算法</h2><h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><p>RC4生成一种称为密钥流的伪随机流，通过异或操作混合，以达到加密的目的，解密时与密文进行异或操作。其密钥流由两部分组成，分别是KSA和PRGA。</p>
+<h4 id="KSA"><a href="#KSA" class="headerlink" title="KSA"></a>KSA</h4><p>RC4首先使用密钥调度算法（KSA）完成对大小为256字节的数组S的初始化及替换，在替换时使用密钥。其密钥长度一般取5-16字节（40-128位），通常不超过256位。先用0-255初始化数组S，再使用密钥进行替换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for i=0 to 255 do  </span><br><span class="line">S[i]=i;            //用0~255初始化状态矢量</span><br><span class="line">//用给定密钥Key初始化密钥数据K[i],Key的长度不够时将循环使用</span><br><span class="line">K[i]=Key[i mod L];</span><br><span class="line">j=0;</span><br><span class="line">for i=0 to 255 do</span><br><span class="line">j=(j+S[i]+K[i])mod 256;</span><br><span class="line">swap(S[i],S[j]);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="PRGA（主要完成流的生成）"><a href="#PRGA（主要完成流的生成）" class="headerlink" title="PRGA（主要完成流的生成）"></a>PRGA（主要完成流的生成）</h4><p>数组S在完成初始化后，便不再使用输入的密钥。密钥流的生成是从S[0]到S[255]的。密钥流中的密钥K被一个一个生成，即从S[0]到S[255]，对每个S[i],根据当前态S的值，将S[i]与S中的另一个元素(字节)置换。当S[255]完成置换后，操作再从S[0]开始重复。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">i=0;</span><br><span class="line">j=0;</span><br><span class="line">while(true)//有字节需要加密</span><br><span class="line">i=(i+1) mod 256;</span><br><span class="line">j=(j+S[i]) mod 256;</span><br><span class="line">swap(S[i],	S[j]);</span><br><span class="line">t=(S[i]+S[j])mod256;</span><br><span class="line">k=S[t];</span><br></pre></td></tr></table></figure>
+
+<p>加密是将K与下一明文字节异或；解密是加密的逆过程，即将K的值与下一密文字节异或</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>算法主要关键在于S的初始化和流的生成</p>
+<p><strong>S的初始化</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">这个过程处理是由以下步骤组成：</span><br><span class="line">（1）选取一个长度为1~ 256个字节的密钥K。</span><br><span class="line">（2）设置状态向量S的值等于0~ 255（以递增的顺序），也就是说S[0]=0，S[1]=1，…，S[255]=255。</span><br><span class="line">（3）创建临时数组，如果密钥K的长度是256个字节，那么把K复制到S。否则，在把K复制到临时数组后，临时数组的剩余位置再次用K的值进行填充，最后，临时数组必须完全填满。</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20220928231458357.png" class title="This is an image">
+
+<p>这里的T就是临时数组，T的输出就是256&#x2F;7个Key</p>
+<p>再进行初始置换，位于S[i]的字节与S数组的另一个字节(由T[i]决定)进行交换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">swap_S</span>(): </span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">        j = (j + S[i] + <span class="built_in">ord</span>(T[i])) % <span class="number">256</span></span><br><span class="line">        tmp = S[i]</span><br><span class="line">        S[i] = S[j]</span><br><span class="line">        S[j] = tmp</span><br></pre></td></tr></table></figure>
+
+<p><strong>流的生成</strong></p>
+<p>经过以上的初始化和置换以后，S已经准备好了，初始的密钥数组K可以丢弃了。现在我们需要另一个循环。在每一步中，我们把S[i]与S的另一个字节进行交换，每次交换的方法由S的实现来决定。一旦用完了256个位置后，在从S[i]开始，逻辑代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">j, t = (<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(txtlen):</span><br><span class="line">        i = i % <span class="number">256</span></span><br><span class="line">        j = (j + S[i]) % <span class="number">256</span></span><br><span class="line">        tmp = S[i]</span><br><span class="line">        S[i] = S[j]</span><br><span class="line">        S[j] = tmp</span><br><span class="line">        t = (S[i] + S[j]) % <span class="number">256</span></span><br><span class="line">        KeyStream.append(S[t])</span><br></pre></td></tr></table></figure>
+
+<p>最后进行异或运算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">res = []</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(flag)):</span><br><span class="line">      res.append(<span class="built_in">ord</span>(flag[i]) ^ KeyStream[i])</span><br></pre></td></tr></table></figure>
+
+<p>完整代码py实现如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">init_S</span>():  <span class="comment">#初始化S盒</span></span><br><span class="line">    <span class="keyword">global</span> S</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">        S.append(i)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init_T</span>():   <span class="comment">#初始化T盒(临时数组)</span></span><br><span class="line">    <span class="keyword">global</span> Key  <span class="comment">#用给定密钥Key初始化密钥数据T[i],Key的长度不够时将循环使用</span></span><br><span class="line">    <span class="keyword">global</span> T</span><br><span class="line">    Key = <span class="string">&#x27;abcdefg&#x27;</span></span><br><span class="line">    keylen = <span class="built_in">len</span>(Key)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">        tmp = Key[(i % keylen)] <span class="comment">#循环使用</span></span><br><span class="line">        T.append(tmp)</span><br><span class="line">   </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">swap_S</span>():  <span class="comment">#根据key对S盒相应的元素进行互换，经过256次循环得到的S盒代入之后的加密过程</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">        j = (j + S[i] + <span class="built_in">ord</span>(T[i])) % <span class="number">256</span></span><br><span class="line">        tmp = S[i]</span><br><span class="line">        S[i] = S[j]</span><br><span class="line">        S[j] = tmp</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Get_KeyStream</span>():  <span class="comment">#得到密钥流 PRGA</span></span><br><span class="line">    <span class="keyword">global</span> KeyStream</span><br><span class="line">    <span class="keyword">global</span> flag</span><br><span class="line">    txtlen = <span class="built_in">len</span>(flag)</span><br><span class="line">    j, t = (<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(txtlen):</span><br><span class="line">        i = i % <span class="number">256</span></span><br><span class="line">        j = (j + S[i]) % <span class="number">256</span></span><br><span class="line">        tmp = S[i]</span><br><span class="line">        S[i] = S[j]</span><br><span class="line">        S[j] = tmp</span><br><span class="line">        t = (S[i] + S[j]) % <span class="number">256</span></span><br><span class="line">        KeyStream.append(S[t])</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Get_code</span>():  <span class="comment">#加密，将T与下一明文字节异或，flag即为明文</span></span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(flag)):</span><br><span class="line">        res.append(<span class="built_in">ord</span>(flag[i]) ^ KeyStream[i])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    T, S, Key = [], [], []</span><br><span class="line">    PlainText, CryptoText, KeyStream = <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, []</span><br><span class="line">    flag = <span class="built_in">input</span>(<span class="string">&#x27;please input you flag:\n&#x27;</span>)<span class="comment">#输入明文</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> flag:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;bad&#x27;</span>)</span><br><span class="line">        exit()</span><br><span class="line">    init_S()</span><br><span class="line">    init_T()</span><br><span class="line">    swap_S()</span><br><span class="line">    Get_KeyStream()</span><br><span class="line">    res = Get_code()</span><br><span class="line">    <span class="built_in">print</span>(res)  <span class="comment">#得到加密后的密文了</span></span><br><span class="line">    <span class="keyword">for</span> i, ele <span class="keyword">in</span> <span class="built_in">enumerate</span>(res):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> ele == [<span class="number">84</span>, <span class="number">91</span>, <span class="number">254</span>, <span class="number">48</span>, <span class="number">129</span>, <span class="number">210</span>, <span class="number">135</span>, <span class="number">132</span>, <span class="number">112</span>, <span class="number">234</span>, <span class="number">208</span>, <span class="number">15</span>, <span class="number">213</span>, <span class="number">39</span>, <span class="number">108</span>, <span class="number">253</span>, <span class="number">86</span>, <span class="number">118</span>, <span class="number">248</span>][i]:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;bad&#x27;</span>)</span><br><span class="line">            exit()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;good&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>上面例子中函数sub_401500，其实就是一个S盒的初始化</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221231171129838.png" class title="This is an image">
+
+<p>函数sub_40152B，是一个密钥盒的初始化</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221231171418697.png" class title="This is an image">
+
+<p>函数sub_401593，对S盒进行了一个处理</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221231174840336.png" class title="This is an image">
+
+<p>函数sub_401619，密钥流的生成</p>
+<img src="/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/image-20221231181015652.png" class title="This is an image">
+
+<p>所以其实可以写脚本，把密钥流算出来</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> S[<span class="number">256</span>] = &#123; <span class="number">0</span> &#125;; </span><br><span class="line">	<span class="type">unsigned</span> <span class="type">char</span> T[<span class="number">256</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="type">char</span> key[] = <span class="string">&quot;123456&quot;</span>;</span><br><span class="line">	<span class="type">int</span> klen = <span class="built_in">strlen</span>(key);</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> xorKey[<span class="number">42</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> tmp=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)  <span class="comment">//初始化S盒和T盒</span></span><br><span class="line">	&#123;</span><br><span class="line">		S[i] = i;</span><br><span class="line">		T[i] = key[i % klen];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; i &lt; <span class="number">255</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		j = (j + S[i] + T[i]) % <span class="number">256</span>;</span><br><span class="line">		tmp = S[i];</span><br><span class="line">		S[i] = S[j];</span><br><span class="line">		S[j] = tmp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//流的生成</span></span><br><span class="line">	<span class="type">int</span> v4, count, v5 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (count = <span class="number">0</span>; count &lt; <span class="number">42</span>; count++)</span><br><span class="line">	&#123;</span><br><span class="line">		i = (i + <span class="number">1</span>) % <span class="number">256</span>;</span><br><span class="line">		j = (j + S[i]) % <span class="number">256</span>;</span><br><span class="line">		v4 = S[i] + <span class="number">66</span>;</span><br><span class="line">		S[i] = S[j] - <span class="number">33</span>;</span><br><span class="line">		S[i] ^= <span class="number">2u</span>;</span><br><span class="line">		S[j] = <span class="number">5</span> * v4;</span><br><span class="line">		S[j] = S[i] - <span class="number">10</span>;</span><br><span class="line">		S[j] += S[i];</span><br><span class="line">		S[i] -= <span class="number">18</span>;</span><br><span class="line"></span><br><span class="line">		xorKey[v5++] = S[(S[j] + S[i]) % <span class="number">256</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">42</span>; i++)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;0x%X,&quot;</span>, xorKey[i]);</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但这里由于运行的编译器版本不同，结果是不同的，所以还是动调把数据拉出来比较好。感谢PZ师傅的指导，不然也不会这么快复现出来。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/29/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1506,7 +1758,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1517,7 +1769,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1528,7 +1780,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

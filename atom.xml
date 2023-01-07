@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-01-07T06:29:41.701Z</updated>
+  <updated>2023-01-07T13:34:26.434Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>树的基本概念</title>
+    <link href="http://example.com/2023/01/07/%E6%A0%91/"/>
+    <id>http://example.com/2023/01/07/%E6%A0%91/</id>
+    <published>2023-01-07T11:52:18.000Z</published>
+    <updated>2023-01-07T13:34:26.434Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;树是一种非线性的数据结构，用它能很好地描述有分支和层次特性的数据结构&lt;/p&gt;
+&lt;h1 id=&quot;树的概念&quot;&gt;&lt;a href=&quot;#树的概念&quot; class=&quot;headerlink&quot; title=&quot;树的概念&quot;&gt;&lt;/a&gt;树的概念&lt;/h1&gt;&lt;h2 id=&quot;树的定义&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="算法" scheme="http://example.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="树" scheme="http://example.com/tags/%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>HNCTF2022复现</title>
