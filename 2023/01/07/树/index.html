@@ -88,13 +88,14 @@
 <meta property="og:site_name" content="Reverse">
 <meta property="og:description" content="树是一种非线性的数据结构，用它能很好地描述有分支和层次特性的数据结构 树的概念树的定义一棵树是由n(n&gt;0)个元素组成的有限集合  每个元素称为结点(node) 有一个特定的结点，称为根结点或树根(root) 除根结点外，其余结点能分成m(m&gt;&#x3D;0)个互不相交的有限集合T0,T1,T2….其中的每个子集又都是一颗树，这些集合称为这颗树的子树。  树的基本术语 结点(node)">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/01/07/%E6%A0%91/20230107213257.jpg">
 <meta property="og:image" content="http://example.com/2023/01/07/%E6%A0%91/20230107212356.jpg">
 <meta property="article:published_time" content="2023-01-07T11:52:18.000Z">
-<meta property="article:modified_time" content="2023-01-07T13:34:26.434Z">
+<meta property="article:modified_time" content="2023-01-07T15:15:36.993Z">
 <meta property="article:author" content="An0rak">
 <meta property="article:tag" content="树">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/01/07/%E6%A0%91/20230107212356.jpg">
+<meta name="twitter:image" content="http://example.com/2023/01/07/%E6%A0%91/20230107213257.jpg">
 
 
 
@@ -438,12 +439,23 @@
 <h5 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h5></li>
 </ul>
 <p>具有n个结点的完全二叉树的高度为log2(n+1) </p>
-
+<img src="/2023/01/07/%E6%A0%91/20230107213257.jpg" class title="This is an image">
 
 <h4 id="扩充二叉树"><a href="#扩充二叉树" class="headerlink" title="扩充二叉树"></a>扩充二叉树</h4><p>除叶子结点外，其余结点都必须有两个孩子，也称为2-树（仅存在度有2和0的结点）</p>
 <h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><img src="/2023/01/07/%E6%A0%91/20230107212356.jpg" class title="This is an image">
 
 <p> 满二叉树一定是完全二叉树，也是扩充二叉树</p>
+<h2 id="二叉树ADT（抽象数据类型）"><a href="#二叉树ADT（抽象数据类型）" class="headerlink" title="二叉树ADT（抽象数据类型）"></a>二叉树ADT（抽象数据类型）</h2><p>运算：</p>
+<p>Create(bt)：构造一棵空二叉树bt</p>
+<p>NewNode(x,ln,rn)：创建一个新结点，该结点的值为x，ln和rn为该结点的左右孩子结点</p>
+<p>IsEmpty(bt)：若二叉树bt为空，则返回TRUE，否则返回FALSE</p>
+<p>ClearTree(bt)：清除二叉树bt中所有结点，使之成为空二叉树</p>
+<p>Root(bt,x)：若二叉树bt非空，则获取根结点中的数据，并返回TRUE，否则返回FALSE</p>
+<p>MakeTree(bt,x,left,right)：构造一棵树bt,根结点的值为x，left和right为该根结点的左右子树</p>
+<p>ProOrderTree(bt)：先序遍历二叉树bt</p>
+<p>InOrderTree(bt)：中序遍历二叉树bt</p>
+<p>PostOrderTree(bt)：后序遍历二叉树bt</p>
+<p>LevelOrderTree(bt)：宽度优先(层次)遍历二叉树bt</p>
 
       
     </div>
@@ -621,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">树的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">树的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.2.</span> <span class="nav-text">树的基本术语</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89%E5%8F%8A%E6%80%A7%E8%B4%A8"><span class="nav-number">2.</span> <span class="nav-text">二叉树的定义及性质</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">二叉树的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.1.</span> <span class="nav-text">树与二叉树的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8"><span class="nav-number">2.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">2.3.</span> <span class="nav-text">特殊二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">2.3.0.1.</span> <span class="nav-text">满二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">2.3.0.2.</span> <span class="nav-text">完全二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8-1"><span class="nav-number">2.3.0.2.1.</span> <span class="nav-text">性质</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%85%85%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">2.3.0.3.</span> <span class="nav-text">扩充二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB"><span class="nav-number">2.3.0.4.</span> <span class="nav-text">关系</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">树的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">树的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.2.</span> <span class="nav-text">树的基本术语</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89%E5%8F%8A%E6%80%A7%E8%B4%A8"><span class="nav-number">2.</span> <span class="nav-text">二叉树的定义及性质</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">二叉树的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.1.</span> <span class="nav-text">树与二叉树的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8"><span class="nav-number">2.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">2.3.</span> <span class="nav-text">特殊二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">2.3.0.1.</span> <span class="nav-text">满二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">2.3.0.2.</span> <span class="nav-text">完全二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8-1"><span class="nav-number">2.3.0.2.1.</span> <span class="nav-text">性质</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%85%85%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">2.3.0.3.</span> <span class="nav-text">扩充二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB"><span class="nav-number">2.3.0.4.</span> <span class="nav-text">关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91ADT%EF%BC%88%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">二叉树ADT（抽象数据类型）</span></a></li></ol></li></ol></div>
             
 
           </div>
