@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-01-08T09:08:40.611Z</updated>
+  <updated>2023-01-08T14:02:49.385Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>迷宫题</title>
+    <link href="http://example.com/2023/01/08/%E8%BF%B7%E5%AE%AB%E9%A2%98/"/>
+    <id>http://example.com/2023/01/08/%E8%BF%B7%E5%AE%AB%E9%A2%98/</id>
+    <published>2023-01-08T09:28:02.000Z</published>
+    <updated>2023-01-08T14:02:49.385Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;迷宫题&quot;&gt;&lt;a href=&quot;#迷宫题&quot; class=&quot;headerlink&quot; title=&quot;迷宫题&quot;&gt;&lt;/a&gt;迷宫题&lt;/h1&gt;&lt;p&gt;详细介绍可参考CTF Wiki &lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="re" scheme="http://example.com/categories/re/"/>
+    
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
+    
+  </entry>
   
   <entry>
     <title>WUSTCTF2020-level4</title>
