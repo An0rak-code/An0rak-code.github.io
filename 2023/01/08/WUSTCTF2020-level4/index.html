@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="ctf," />
+  <meta name="keywords" content="buu做题记录," />
 
 
 
@@ -81,20 +81,23 @@
 
 
 
-<meta name="description" content="TEA算法原理TEA使用64位的明文分组，密钥长度为128位，采用Feistel网络。其作者推荐使用32次循环加密即64轮（每轮两次加密）。 12345678910111213141516171819&#x2F;&#x2F;加密void Encrypt(long* EntryData, long* Key) &amp;#123;&#x2F;&#x2F;分别加密数组中的前四个字节与后4个字节,4个字节为一组每次加密两组unsigned long">
+<meta name="description" content="伪代码分析主逻辑，提示的很明显，考的是数据结构 )  运行后： )  一共是三种遍历方式 type1:中序遍历（先左子树，再根结点，再右子树） )  type2：后序遍历（先左子树，再右子树，再根结点） )  最后一种应该就是先序遍历了 exp123456789101112131415161718192021222324#include&lt;iostream&gt;  using namespa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tea加密">
-<meta property="og:url" content="http://example.com/2023/01/06/Tea%E5%8A%A0%E5%AF%86/index.html">
+<meta property="og:title" content="WUSTCTF2020-level4">
+<meta property="og:url" content="http://example.com/2023/01/08/WUSTCTF2020-level4/index.html">
 <meta property="og:site_name" content="Reverse">
-<meta property="og:description" content="TEA算法原理TEA使用64位的明文分组，密钥长度为128位，采用Feistel网络。其作者推荐使用32次循环加密即64轮（每轮两次加密）。 12345678910111213141516171819&#x2F;&#x2F;加密void Encrypt(long* EntryData, long* Key) &amp;#123;&#x2F;&#x2F;分别加密数组中的前四个字节与后4个字节,4个字节为一组每次加密两组unsigned long">
+<meta property="og:description" content="伪代码分析主逻辑，提示的很明显，考的是数据结构 )  运行后： )  一共是三种遍历方式 type1:中序遍历（先左子树，再根结点，再右子树） )  type2：后序遍历（先左子树，再右子树，再根结点） )  最后一种应该就是先序遍历了 exp123456789101112131415161718192021222324#include&lt;iostream&gt;  using namespa">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/01/06/Tea%E5%8A%A0%E5%AF%86/image-20220809092514727.png">
-<meta property="article:published_time" content="2023-01-06T01:59:55.000Z">
-<meta property="article:modified_time" content="2023-01-06T06:01:23.430Z">
+<meta property="og:image" content="http://example.com/2023/01/08/WUSTCTF2020-level4/image-20230108152425183.png">
+<meta property="og:image" content="http://example.com/2023/01/08/WUSTCTF2020-level4/image-20230108152608746.png">
+<meta property="og:image" content="http://example.com/2023/01/08/WUSTCTF2020-level4/image-20230108152851117.png">
+<meta property="og:image" content="http://example.com/2023/01/08/WUSTCTF2020-level4/image-20230108153034432.png">
+<meta property="article:published_time" content="2023-01-08T07:22:22.000Z">
+<meta property="article:modified_time" content="2023-01-08T09:08:40.611Z">
 <meta property="article:author" content="An0rak">
-<meta property="article:tag" content="ctf">
+<meta property="article:tag" content="buu做题记录">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/01/06/Tea%E5%8A%A0%E5%AF%86/image-20220809092514727.png">
+<meta name="twitter:image" content="http://example.com/2023/01/08/WUSTCTF2020-level4/image-20230108152425183.png">
 
 
 
@@ -124,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/01/06/Tea加密/"/>
+  <link rel="canonical" href="http://example.com/2023/01/08/WUSTCTF2020-level4/"/>
 
 
 
 
 
-  <title>Tea加密 | Reverse</title>
+  <title>WUSTCTF2020-level4 | Reverse</title>
   
 
 
@@ -301,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/06/Tea%E5%8A%A0%E5%AF%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/08/WUSTCTF2020-level4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -318,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Tea加密</h1>
+          <h1 class="post-title" itemprop="name headline">WUSTCTF2020-level4</h1>
         
 
         <div class="post-meta">
@@ -330,8 +333,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-06T09:59:55+08:00">
-                2023-01-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-08T15:22:22+08:00">
+                2023-01-08
               </time>
             
 
@@ -353,8 +356,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">加密算法</span>
+                  <a href="/categories/re/" itemprop="url" rel="index">
+                    <span itemprop="name">re</span>
                   </a>
                 </span>
 
@@ -395,34 +398,26 @@
       
 
       
-        <h1 id="TEA"><a href="#TEA" class="headerlink" title="TEA"></a>TEA</h1><h2 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h2><p>TEA使用64位的明文分组，密钥长度为128位，采用Feistel网络。其作者推荐使用32次循环加密即64轮（每轮两次加密）。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//加密</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Encrypt</span><span class="params">(<span class="type">long</span>* EntryData, <span class="type">long</span>* Key)</span> &#123;</span><br><span class="line"><span class="comment">//分别加密数组中的前四个字节与后4个字节,4个字节为一组每次加密两组</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> x = EntryData[<span class="number">0</span>];</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> y = EntryData[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> delta = <span class="number">0x9E3779B9</span>;</span><br><span class="line"><span class="comment">//总共加密32轮</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">sum += delta;</span><br><span class="line">x += ((y &lt;&lt; <span class="number">4</span>) + Key[<span class="number">0</span>]) ^ (y + sum) ^ ((y &gt;&gt; <span class="number">5</span>) + Key[<span class="number">1</span>]);</span><br><span class="line">    <span class="comment">//x+=const</span></span><br><span class="line">y += ((x &lt;&lt; <span class="number">4</span>) + Key[<span class="number">2</span>]) ^ (x + sum) ^ ((x &gt;&gt; <span class="number">5</span>) + Key[<span class="number">3</span>]);</span><br><span class="line">    &#125;  <span class="comment">//y+=const</span></span><br><span class="line"><span class="comment">//最后加密的结果重新写入到数组中</span></span><br><span class="line">EntryData[<span class="number">0</span>] = x;</span><br><span class="line">EntryData[<span class="number">1</span>] = y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="伪代码分析"><a href="#伪代码分析" class="headerlink" title="伪代码分析"></a>伪代码分析</h2><p>主逻辑，提示的很明显，考的是数据结构</p>
+<img src="/2023/01/08/WUSTCTF2020-level4/image-20230108152425183.png" class title="This is an image">)
 
-<p>该算法使用了一个常数 δ 作为倍数，它来源于黄金比率，以保证每一轮加密都不相同。但 δ 的精确值似乎并不重要，但能避免一些算法错误，这里 TEA 把它定义为 δ&#x3D;「(√5 - 1)231」（也就是程序中的0×9E3779B9）。</p>
-<h3 id="加密流程"><a href="#加密流程" class="headerlink" title="加密流程"></a>加密流程</h3><img src="/2023/01/06/Tea%E5%8A%A0%E5%AF%86/image-20220809092514727.png" class title="This is an image">
+<p>运行后：</p>
+<img src="/2023/01/08/WUSTCTF2020-level4/image-20230108152608746.png" class title="This is an image">)
 
-<p>图解符号：</p>
-<ul>
-<li>方框：相加盒，将指向该盒的变量进行相加</li>
-<li>圆圈：异或盒，将指向该盒的变量进行异或</li>
-</ul>
-<h3 id="解密思路"><a href="#解密思路" class="headerlink" title="解密思路"></a>解密思路</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">上文中，v0+=xxx与v1+=xxx这两个公式总共执行了32轮，可以记作：</span><br><span class="line">(v0+=xxx)32</span><br><span class="line">(v1+=xxx)32</span><br><span class="line">那么解密的时候，应该为三十二轮递减，且v0和v1的顺序应当变换回来</span><br><span class="line">(v0-=xxx)32</span><br><span class="line">(v1-=xxx)32</span><br></pre></td></tr></table></figure>
+<p>一共是三种遍历方式</p>
+<p>type1:中序遍历（先左子树，再根结点，再右子树）</p>
+<img src="/2023/01/08/WUSTCTF2020-level4/image-20230108152851117.png" class title="This is an image">)
 
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解密</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Decrypt</span><span class="params">(<span class="type">long</span>* EntryData, <span class="type">long</span>* Key)</span> &#123;</span><br><span class="line"><span class="comment">//分别加密数组中的前四个字节与后4个字节,4个字节为一组每次加密两组</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> x = EntryData[<span class="number">0</span>];</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> y = EntryData[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> delta = <span class="number">0x9E3779B9</span>;</span><br><span class="line">sum = delta &lt;&lt; <span class="number">5</span>;   <span class="comment">//这里的sum是0x9e3779b9*32后截取32位的结果，截取很重要。</span></span><br><span class="line">    <span class="comment">//注意这里,sum = 32轮之后的黄金分割值. 因为我们要反序解密.</span></span><br><span class="line"><span class="comment">//总共加密32轮 那么反序也解密32轮</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line"><span class="comment">// 先将y解开 然后参与运算在解x</span></span><br><span class="line">y -= ((x &lt;&lt; <span class="number">4</span>) + Key[<span class="number">2</span>]) ^ (x + sum) ^ ((x &gt;&gt; <span class="number">5</span>) + Key[<span class="number">3</span>]);</span><br><span class="line">x -= ((y &lt;&lt; <span class="number">4</span>) + Key[<span class="number">0</span>]) ^ (y + sum) ^ ((y &gt;&gt; <span class="number">5</span>) + Key[<span class="number">1</span>]);</span><br><span class="line">sum -= delta;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//最后加密的结果重新写入到数组中</span></span><br><span class="line">EntryData[<span class="number">0</span>] = x;</span><br><span class="line">EntryData[<span class="number">1</span>] = y;</span><br></pre></td></tr></table></figure>
+<p>type2：后序遍历（先左子树，再右子树，再根结点）</p>
+<img src="/2023/01/08/WUSTCTF2020-level4/image-20230108153034432.png" class title="This is an image">)
 
-<p><strong>特征</strong></p>
-<ul>
-<li>左移4 和右移5</li>
-<li>0x9e3779b9</li>
-<li>对3个数进行两次异或</li>
-<li>x-&#x3D;0x61c88647和x+&#x3D;0x9e3779b9，这两个值是等价的</li>
-</ul>
-<p><strong>完整代码</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">encrypt</span> <span class="params">(<span class="type">uint32_t</span> *v,<span class="type">uint32_t</span> *k )</span>&#123;</span><br><span class="line">	<span class="type">uint32_t</span> v0=v[<span class="number">0</span>],v1=v[<span class="number">1</span>],sum=<span class="number">0</span>,i;</span><br><span class="line">	<span class="type">uint32_t</span> delta=<span class="number">0x9e3779b9</span>;</span><br><span class="line">	<span class="type">uint32_t</span> k0=k[<span class="number">0</span>],k1=k[<span class="number">1</span>],k2=k[<span class="number">2</span>],k3=k[<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">32</span>;i++)&#123;</span><br><span class="line">		sum+=delta;</span><br><span class="line">		v0+=((v1&lt;&lt;<span class="number">4</span>)+k0)^(v1+sum)^((v1&gt;&gt;<span class="number">5</span>)+k1);</span><br><span class="line">		v1+=((v0&lt;&lt;<span class="number">4</span>)+k2)^(v0+sum)^((v0&gt;&gt;<span class="number">5</span>)+k3);</span><br><span class="line">	&#125; </span><br><span class="line">	v[<span class="number">0</span>]=v0;v[<span class="number">1</span>]=v1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">decrypt</span> <span class="params">(<span class="type">uint32_t</span> *v,<span class="type">uint32_t</span> *k)</span>&#123;</span><br><span class="line">	<span class="type">uint32_t</span> v0=v[<span class="number">0</span>],v1=v[<span class="number">1</span>],sum=<span class="number">0xC6EF3720</span>,i;	<span class="comment">//这里的sum是0x9e3779b9*32后截取32位的结果，截取很重要。</span></span><br><span class="line">	<span class="type">uint32_t</span> delta=<span class="number">0x9e3779b9</span>;</span><br><span class="line">	<span class="type">uint32_t</span> k0=k[<span class="number">0</span>],k1=k[<span class="number">1</span>],k2=k[<span class="number">2</span>],k3=k[<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">32</span>;i++)&#123;</span><br><span class="line">		v1-=((v0&lt;&lt;<span class="number">4</span>)+k2)^(v0+sum)^((v0&gt;&gt;<span class="number">5</span>)+k3);</span><br><span class="line">		v0-=((v1&lt;&lt;<span class="number">4</span>)+k0)^(v1+sum)^((v1&gt;&gt;<span class="number">5</span>)+k1);</span><br><span class="line">		sum-=delta;</span><br><span class="line">	&#125; </span><br><span class="line">	v[<span class="number">0</span>]=v0;v[<span class="number">1</span>]=v1;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">uint32_t</span> v[<span class="number">2</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,k[<span class="number">4</span>]=&#123;<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;加密前的数据：%u %u\n&quot;</span>,v[<span class="number">0</span>],v[<span class="number">1</span>]);	<span class="comment">//%u 以十进制形式输出无符号整数 </span></span><br><span class="line">	encrypt(v,k);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;加密后数据：%u %u\n&quot;</span>,v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">	decrypt(v,k);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;解密后数据：%u %u\n&quot;</span>,v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后一种应该就是先序遍历了</p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span>  </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;  </span><br><span class="line"></span><br><span class="line"><span class="type">char</span> post[] = <span class="string">&quot;20f0Th&#123;2tsIS_icArE&#125;e7__w&quot;</span>; <span class="comment">// 后序遍历结果</span></span><br><span class="line"><span class="type">char</span> mid[] = <span class="string">&quot;2f0t02T&#123;hcsiI_SwA__r7Ee&#125;&quot;</span>; <span class="comment">// 中序遍历结果</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pre</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">if</span>(start &gt; end)   </span><br><span class="line">        <span class="keyword">return</span> ;  </span><br><span class="line">    <span class="type">int</span> i = start;  </span><br><span class="line">    <span class="keyword">while</span>(i &lt; end &amp;&amp; mid[i] != post[root]) i++;  <span class="comment">//定位根在中序的位置</span></span><br><span class="line">    cout&lt;&lt;mid[i];</span><br><span class="line">    <span class="built_in">pre</span>(root - <span class="number">1</span> - (end - i), start, i - <span class="number">1</span>);  <span class="comment">//递归处理左子树</span></span><br><span class="line">    <span class="built_in">pre</span>(root - <span class="number">1</span>, i + <span class="number">1</span>, end);  <span class="comment">//递归处理右子树</span></span><br><span class="line">    </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="built_in">pre</span>(<span class="number">24</span>, <span class="number">0</span>, <span class="number">24</span>);  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">//wctf2020&#123;This_IS_A_7reE&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>python实现</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">v, k, i</span>):</span><br><span class="line">    v0, v1 = c_uint32(v[<span class="number">2</span> * i]), c_uint32(v[<span class="number">2</span> * i + <span class="number">1</span>])</span><br><span class="line">    delta = <span class="number">0x543210DD</span></span><br><span class="line">    k0, k1, k2, k3 = k[<span class="number">0</span>], k[<span class="number">1</span>], k[<span class="number">2</span>], k[<span class="number">3</span>]</span><br><span class="line">    total = c_uint32(delta * <span class="number">32</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        v1.value -= ((v0.value &lt;&lt; <span class="number">4</span>) + k2) ^ (v0.value + total.value) ^ ((v0.value &gt;&gt; <span class="number">5</span>) + k3)</span><br><span class="line">        v0.value -= ((v1.value &lt;&lt; <span class="number">4</span>) + k0) ^ (v1.value + total.value) ^ ((v1.value &gt;&gt; <span class="number">5</span>) + k1)</span><br><span class="line">        total.value += delta</span><br><span class="line">    <span class="keyword">return</span> v0.value, v1.value</span><br><span class="line"></span><br><span class="line">value = []  <span class="comment">#加密后数据</span></span><br><span class="line">key = []   <span class="comment">#密钥</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    res = decrypt(value, key, i)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">hex</span>(res[<span class="number">0</span>]), <span class="built_in">hex</span>(res[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="built_in">hex</span> = <span class="string">&#x27;&#x27;</span> <span class="comment">#对解密后数据重新排列</span></span><br><span class="line"><span class="built_in">str</span> = binascii.unhexlify(<span class="built_in">hex</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)</span><br></pre></td></tr></table></figure>
-
+<p>参考博客：<a target="_blank" rel="noopener" href="http://120.24.80.93/index.php/2021/12/15/wustctf2020level4/">http://120.24.80.93/index.php/2021/12/15/wustctf2020level4/</a></p>
+<p>感觉还没完全明白这个脚本意思，本来想自己写一个试试，但写不出，呜呜呜..</p>
+<h4 id="改汇编指令"><a href="#改汇编指令" class="headerlink" title="改汇编指令"></a>改汇编指令</h4><p>也没懂，哭了</p>
+<p><a target="_blank" rel="noopener" href="https://www.52hertz.tech/2020/03/30/wctf2020_official_wp/#level4-12-solves">https://www.52hertz.tech/2020/03/30/wctf2020_official_wp/#level4-12-solves</a></p>
 
       
     </div>
@@ -440,7 +435,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ctf/" rel="tag"># ctf</a>
+            <a href="/tags/buu%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/" rel="tag"># buu做题记录</a>
           
         </div>
       
@@ -453,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/" rel="next" title="绿城杯2021-easy_re">
-                <i class="fa fa-chevron-left"></i> 绿城杯2021-easy_re
+              <a href="/2023/01/08/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/" rel="next" title="二叉树的遍历">
+                <i class="fa fa-chevron-left"></i> 二叉树的遍历
               </a>
             
           </div>
@@ -462,10 +457,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/01/07/0xGame2022%E5%A4%8D%E7%8E%B0/" rel="prev" title="0xGame2022复现">
-                0xGame2022复现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -604,7 +595,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TEA"><span class="nav-number">1.</span> <span class="nav-text">TEA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">算法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">加密流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%AF%86%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">解密思路</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">伪代码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#exp"><span class="nav-number">1.0.1.</span> <span class="nav-text">exp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B9%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4"><span class="nav-number">1.0.2.</span> <span class="nav-text">改汇编指令</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

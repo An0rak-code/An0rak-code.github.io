@@ -943,4 +943,35 @@
         <tag>树</tag>
       </tags>
   </entry>
+  <entry>
+    <title>WUSTCTF2020-level4</title>
+    <url>/2023/01/08/WUSTCTF2020-level4/</url>
+    <content><![CDATA[<h2 id="伪代码分析"><a href="#伪代码分析" class="headerlink" title="伪代码分析"></a>伪代码分析</h2><p>主逻辑，提示的很明显，考的是数据结构</p>
+<img src="/2023/01/08/WUSTCTF2020-level4/image-20230108152425183.png" class title="This is an image">)
+
+<p>运行后：</p>
+<img src="/2023/01/08/WUSTCTF2020-level4/image-20230108152608746.png" class title="This is an image">)
+
+<p>一共是三种遍历方式</p>
+<p>type1:中序遍历（先左子树，再根结点，再右子树）</p>
+<img src="/2023/01/08/WUSTCTF2020-level4/image-20230108152851117.png" class title="This is an image">)
+
+<p>type2：后序遍历（先左子树，再右子树，再根结点）</p>
+<img src="/2023/01/08/WUSTCTF2020-level4/image-20230108153034432.png" class title="This is an image">)
+
+<p>最后一种应该就是先序遍历了</p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span>  </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;  </span><br><span class="line"></span><br><span class="line"><span class="type">char</span> post[] = <span class="string">&quot;20f0Th&#123;2tsIS_icArE&#125;e7__w&quot;</span>; <span class="comment">// 后序遍历结果</span></span><br><span class="line"><span class="type">char</span> mid[] = <span class="string">&quot;2f0t02T&#123;hcsiI_SwA__r7Ee&#125;&quot;</span>; <span class="comment">// 中序遍历结果</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pre</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> start, <span class="type">int</span> end)</span> </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">if</span>(start &gt; end)   </span><br><span class="line">        <span class="keyword">return</span> ;  </span><br><span class="line">    <span class="type">int</span> i = start;  </span><br><span class="line">    <span class="keyword">while</span>(i &lt; end &amp;&amp; mid[i] != post[root]) i++;  <span class="comment">//定位根在中序的位置</span></span><br><span class="line">    cout&lt;&lt;mid[i];</span><br><span class="line">    <span class="built_in">pre</span>(root - <span class="number">1</span> - (end - i), start, i - <span class="number">1</span>);  <span class="comment">//递归处理左子树</span></span><br><span class="line">    <span class="built_in">pre</span>(root - <span class="number">1</span>, i + <span class="number">1</span>, end);  <span class="comment">//递归处理右子树</span></span><br><span class="line">    </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="built_in">pre</span>(<span class="number">24</span>, <span class="number">0</span>, <span class="number">24</span>);  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">//wctf2020&#123;This_IS_A_7reE&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>参考博客：<a href="http://120.24.80.93/index.php/2021/12/15/wustctf2020level4/">http://120.24.80.93/index.php/2021/12/15/wustctf2020level4/</a></p>
+<p>感觉还没完全明白这个脚本意思，本来想自己写一个试试，但写不出，呜呜呜..</p>
+<h4 id="改汇编指令"><a href="#改汇编指令" class="headerlink" title="改汇编指令"></a>改汇编指令</h4><p>也没懂，哭了</p>
+<p><a href="https://www.52hertz.tech/2020/03/30/wctf2020_official_wp/#level4-12-solves">https://www.52hertz.tech/2020/03/30/wctf2020_official_wp/#level4-12-solves</a></p>
+]]></content>
+      <categories>
+        <category>re</category>
+      </categories>
+      <tags>
+        <tag>buu做题记录</tag>
+      </tags>
+  </entry>
 </search>
