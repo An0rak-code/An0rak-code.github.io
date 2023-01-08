@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-01-08T03:34:10.891Z</updated>
+  <updated>2023-01-08T07:14:53.060Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>二叉树的遍历</title>
+    <link href="http://example.com/2023/01/08/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/"/>
+    <id>http://example.com/2023/01/08/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/</id>
+    <published>2023-01-08T03:35:39.000Z</published>
+    <updated>2023-01-08T07:14:53.060Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;遍历&quot;&gt;&lt;a href=&quot;#遍历&quot; class=&quot;headerlink&quot; title=&quot;遍历&quot;&gt;&lt;/a&gt;遍历&lt;/h1&gt;&lt;p&gt;对于一个有限元素的集合，遍历是一种对该集合中的每个元素访问且仅访问一次的操作&lt;/p&gt;
+&lt;h2 id=&quot;二叉树的遍历&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="算法" scheme="http://example.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="树" scheme="http://example.com/tags/%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>树的基本概念</title>

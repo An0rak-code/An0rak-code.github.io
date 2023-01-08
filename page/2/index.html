@@ -297,6 +297,212 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/" itemprop="url">moectf2022 re复现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-31T19:38:07+08:00">
+                2022-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/re/" itemprop="url" rel="index">
+                    <span itemprop="name">re</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="chicken-soup"><a href="#chicken-soup" class="headerlink" title="chicken_soup"></a>chicken_soup</h1><p>主要考察去除花指令以及位移操作</p>
+<img src="/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/image-20221231195224393.png" class title="This is an image">
+
+<p>跟进函数sub_401000，是一个加的操作</p>
+<p>input[i] +&#x3D; input[i + 1];</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">unsigned int __cdecl sub_401000(const char *a1)</span><br><span class="line">&#123;</span><br><span class="line">  unsigned int result; // eax</span><br><span class="line">  unsigned int i; // [esp+18h] [ebp-8h]</span><br><span class="line"></span><br><span class="line">  for ( i = 0; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    result = strlen(a1) - 1;</span><br><span class="line">    if ( i &gt;= result )</span><br><span class="line">      break;</span><br><span class="line">    a1[i] += a1[i + 1];</span><br><span class="line">  &#125;</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>跟进函数sub_401080，是一个移位操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">unsigned int __cdecl sub_401080(const char *a1)</span><br><span class="line">&#123;</span><br><span class="line">  unsigned int result; // eax</span><br><span class="line">  unsigned int i; // [esp+18h] [ebp-8h]</span><br><span class="line"></span><br><span class="line">  for ( i = 0; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    result = i;</span><br><span class="line">    if ( i &gt;= strlen(a1) )</span><br><span class="line">      break;</span><br><span class="line">    a1[i] = (16 * a1[i]) | ((int)(unsigned __int8)a1[i] &gt;&gt; 4);</span><br><span class="line">  &#125;</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">enc = [<span class="number">0xcd</span>,<span class="number">0x4d</span>,<span class="number">0x8c</span>,<span class="number">0x7d</span>,<span class="number">0xad</span>,<span class="number">0x1e</span>,<span class="number">0xbe</span>,<span class="number">0x4a</span>,<span class="number">0x8a</span>,<span class="number">0x7d</span>,<span class="number">0xbc</span>,<span class="number">0x7c</span>,<span class="number">0xfc</span>,<span class="number">0x2e</span>,<span class="number">0x2a</span>,<span class="number">0x79</span>,<span class="number">0x9d</span>,<span class="number">0x6a</span>,<span class="number">0x1a</span>,<span class="number">0xcc</span>,<span class="number">0x3d</span>,<span class="number">0x4a</span>,<span class="number">0xf8</span>,<span class="number">0x3c</span>,<span class="number">0x79</span>,<span class="number">0x69</span>,<span class="number">0x39</span>,<span class="number">0xd9</span>,<span class="number">0xdd</span>,<span class="number">0x9d</span>,<span class="number">0xa9</span>,<span class="number">0x69</span>,<span class="number">0x4c</span>,<span class="number">0x8c</span>,<span class="number">0xdd</span>,<span class="number">0x59</span>,<span class="number">0xe9</span>,<span class="number">0xd7</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(enc)):</span><br><span class="line">    enc[i] = ((enc[i] &gt;&gt; <span class="number">4</span>) | (enc[i] &lt;&lt; <span class="number">4</span>)) &amp; <span class="number">0xff</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(enc)-<span class="number">1</span>, <span class="number">0</span>, -<span class="number">1</span>):  <span class="comment">#逆过来遍历</span></span><br><span class="line">    enc[i-<span class="number">1</span>] -= enc[i]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">bytes</span>(enc))</span><br></pre></td></tr></table></figure>
+
+<h1 id="fake-key"><a href="#fake-key" class="headerlink" title="fake key"></a>fake key</h1><img src="/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/image-20221231202335120.png" class title="This is an image">
+
+<p>分析程序逻辑，先对输入的flag进行一个xor操作，再用随机数进行一个加密，但题目已经提示密钥是假的，我们需要通过动调来获得key和随机数</p>
+<p>关于如何获取随机数，可以在line19下断，提取出此时的input数据，然后跑完整个for循环，再提取input数据，两者相减就是生成的随机数。</p>
+<p>ida动调</p>
+<p>真的key:  yunzh1junTCL,trackYYDS</p>
+<img src="/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/image-20221231203254817.png" class title="This is an image">
+
+<p>循环前input数据</p>
+<img src="/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/image-20221231203501591.png" class title="This is an image">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0x18, 0x14, 0x0F, 0x1B, 0x09, 0x50, 0x0B, 0x14, 0x0F, 0x35, </span><br><span class="line">  0x22, 0x2D, 0x4D, 0x15, 0x13, 0x00, 0x02, 0x0A, 0x38, 0x38, </span><br><span class="line">  0x25, 0x32, 0x18, 0x14, 0x0F, 0x1B, 0x09, 0x50, 0x0B, 0x14, </span><br><span class="line">  0x0F, 0x35, 0x22, 0x2D, 0x4D, 0x15, 0x13</span><br></pre></td></tr></table></figure>
+
+<p>循环后input数据</p>
+<img src="/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/image-20221231203622646.png" class title="This is an image">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0x19, 0x1B, 0x13, 0x1B, 0x12, 0x54, 0x13, 0x1C, 0x11, 0x39, </span><br><span class="line"> 0x27, 0x32, 0x4E, 0x1C, 0x14, 0x01, 0x07, 0x0C, 0x3F, 0x3E, </span><br><span class="line"> 0x26, 0x36, 0x1A, 0x17, 0x11, 0x1D, 0x0A, 0x56, 0x13, 0x19, </span><br><span class="line"> 0x16, 0x3B, 0x23, 0x35, 0x56, 0x17, 0x1A</span><br></pre></td></tr></table></figure>
+
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">key=<span class="string">&quot;yunzh1junTCL,trackYYDS&quot;</span></span><br><span class="line">str1=[<span class="number">0x18</span>, <span class="number">0x14</span>, <span class="number">0x0F</span>, <span class="number">0x1B</span>, <span class="number">0x09</span>, <span class="number">0x50</span>, <span class="number">0x0B</span>, <span class="number">0x14</span>, <span class="number">0x0F</span>, <span class="number">0x35</span>,</span><br><span class="line">  <span class="number">0x22</span>, <span class="number">0x2D</span>, <span class="number">0x4D</span>, <span class="number">0x15</span>, <span class="number">0x13</span>, <span class="number">0x00</span>, <span class="number">0x02</span>, <span class="number">0x0A</span>, <span class="number">0x38</span>, <span class="number">0x38</span>,</span><br><span class="line">  <span class="number">0x25</span>, <span class="number">0x32</span>, <span class="number">0x18</span>, <span class="number">0x14</span>, <span class="number">0x0F</span>, <span class="number">0x1B</span>, <span class="number">0x09</span>, <span class="number">0x50</span>, <span class="number">0x0B</span>, <span class="number">0x14</span>,</span><br><span class="line">  <span class="number">0x0F</span>, <span class="number">0x35</span>, <span class="number">0x22</span>, <span class="number">0x2D</span>, <span class="number">0x4D</span>, <span class="number">0x15</span>, <span class="number">0x13</span>]</span><br><span class="line">str2=[ <span class="number">0x19</span>, <span class="number">0x1B</span>, <span class="number">0x13</span>, <span class="number">0x1B</span>, <span class="number">0x12</span>, <span class="number">0x54</span>, <span class="number">0x13</span>, <span class="number">0x1C</span>, <span class="number">0x11</span>, <span class="number">0x39</span>,</span><br><span class="line">  <span class="number">0x27</span>, <span class="number">0x32</span>, <span class="number">0x4E</span>, <span class="number">0x1C</span>, <span class="number">0x14</span>, <span class="number">0x01</span>, <span class="number">0x07</span>, <span class="number">0x0C</span>, <span class="number">0x3F</span>, <span class="number">0x3E</span>,</span><br><span class="line">  <span class="number">0x26</span>, <span class="number">0x36</span>, <span class="number">0x1A</span>, <span class="number">0x17</span>, <span class="number">0x11</span>, <span class="number">0x1D</span>, <span class="number">0x0A</span>, <span class="number">0x56</span>, <span class="number">0x13</span>, <span class="number">0x19</span>,</span><br><span class="line">  <span class="number">0x16</span>, <span class="number">0x3B</span>, <span class="number">0x23</span>, <span class="number">0x35</span>, <span class="number">0x56</span>, <span class="number">0x17</span>, <span class="number">0x1A</span>]</span><br><span class="line"></span><br><span class="line">enc=[<span class="number">0x15</span>, <span class="number">0x21</span>, <span class="number">0x0F</span>, <span class="number">0x19</span>, <span class="number">0x25</span>, <span class="number">0x5B</span>, <span class="number">0x19</span>, <span class="number">0x39</span>, <span class="number">0x5F</span>, <span class="number">0x3A</span>,</span><br><span class="line">  <span class="number">0x3B</span>, <span class="number">0x30</span>, <span class="number">0x74</span>, <span class="number">0x07</span>, <span class="number">0x43</span>, <span class="number">0x3F</span>, <span class="number">0x09</span>, <span class="number">0x5A</span>, <span class="number">0x34</span>, <span class="number">0x0C</span>,</span><br><span class="line">  <span class="number">0x74</span>, <span class="number">0x3F</span>, <span class="number">0x1E</span>, <span class="number">0x2D</span>, <span class="number">0x27</span>, <span class="number">0x21</span>, <span class="number">0x12</span>, <span class="number">0x16</span>, <span class="number">0x1F</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(enc)):</span><br><span class="line">    enc[i]-=(str2[i]-str1[i])</span><br><span class="line"><span class="built_in">print</span>(enc)</span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(enc)):</span><br><span class="line">    flag+=<span class="built_in">chr</span>(enc[i]^<span class="built_in">ord</span>(key[i%<span class="built_in">len</span>(key)]))</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>OD动调也可以得到这些数据</p>
+<img src="/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/image-20221231235844439.png" class title="This is an image">
+
+<img src="/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/20230101000312.png" class title="This is an image">
+
+<img src="/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/20230101000411.png" class title="This is an image">
+
+<h1 id="Art"><a href="#Art" class="headerlink" title="Art"></a>Art</h1><p>upx正常脱壳</p>
+<img src="/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/image-20230101103228912.png" class title="This is an image">
+
+<p>整个加密逻辑只有一句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Str1[i - 1] ^= (Str1[i - 1] % 17 + Str1[i]) ^ 0x19;</span><br></pre></td></tr></table></figure>
+
+<p>Str1就是input</p>
+<p>跟进函数sub_401550</p>
+<img src="/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/image-20230101103500021.png" class title="This is an image">
+
+<p>云姐解释的这里是一个SHA1，用来限制多解的情况，很明显我没看懂这里</p>
+<p>str2的数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0x02, 0x18, 0x0F, 0xF8, 0x19, 0x04, 0x27, 0xD8, 0xEB, 0x00, </span><br><span class="line"> 0x35, 0x48, 0x4D, 0x2A, 0x45, 0x6B, 0x59, 0x2E, 0x43, 0x01, </span><br><span class="line"> 0x18, 0x5C, 0x09, 0x09, 0x09, 0x09, 0xB5, 0x7D</span><br></pre></td></tr></table></figure>
+
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">check = [<span class="number">0x2</span>, <span class="number">0x18</span>, <span class="number">0xf</span>, <span class="number">0xf8</span>, <span class="number">0x19</span>, <span class="number">0x4</span>, <span class="number">0x27</span>, <span class="number">0xd8</span>, <span class="number">0xeb</span>, <span class="number">0x0</span>, <span class="number">0x35</span>, <span class="number">0x48</span>, <span class="number">0x4d</span>, <span class="number">0x2a</span>, <span class="number">0x45</span>, <span class="number">0x6b</span>, <span class="number">0x59</span>, <span class="number">0x2e</span>, <span class="number">0x43</span>, <span class="number">0x1</span>, <span class="number">0x18</span>, <span class="number">0x5c</span>, <span class="number">0x9</span>, <span class="number">0x9</span>, <span class="number">0x9</span>, <span class="number">0x9</span>, <span class="number">0xb5</span>, <span class="number">0x7d</span>]</span><br><span class="line">tmp = [<span class="number">0</span>]*<span class="number">28</span></span><br><span class="line">tmp[<span class="built_in">len</span>(check)-<span class="number">1</span>]=check[-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">DFS</span>(<span class="params">deep</span>):</span><br><span class="line">    <span class="keyword">if</span> deep == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">bytes</span>(tmp))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0xff</span>):</span><br><span class="line">            <span class="keyword">if</span> (i ^ <span class="number">0x19</span>) ^ (i % <span class="number">0x11</span> + tmp[deep]) == check[deep - <span class="number">1</span>]:</span><br><span class="line">                tmp[deep - <span class="number">1</span>] = i</span><br><span class="line">                DFS(deep - <span class="number">1</span>)</span><br><span class="line">DFS(<span class="built_in">len</span>(check)-<span class="number">1</span>)  <span class="comment">#深搜算法</span></span><br></pre></td></tr></table></figure>
+
+<p>从前往后爆破：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">check = [<span class="number">0x2</span>, <span class="number">0x18</span>, <span class="number">0xf</span>, <span class="number">0xf8</span>, <span class="number">0x19</span>, <span class="number">0x4</span>, <span class="number">0x27</span>, <span class="number">0xd8</span>, <span class="number">0xeb</span>, <span class="number">0x0</span>, <span class="number">0x35</span>, <span class="number">0x48</span>, <span class="number">0x4d</span>, <span class="number">0x2a</span>, <span class="number">0x45</span>, <span class="number">0x6b</span>, <span class="number">0x59</span>, <span class="number">0x2e</span>, <span class="number">0x43</span>, <span class="number">0x1</span>, <span class="number">0x18</span>, <span class="number">0x5c</span>, <span class="number">0x9</span>, <span class="number">0x9</span>, <span class="number">0x9</span>, <span class="number">0x9</span>, <span class="number">0xb5</span>, <span class="number">0x7d</span>]</span><br><span class="line">flag=<span class="string">&#x27;m&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(check)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0xff</span>):</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">ord</span>(flag[i-<span class="number">1</span>]) ^ <span class="number">0x19</span>) ^ (<span class="built_in">ord</span>(flag[i-<span class="number">1</span>]) % <span class="number">0x11</span> + j) == check[i-<span class="number">1</span>]:</span><br><span class="line">            flag+=<span class="built_in">chr</span>(j)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考文章：官方wp</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/XDSEC/MoeCTF_2022/blob/main/Official_Writeup/Reverse/Reverse_Offical_WriteUp.md">https://github.com/XDSEC/MoeCTF_2022/blob/main/Official_Writeup/Reverse/Reverse_Offical_WriteUp.md</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/30/%E5%88%9D%E8%AF%86%E5%A3%B3%E4%BB%A5%E5%8F%8ADASCTF%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9Beasyre%E7%9A%84%E5%A4%8D%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1758,7 +1964,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
