@@ -297,6 +297,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/" itemprop="url">Hgame2023复现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-21T19:37:03+08:00">
+                2023-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/re/" itemprop="url" rel="index">
+                    <span itemprop="name">re</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>新年前，把前面的欠的债还一还，哈哈哈。。</p>
+<h1 id="Week1"><a href="#Week1" class="headerlink" title="Week1"></a>Week1</h1><h2 id="easyenc"><a href="#easyenc" class="headerlink" title="easyenc"></a>easyenc</h2><img src="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/image-20230121195537303.png" class title="This is an image">
+
+<p>其实就是一个普通的异或处理，但苦于脚本能力并不好，感觉写的exp有点傻，因为要注意一个小端存储的问题，但在c语言中就不用管这么多，可以直接全文复制，不用管int怎么转char</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">v5=[<span class="number">0x04</span>,<span class="number">0xff</span>,<span class="number">0xfd</span>,<span class="number">0x09</span>,<span class="number">0x01</span>,<span class="number">0xf3</span>,<span class="number">0xb0</span>,<span class="number">0x0</span>,<span class="number">0x00</span>,<span class="number">0x05</span>,<span class="number">0xf0</span>,<span class="number">0xad</span>,<span class="number">0x07</span>,<span class="number">0x06</span>,<span class="number">0x17</span>,<span class="number">0x05</span>,<span class="number">0xeb</span>,<span class="number">0x17</span>,<span class="number">0xfd</span>,<span class="number">0x17</span>,<span class="number">0xea</span>,<span class="number">0x01</span>,<span class="number">0xee</span>,<span class="number">0x01</span>,<span class="number">0xea</span>,<span class="number">0xb1</span>,<span class="number">0x05</span>,<span class="number">0xfa</span>,<span class="number">0x08</span>,<span class="number">0x01</span>,<span class="number">0x17</span>,<span class="number">0xac</span>,<span class="number">0xec</span>,<span class="number">0x01</span>,<span class="number">0xea</span>,</span><br><span class="line">    <span class="number">0xfd</span>,<span class="number">0xf0</span>,<span class="number">0x05</span>,<span class="number">0x07</span>,<span class="number">0x06</span>,-<span class="number">7</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(v5))</span><br><span class="line">flag=[<span class="number">0</span>]*<span class="number">41</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(v5)):</span><br><span class="line">    flag[i]=(v5[i]+<span class="number">86</span>)^<span class="number">0x32</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">hex</span>(flag[i]))</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="built_in">hex</span>=<span class="string">&#x27;6867616d657b3464646974316f6e5f69735f615f72657665723569626c655f307065726174696f6e7d&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(binascii.unhexlify(<span class="built_in">hex</span>))</span><br></pre></td></tr></table></figure>
+
+<p>官方放出的wp用的是c语言，很方便</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="type">int</span> v8[<span class="number">11</span>];</span><br><span class="line">	 v8[<span class="number">0</span>] = <span class="number">167640836</span>;</span><br><span class="line">	 v8[<span class="number">1</span>] = <span class="number">11596545</span>;</span><br><span class="line">	 v8[<span class="number">2</span>] = <span class="number">-1376779008</span>;</span><br><span class="line">	 v8[<span class="number">3</span>] = <span class="number">85394951</span>;</span><br><span class="line">	 v8[<span class="number">4</span>] = <span class="number">402462699</span>;</span><br><span class="line">	 v8[<span class="number">5</span>] = <span class="number">32375274</span>;</span><br><span class="line">	 v8[<span class="number">6</span>] = <span class="number">-100290070</span>;</span><br><span class="line">	 v8[<span class="number">7</span>] = <span class="number">-1407778552</span>;</span><br><span class="line">	 v8[<span class="number">8</span>] = <span class="number">-34995732</span>;</span><br><span class="line">	 v8[<span class="number">9</span>] = <span class="number">101123568</span>;</span><br><span class="line">	 v8[<span class="number">10</span>] = <span class="number">-7</span>;</span><br><span class="line">	 <span class="type">char</span>* p = v8;</span><br><span class="line">	 <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">41</span>; i++)</span><br><span class="line">		 &#123;</span><br><span class="line">		 <span class="built_in">putchar</span>((p[i] + <span class="number">86</span>) ^ <span class="number">0x32</span>);</span><br><span class="line">		 &#125;</span><br><span class="line">	</span><br><span class="line">	 &#125;</span><br><span class="line"><span class="comment">//hgame&#123;4ddit1on_is_a_rever5ible_0peration&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="encode"><a href="#encode" class="headerlink" title="encode"></a>encode</h2><img src="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/image-20230121201602252.png" class title="This is an image">
+
+<p>但逻辑其实不难，就是做了一个处理，然后对数据进行一个比较，但是对数据的处理部分可能一开始看会比较的迷..可以运行几个数尝试下，看看实现了什么功能</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>=<span class="string">&quot;hgame&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(<span class="string">&#x27;h&#x27;</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">ord</span>(<span class="built_in">str</span>[<span class="number">0</span>])&amp;<span class="number">0xf</span>)</span><br><span class="line"><span class="built_in">print</span>((<span class="built_in">ord</span>(<span class="built_in">str</span>[<span class="number">0</span>])&gt;&gt;<span class="number">4</span>)&amp;<span class="number">0xf</span>)</span><br></pre></td></tr></table></figure>
+
+<p>从结果来看，把一个8bit的char用位运算拆为两个4bit的数字，然后开始比较，这里比较麻烦的应该是数据的提取，双击进去dword_403000，然后按y设置成int数组，再shift+E导出数据</p>
+<h5 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>=[<span class="number">8</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">13</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">50</span>):</span><br><span class="line">    flag+=<span class="built_in">chr</span>(<span class="built_in">str</span>[i*<span class="number">2</span>]+(<span class="built_in">str</span>[i*<span class="number">2</span>+<span class="number">1</span>]&lt;&lt;<span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment">#hgame&#123;encode_is_easy_for_a_reverse_engineer&#125;      </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="a-cup-of-tea"><a href="#a-cup-of-tea" class="headerlink" title="a_cup_of_tea"></a>a_cup_of_tea</h2><p>一个魔改的tea加密</p>
+<img src="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/image-20230121205044461.png" class title="This is an image">
+
+<p>直接给exp了</p>
+<h5 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">decrypt</span><span class="params">(<span class="type">uint32_t</span>* v, <span class="type">uint32_t</span>* k)</span> &#123;</span><br><span class="line">	<span class="type">uint32_t</span> v0 = v[<span class="number">0</span>], v1 = v[<span class="number">1</span>], sum = <span class="number">-0x543210DD</span> * <span class="number">32</span>, i;</span><br><span class="line">	<span class="type">uint32_t</span> delta = <span class="number">0x543210DD</span>;</span><br><span class="line">	<span class="type">uint32_t</span> k0 = k[<span class="number">0</span>], k1 = k[<span class="number">1</span>], k2 = k[<span class="number">2</span>], k3 = k[<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">		v1 -= ((v0 +k2) &lt;&lt;<span class="number">4</span>) ^ (v0 + sum) ^ ((v0 &gt;&gt; <span class="number">5</span>) + k3);</span><br><span class="line">		v0 -= ((v1 &lt;&lt; <span class="number">4</span>) + k0) ^ (v1 + sum) ^ ((v1 &gt;&gt; <span class="number">5</span>) + k1);</span><br><span class="line">		sum += delta;</span><br><span class="line">	&#125;</span><br><span class="line">	v[<span class="number">0</span>] = v0; v[<span class="number">1</span>] = v1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">uint32_t</span> key[<span class="number">6</span>] = &#123; <span class="number">0x12345678</span>, <span class="number">0x23456789</span>,<span class="number">0x3456789</span>,<span class="number">0x45678901</span> &#125;;</span><br><span class="line">	<span class="type">uint32_t</span> enc[] = &#123; <span class="number">0x2E63829D</span>,<span class="number">0xC14E400F</span>,<span class="number">0x9B39BFB9</span>,<span class="number">0x5A1F8B14</span>,<span class="number">0x61886DDE</span>,<span class="number">0x6565C6CF</span>,<span class="number">0x9F064F64</span>,<span class="number">0x236A43F6</span>&#125;;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i += <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		decrypt(enc + i, (<span class="type">uint32_t</span>*)key);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, (<span class="type">char</span>*)(enc));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//hgame&#123;Tea_15_4_v3ry_h3a1thy_drlnk&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/08/%E8%BF%B7%E5%AE%AB%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1814,161 +1978,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/04/python%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Reverse">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/01/04/python%E5%AD%A6%E4%B9%A0/" itemprop="url">python学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-04T12:54:46+08:00">
-                2023-01-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Python-字符串-ascii-uppercase"><a href="#Python-字符串-ascii-uppercase" class="headerlink" title="Python 字符串 | ascii_uppercase"></a>Python 字符串 | ascii_uppercase</h1><h3 id="ascii-uppercase"><a href="#ascii-uppercase" class="headerlink" title="ascii_uppercase"></a>ascii_uppercase</h3><p>在 Python3 中，**<code>ascii_uppercase </code>**是用作字符串常量的预初始化字符串</p>
-<p><strong>语法：</strong> string.ascii_uppercase</p>
-<p><strong>参数：</strong>不接受任何参数，因为它不是函数。</p>
-<p><strong>返回：</strong>返回所有大写字母</p>
-<p><strong>ascii_lowercase</strong>上同，返回所有小写字母</p>
-<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h5 id="检查字符串输入是否只有大写ASCII字符"><a href="#检查字符串输入是否只有大写ASCII字符" class="headerlink" title="检查字符串输入是否只有大写ASCII字符"></a>检查字符串输入是否只有大写ASCII字符</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># importing string library function </span></span><br><span class="line"><span class="keyword">import</span> string </span><br><span class="line">     </span><br><span class="line"><span class="comment"># Function checks if input string </span></span><br><span class="line"><span class="comment"># has upper ascii letters or not </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">value</span>): </span><br><span class="line">    <span class="keyword">for</span> letter <span class="keyword">in</span> value: </span><br><span class="line">             </span><br><span class="line">        <span class="comment"># If anything other than upper ascii </span></span><br><span class="line">        <span class="comment"># letter is present, then return </span></span><br><span class="line">        <span class="comment"># False, else return True </span></span><br><span class="line">        <span class="keyword">if</span> letter <span class="keyword">not</span> <span class="keyword">in</span> string.ascii_uppercase: </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="生成给定大小的强随机密码"><a href="#生成给定大小的强随机密码" class="headerlink" title="生成给定大小的强随机密码"></a>生成给定大小的强随机密码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Importing random to generate </span></span><br><span class="line"><span class="comment"># random string sequence </span></span><br><span class="line"><span class="keyword">import</span> random </span><br><span class="line">    </span><br><span class="line"><span class="comment"># Importing string library function </span></span><br><span class="line"><span class="keyword">import</span> string </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rand_pass</span>(<span class="params">size</span>): </span><br><span class="line">        </span><br><span class="line">    <span class="comment"># Takes random choices from </span></span><br><span class="line">    <span class="comment"># ascii_letters and digits </span></span><br><span class="line">    generate_pass = <span class="string">&#x27;&#x27;</span>.join([random.choice( </span><br><span class="line">                        string.ascii_uppercase + string.digits) </span><br><span class="line">                        <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(size)]) </span><br><span class="line">                            </span><br><span class="line">    <span class="keyword">return</span> generate_pass </span><br><span class="line">    </span><br><span class="line"><span class="comment"># Driver Code  </span></span><br><span class="line">password = rand_pass(<span class="number">10</span>) </span><br><span class="line"><span class="built_in">print</span>(password) </span><br><span class="line"><span class="comment">#string.digits将给出小写字母 &#x27;0123456789&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
   </nav>
 
 
@@ -2014,7 +2028,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
