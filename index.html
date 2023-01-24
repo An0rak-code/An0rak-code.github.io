@@ -297,6 +297,216 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/24/%E6%A0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/24/%E6%A0%88/" itemprop="url">栈</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-24T19:59:21+08:00">
+                2023-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是栈"><a href="#什么是栈" class="headerlink" title="什么是栈"></a>什么是栈</h2><p>栈是一种先进后出的数据结构， 就好比我们生活中的乒乓球桶， 只有一端开口。它按照先进后出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据（最后一个数据被第一个读出来）。 我们学习递归的时候， 在计算机内部就是用栈实现的递归。在计算机中，它是一种运算受限的线性表。其限制是仅允许在表的一端进行插入和删除运算，这一端被称为栈顶，相对地，把另一端称为栈底。</p>
+<h2 id="写一个栈"><a href="#写一个栈" class="headerlink" title="写一个栈"></a>写一个栈</h2><table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">函数</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">入栈</td>
+<td align="left">push(x)</td>
+<td align="left">将x元素入栈</td>
+</tr>
+<tr>
+<td align="left">出栈</td>
+<td align="left">pop()</td>
+<td align="left">弹出栈的第一个元素，返回值为栈顶元素值</td>
+</tr>
+<tr>
+<td align="left">元素个数</td>
+<td align="left">size()</td>
+<td align="left">获取栈中的元素个数，返回int</td>
+</tr>
+<tr>
+<td align="left">获取栈顶元素</td>
+<td align="left">top()</td>
+<td align="left">获取栈顶元素的值</td>
+</tr>
+</tbody></table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MaxN = <span class="number">100000</span>;</span><br><span class="line"><span class="type">int</span> st[MaxN + <span class="number">5</span>];</span><br><span class="line"><span class="type">int</span> total;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">push</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	total = total + <span class="number">1</span>;</span><br><span class="line">	st[total] = x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">pop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> value = st[total];</span><br><span class="line">	total = total - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">size</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">top</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> st[total];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">3</span>);</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">5</span>);</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">6</span>);</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">10</span>);</span><br><span class="line">	cout &lt;&lt; <span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">pop</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">top</span>() &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="stack的基本操作"><a href="#stack的基本操作" class="headerlink" title="stack的基本操作"></a>stack的基本操作</h2><p>在 C++ 的标准库中， 有封装好的栈 stack ，stack是一个模板类，定义的示例代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stack&lt;类型&gt; 对象：</span><br><span class="line">stack&lt;<span class="type">int</span>&gt;  s;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">代码</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">入栈</td>
+<td align="left">s.push(x)</td>
+<td align="left">将x元素入栈</td>
+</tr>
+<tr>
+<td align="left">出栈</td>
+<td align="left">s.pop()</td>
+<td align="left">弹出栈的第一个元素，并不会返回元素的值</td>
+</tr>
+<tr>
+<td align="left">栈顶元素</td>
+<td align="left">s.top()</td>
+<td align="left">获取栈的第一个元素</td>
+</tr>
+<tr>
+<td align="left">元素个数</td>
+<td align="left">s.size()</td>
+<td align="left">获取栈中的元素个数，返回int</td>
+</tr>
+<tr>
+<td align="left">判空</td>
+<td align="left">s.empty()</td>
+<td align="left">栈是否为空，返回bool，相当于s.size() &#x3D;&#x3D; 0</td>
+</tr>
+</tbody></table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/24/vector/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1964,156 +2174,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/07/0xGame2022%E5%A4%8D%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Reverse">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/01/07/0xGame2022%E5%A4%8D%E7%8E%B0/" itemprop="url">0xGame2022复现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-07T09:59:34+08:00">
-                2023-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/re/" itemprop="url" rel="index">
-                    <span itemprop="name">re</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Week1"><a href="#Week1" class="headerlink" title="Week1"></a>Week1</h1><h2 id="re4"><a href="#re4" class="headerlink" title="re4"></a>re4</h2><p>一个普通的tea加密，提取密钥密文进行解密即可</p>
-<img src="/2023/01/07/0xGame2022%E5%A4%8D%E7%8E%B0/image-20230107123837017.png" class title="This is an image">
-
-<h5 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">encrypt</span> <span class="params">(<span class="type">uint32_t</span>* v, <span class="type">uint32_t</span>* k)</span> &#123;</span><br><span class="line"><span class="type">uint32_t</span> v0=v[<span class="number">0</span>], v1=v[<span class="number">1</span>], sum=<span class="number">0</span>, i; <span class="comment">/* set up */</span></span><br><span class="line"><span class="type">uint32_t</span> delta=<span class="number">0x9e3779b9</span>; <span class="comment">/* a key schedule constant */</span></span><br><span class="line"><span class="type">uint32_t</span> k0=k[<span class="number">0</span>], k1=k[<span class="number">1</span>], k2=k[<span class="number">2</span>], k3=k[<span class="number">3</span>]; <span class="comment">/* cache key */</span></span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123; <span class="comment">/* basic cycle start */</span></span><br><span class="line">sum += delta;</span><br><span class="line">v0 += ((v1&lt;&lt;<span class="number">4</span>) + k0) ^ (v1 + sum) ^ ((v1&gt;&gt;<span class="number">5</span>) + k1);</span><br><span class="line">v1 += ((v0&lt;&lt;<span class="number">4</span>) + k2) ^ (v0 + sum) ^ ((v0&gt;&gt;<span class="number">5</span>) + k3);</span><br><span class="line">&#125; <span class="comment">/* end cycle */</span></span><br><span class="line">v[<span class="number">0</span>]=v0; v[<span class="number">1</span>]=v1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">decrypt</span> <span class="params">(<span class="type">uint32_t</span>* v, <span class="type">uint32_t</span>* k)</span> &#123;</span><br><span class="line"><span class="type">uint32_t</span> v0=v[<span class="number">0</span>], v1=v[<span class="number">1</span>], sum=<span class="number">0x9e3779b9</span> * <span class="number">32</span>, i; <span class="comment">/* set up */</span></span><br><span class="line"><span class="type">uint32_t</span> delta=<span class="number">0x9e3779b9</span>; <span class="comment">/* a key schedule constant */</span></span><br><span class="line"><span class="type">uint32_t</span> k0=k[<span class="number">0</span>], k1=k[<span class="number">1</span>], k2=k[<span class="number">2</span>], k3=k[<span class="number">3</span>]; <span class="comment">/* cache key */</span></span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;<span class="number">32</span>; i++) &#123; <span class="comment">/* basic cycle start */</span></span><br><span class="line">v1 -= ((v0&lt;&lt;<span class="number">4</span>) + k2) ^ (v0 + sum) ^ ((v0&gt;&gt;<span class="number">5</span>) + k3);</span><br><span class="line">v0 -= ((v1&lt;&lt;<span class="number">4</span>) + k0) ^ (v1 + sum) ^ ((v1&gt;&gt;<span class="number">5</span>) + k1);</span><br><span class="line">sum -= delta;</span><br><span class="line">&#125; <span class="comment">/* end cycle */</span></span><br><span class="line">v[<span class="number">0</span>]=v0; v[<span class="number">1</span>]=v1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="type">uint32_t</span> key[<span class="number">6</span>] = &#123;<span class="number">0x795F6F64</span>, <span class="number">0x6B5F756F</span>, <span class="number">0x5F776F6E</span>, <span class="number">0x3F616574</span>&#125;;</span><br><span class="line"><span class="type">uint32_t</span> enc[] =&#123;<span class="number">3293258237</span>, <span class="number">3797453781</span>, <span class="number">2711996313</span>, <span class="number">3260442805</span>, <span class="number">1056803237</span>,</span><br><span class="line"><span class="number">1218477302</span>, <span class="number">896926073</span>, <span class="number">1670822367</span>, <span class="number">2779477777</span>, <span class="number">2262174553</span>, <span class="number">226803321</span>,</span><br><span class="line"><span class="number">4259941008</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i &lt; <span class="number">12</span>; i += <span class="number">2</span>)</span><br><span class="line">&#123;</span><br><span class="line">decrypt(enc + i,(<span class="type">uint32_t</span> *)key);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>,(<span class="type">char</span> *)(enc));</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//官方exp</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#py脚本1</span></span><br><span class="line"><span class="comment">#tea4</span></span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">v, k, i</span>):</span><br><span class="line">    v0, v1 = c_uint32(v[<span class="number">2</span> * i]), c_uint32(v[<span class="number">2</span> * i + <span class="number">1</span>])</span><br><span class="line">    delta = <span class="number">0x61C88647</span></span><br><span class="line">    k0, k1, k2, k3 = k[<span class="number">0</span>], k[<span class="number">1</span>], k[<span class="number">2</span>], k[<span class="number">3</span>]</span><br><span class="line">    total = c_uint32((-delta) * <span class="number">32</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        v1.value -= ((v0.value &lt;&lt; <span class="number">4</span>) + k2) ^ (v0.value + total.value) ^ ((v0.value &gt;&gt; <span class="number">5</span>) + k3)</span><br><span class="line">        v0.value -= ((v1.value &lt;&lt; <span class="number">4</span>) + k0) ^ (v1.value + total.value) ^ ((v1.value &gt;&gt; <span class="number">5</span>) + k1)</span><br><span class="line">        total.value += delta</span><br><span class="line">    <span class="keyword">return</span> v0.value, v1.value</span><br><span class="line"></span><br><span class="line">value =[<span class="number">0xC44B21FD</span>,<span class="number">0xE2588BD5</span>,<span class="number">0xA1A5C799</span>,<span class="number">0xC25668B5</span>,<span class="number">0x3EFD89A5</span>,<span class="number">0x48A07CF6</span>,<span class="number">0x35760179</span>,<span class="number">0x6396B9DF</span>,<span class="number">0xA5AB7711</span>,<span class="number">0x86D60B59</span>,<span class="number">0xD84BE79</span>,<span class="number">0xFDE98A90</span>]</span><br><span class="line"></span><br><span class="line">key = [<span class="number">0x795F6F64</span>,<span class="number">0x6B5F756F</span>,<span class="number">0x5F776F6E</span>,<span class="number">0x3F616574</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>):</span><br><span class="line">    res = decrypt(value, key, i)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">hex</span>(res[<span class="number">0</span>]), <span class="built_in">hex</span>(res[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="built_in">hex</span> = <span class="string">&#x27;307847616d657b63396663393865392d33623732662d396463332d3030613934643862313236647d&#x27;</span></span><br><span class="line"><span class="built_in">str</span> = binascii.unhexlify(<span class="built_in">hex</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)</span><br><span class="line"><span class="comment">#0xGame&#123;c9fc98e9-3b72f-9dc3-00a94d8b126d&#125;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#py脚本2</span></span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">v,k</span>):</span><br><span class="line">    v0 = c_uint32(v[<span class="number">0</span>])</span><br><span class="line">    v1 = c_uint32(v[<span class="number">1</span>])</span><br><span class="line">    delta = <span class="number">0x61C88647</span></span><br><span class="line">    sum1 = c_uint32((-delta) * <span class="number">32</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        v1.value -= (sum1.value + v0.value) ^ (k[<span class="number">2</span>] + (v0.value &lt;&lt; <span class="number">4</span>)) ^ (k[<span class="number">3</span>] + (v0.value &gt;&gt; <span class="number">5</span>))</span><br><span class="line">        v0.value -= (sum1.value + v1.value) ^ (k[<span class="number">0</span>] + (v1.value &lt;&lt; <span class="number">4</span>)) ^ (k[<span class="number">1</span>] + (v1.value &gt;&gt; <span class="number">5</span>))</span><br><span class="line">        sum1.value += delta</span><br><span class="line">    <span class="keyword">return</span> v0.value, v1.value</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    flag=<span class="string">b&quot;&quot;</span></span><br><span class="line">    l=[<span class="number">0xC44B21FD</span>,<span class="number">0xE2588BD5</span>,<span class="number">0xA1A5C799</span>,<span class="number">0xC25668B5</span>,<span class="number">0x3EFD89A5</span>,<span class="number">0x48A07CF6</span>,<span class="number">0x35760179</span>,<span class="number">0x6396B9DF</span>,<span class="number">0xA5AB7711</span>,<span class="number">0x86D60B59</span>,<span class="number">0xD84BE79</span>,<span class="number">0xFDE98A90</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">12</span>,<span class="number">2</span>):</span><br><span class="line">        a = [l[i],l[i+<span class="number">1</span>]]</span><br><span class="line">        k = [<span class="number">0x795F6F64</span>,<span class="number">0x6B5F756F</span>,<span class="number">0x5F776F6E</span>,<span class="number">0x3F616574</span>]</span><br><span class="line">        res = decrypt(a,k)</span><br><span class="line">        <span class="built_in">print</span>(res)</span><br><span class="line">        flag += libnum.n2s(res[<span class="number">0</span>])[::-<span class="number">1</span>]</span><br><span class="line">        flag += libnum.n2s(res[<span class="number">1</span>])[::-<span class="number">1</span>]</span><br><span class="line">    <span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2164,7 +2224,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2186,7 +2246,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

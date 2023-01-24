@@ -1300,4 +1300,84 @@
         <tag>链表</tag>
       </tags>
   </entry>
+  <entry>
+    <title>栈</title>
+    <url>/2023/01/24/%E6%A0%88/</url>
+    <content><![CDATA[<h2 id="什么是栈"><a href="#什么是栈" class="headerlink" title="什么是栈"></a>什么是栈</h2><p>栈是一种先进后出的数据结构， 就好比我们生活中的乒乓球桶， 只有一端开口。它按照先进后出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据（最后一个数据被第一个读出来）。 我们学习递归的时候， 在计算机内部就是用栈实现的递归。在计算机中，它是一种运算受限的线性表。其限制是仅允许在表的一端进行插入和删除运算，这一端被称为栈顶，相对地，把另一端称为栈底。</p>
+<h2 id="写一个栈"><a href="#写一个栈" class="headerlink" title="写一个栈"></a>写一个栈</h2><table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">函数</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">入栈</td>
+<td align="left">push(x)</td>
+<td align="left">将x元素入栈</td>
+</tr>
+<tr>
+<td align="left">出栈</td>
+<td align="left">pop()</td>
+<td align="left">弹出栈的第一个元素，返回值为栈顶元素值</td>
+</tr>
+<tr>
+<td align="left">元素个数</td>
+<td align="left">size()</td>
+<td align="left">获取栈中的元素个数，返回int</td>
+</tr>
+<tr>
+<td align="left">获取栈顶元素</td>
+<td align="left">top()</td>
+<td align="left">获取栈顶元素的值</td>
+</tr>
+</tbody></table>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MaxN = <span class="number">100000</span>;</span><br><span class="line"><span class="type">int</span> st[MaxN + <span class="number">5</span>];</span><br><span class="line"><span class="type">int</span> total;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">push</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	total = total + <span class="number">1</span>;</span><br><span class="line">	st[total] = x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">pop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> value = st[total];</span><br><span class="line">	total = total - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">size</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">top</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> st[total];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">3</span>);</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">5</span>);</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">6</span>);</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">10</span>);</span><br><span class="line">	cout &lt;&lt; <span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">pop</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">top</span>() &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="stack的基本操作"><a href="#stack的基本操作" class="headerlink" title="stack的基本操作"></a>stack的基本操作</h2><p>在 C++ 的标准库中， 有封装好的栈 stack ，stack是一个模板类，定义的示例代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">stack&lt;类型&gt; 对象：</span><br><span class="line">stack&lt;<span class="type">int</span>&gt;  s;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">代码</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">入栈</td>
+<td align="left">s.push(x)</td>
+<td align="left">将x元素入栈</td>
+</tr>
+<tr>
+<td align="left">出栈</td>
+<td align="left">s.pop()</td>
+<td align="left">弹出栈的第一个元素，并不会返回元素的值</td>
+</tr>
+<tr>
+<td align="left">栈顶元素</td>
+<td align="left">s.top()</td>
+<td align="left">获取栈的第一个元素</td>
+</tr>
+<tr>
+<td align="left">元素个数</td>
+<td align="left">s.size()</td>
+<td align="left">获取栈中的元素个数，返回int</td>
+</tr>
+<tr>
+<td align="left">判空</td>
+<td align="left">s.empty()</td>
+<td align="left">栈是否为空，返回bool，相当于s.size() &#x3D;&#x3D; 0</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
+      </tags>
+  </entry>
 </search>
