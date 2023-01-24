@@ -1263,4 +1263,41 @@
         <tag>链表</tag>
       </tags>
   </entry>
+  <entry>
+    <title>vector</title>
+    <url>/2023/01/24/vector/</url>
+    <content><![CDATA[<h2 id="什么是vector"><a href="#什么是vector" class="headerlink" title="什么是vector"></a>什么是vector</h2><p>vector（是一个模板类）是c++中的一种容器，简单说就算一个不定长的数组。它把一些常用操作“封装”在了vector类型内部。vector 的长度可变，随着往vector里面加数，vector长度会随着增加。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector &lt;<span class="type">int</span>&gt; v;<span class="comment">//v=[]</span></span><br><span class="line">x=(<span class="type">int</span>)v.<span class="built_in">size</span>();<span class="comment">//x=0</span></span><br><span class="line">v.<span class="built_in">push_back</span>(<span class="number">2</span>);<span class="comment">//v=[2] 无返回值</span></span><br><span class="line">x=(<span class="type">int</span>)v.<span class="built_in">size</span>();<span class="comment">//x=1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="vector的基本操作"><a href="#vector的基本操作" class="headerlink" title="vector的基本操作"></a>vector的基本操作</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;int&gt; c</span><br><span class="line">c.clear()            //移除容器中所有数据。</span><br><span class="line">c.empty()            //判断容器是否为空。</span><br><span class="line">c.erase(pos)         //删除pos位置的数据</span><br><span class="line">c.erase(beg,end)     //删除[beg,end)区间的数据</span><br><span class="line">c.front()            //传回第一个数据。</span><br><span class="line">c.insert(pos,elem)   //在pos位置插入一个elem拷贝</span><br><span class="line">c.pop_back()         //删除最后一个数据。</span><br><span class="line">c.push_back(elem)    //在尾部加入一个数据。</span><br><span class="line">c.resize(num)        //重新设置该容器的大小</span><br><span class="line">c.size()             //回容器中实际数据的个数。</span><br><span class="line">c.begin()            //返回指向容器第一个元素的迭代器</span><br><span class="line">c.end()              //返回指向容器最后一个元素的迭代器</span><br></pre></td></tr></table></figure>
+
+<h2 id="二维vector的初始化"><a href="#二维vector的初始化" class="headerlink" title="二维vector的初始化"></a>二维vector的初始化</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt; &gt;<span class="built_in">a</span>(<span class="number">3</span>);<span class="comment">//a[[],[],[]]</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</span><br><span class="line">&#123;</span><br><span class="line">    a[i].<span class="built_in">resize</span>(<span class="number">3</span>);</span><br><span class="line">&#125;<span class="comment">//a=[[0,0,0],[0,0,0],[0,0,0]]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="小明爱数列"><a href="#小明爱数列" class="headerlink" title="小明爱数列"></a>小明爱数列</h3><p>小明非常喜欢数列，于是他提出了一个关于数列的问题。他拿到一个长度为 n 的数列，之后对这个数列进行了两种操作：</p>
+<p>第一种： Dx</p>
+<p>表示删除数列第 x 位置的一个数字，后面的数字向前移动（若 x&gt; 此时数列长度则操作无效）；</p>
+<p>第二种： Zxy</p>
+<p>表示在数列的第 x 位置插入一个数字 y ，后面的数字向后移动（若 x&gt; 此时数列长度则在数列末尾插入 y ）；</p>
+<p>经过 k 次这两种操作以后，小明想要知道现在的数列是什么，聪明的你可以帮助小明解决这个问题吗？</p>
+<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>输入包括 k+2 行数据；<br>第一行包括两个数 n,k ，分别表示数列中数的个数以及操作的次数，其中 1&#x3D;&lt;k≤n&lt;5000 ；<br>第二行 n 个数表示该数列的 n 个数，以空格隔开，其中任意数 ai 为 int 范围内的整数；<br>第三行到第 k+2 行，每行一个操作，格式见题面描述。</p>
+<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>输出包括两行；<br>第一行一个数 m ，表示全部操作之后数组的长度；<br>第二行 m 个数，表示当前的数组。</p>
+<h4 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">4 3</span><br><span class="line">4 5 2 1</span><br><span class="line">Z 3 3</span><br><span class="line">Z 0 1</span><br><span class="line">D 2</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5</span><br><span class="line">1 4 2 3 1</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h4><p>输出包括两行；<br>第一行一个数 m ，表示全部操作之后数组的长度；<br>第二行 m 个数，表示当前的数组。</p>
+<h4 id="样例解释"><a href="#样例解释" class="headerlink" title="样例解释"></a>样例解释</h4><p>初始数组为(4521)</p>
+<p>执行完 Z33 得到(45231)</p>
+<p>执行完 Z01 得到(145231)</p>
+<p>执行完 D2 得到(14231) </p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; c;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> n,x,k;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;k;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x;</span><br><span class="line">		c.<span class="built_in">push_back</span>(x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> index,value;</span><br><span class="line">	<span class="type">char</span> W;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;k;i++)&#123;</span><br><span class="line">		cin&gt;&gt;W;</span><br><span class="line">		<span class="keyword">if</span>(W==<span class="string">&#x27;Z&#x27;</span>)&#123;</span><br><span class="line">			cin&gt;&gt;index&gt;&gt;value;</span><br><span class="line">			c.<span class="built_in">insert</span>(c.<span class="built_in">begin</span>()+<span class="built_in">min</span>((<span class="type">int</span>)c.<span class="built_in">size</span>(),index),value);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			cin&gt;&gt;index;</span><br><span class="line">			<span class="keyword">if</span>(index&lt;c.<span class="built_in">size</span>())&#123;</span><br><span class="line">				c.<span class="built_in">erase</span>(c.<span class="built_in">begin</span>()+index);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;c.<span class="built_in">size</span>()&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;c.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">		cout&lt;&lt;c[i]&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>vector</tag>
+      </tags>
+  </entry>
 </search>
