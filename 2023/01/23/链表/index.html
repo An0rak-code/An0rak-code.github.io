@@ -90,7 +90,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/01/23/%E9%93%BE%E8%A1%A8/image-20230123170845532.png">
 <meta property="article:published_time" content="2023-01-23T08:31:13.000Z">
-<meta property="article:modified_time" content="2023-01-24T02:50:00.097Z">
+<meta property="article:modified_time" content="2023-01-24T02:53:45.962Z">
 <meta property="article:author" content="An0rak">
 <meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary">
@@ -399,13 +399,47 @@
 <p>为了能够在常数时间内实现元素的插入和删除， 我们引入 链表 这种数据结构。</p>
 <p>链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。链表由一系列结点（链表中每一个元素称为结点）组成，结点可以在运行时动态生成。</p>
 <p>那么非连续、非线性有什么含义呢？这表明链表的内存是不连续的，前一个元素存储地址的下一个地址中存储的不一定是下一个元素。链表通过一个指向下一个元素地址的引用将链表中的元素串起来。</p>
-<h2 id="链表的分类"><a href="#链表的分类" class="headerlink" title="链表的分类"></a>链表的分类</h2><p>单向链表：每一个节点包含了数据块和指向下一个节点的指针</p>
-<p>双向链表：每一个节点包含了数据块和指向下一个节点的指针以及指向前一个节点的指针</p>
+<h2 id="链表的分类"><a href="#链表的分类" class="headerlink" title="链表的分类"></a>链表的分类</h2><table>
+<thead>
+<tr>
+<th align="left">分类</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">单向链表</td>
+<td align="left">每一个节点包含了数据块和指向下一个节点的指针</td>
+</tr>
+<tr>
+<td align="left">双向链表</td>
+<td align="left">每一个节点包含了数据块和指向下一个节点的指针以及指向前一个节点的指针</td>
+</tr>
+</tbody></table>
 <h3 id="单向链表"><a href="#单向链表" class="headerlink" title="单向链表"></a>单向链表</h3><p>单向链表是最简单的链表形式。链表中最基本的数据称为节点(node)，每一个节点包含了数据块(data)和指向下一个节点的指针(next)，链表有一个头节点，图中以head表示。可以看出,head指向第一个元素，第一个元素的next又指向第二个元素……直到最后一个元素，该元素不再指向其他元素，它称为表尾，它的 next 为空（ NULL ），链表到此结束</p>
 <img src="/2023/01/23/%E9%93%BE%E8%A1%A8/image-20230123170845532.png" class title="This is an image">
 
 <p>可以看到，要找链表中的某一元素，必须先找到上一个元素，根据它提供的下一个元素的地址才能找到下一个元素。如果不提供头指针，则整个链表都无法访问。链表如同一条铁链一样，一环扣一环，中间是不能断开的。</p>
-<h2 id="链表的常用操作"><a href="#链表的常用操作" class="headerlink" title="链表的常用操作"></a>链表的常用操作</h2><h3 id="查找操作O-n-（数组的点查是O-1-）"><a href="#查找操作O-n-（数组的点查是O-1-）" class="headerlink" title="查找操作O(n)（数组的点查是O(1)）"></a>查找操作O(n)（数组的点查是O(1)）</h3><p>如何根据给出的数据，找到链表中符合条件的节点？需要从头节点开始，逐个向后遍历节点，比较p的data同待查找的数据是否相同，相同则返回当前节点。</p>
+<h2 id="链表的常用操作"><a href="#链表的常用操作" class="headerlink" title="链表的常用操作"></a>链表的常用操作</h2><table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">查找</td>
+<td align="left">找到符合条件的节点</td>
+</tr>
+<tr>
+<td align="left">插入</td>
+<td align="left">添加一个新节点</td>
+</tr>
+<tr>
+<td align="left">删除</td>
+<td align="left">删除一个存在的节点</td>
+</tr>
+</tbody></table>
+<h3 id="查找操作O-n-（数组的点查是O-1-）"><a href="#查找操作O-n-（数组的点查是O-1-）" class="headerlink" title="查找操作O(n)（数组的点查是O(1)）"></a>查找操作O(n)（数组的点查是O(1)）</h3><p>如何根据给出的数据，找到链表中符合条件的节点？需要从头节点开始，逐个向后遍历节点，比较p的data同待查找的数据是否相同，相同则返回当前节点。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">    <span class="type">int</span> next,data;</span><br><span class="line">           &#125;a[<span class="number">10000</span>];</span><br><span class="line"><span class="type">int</span> head;<span class="comment">//head即头节点的编号</span></span><br><span class="line"></span><br><span class="line"><span class="function">node <span class="title">find</span><span class="params">(<span class="type">int</span> value)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> p=head;<span class="comment">//从头节点开始遍历</span></span><br><span class="line">    <span class="keyword">while</span>(a[p]!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(value==a[p].data)</span><br><span class="line">            <span class="keyword">return</span> a[p];</span><br><span class="line">        p=a[p].next;<span class="comment">//不满足条件则遍历下一个</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="插入操作O-1"><a href="#插入操作O-1" class="headerlink" title="插入操作O(1)"></a>插入操作O(1)</h3><p>若要在p节点后，插入一个q节点，则需要：</p>
@@ -418,6 +452,30 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">    <span class="type">int</span> next,data;</span><br><span class="line">&#125;a[<span class="number">10000</span>];</span><br><span class="line"><span class="type">int</span> head;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">delete</span><span class="params">(node &amp;delNode,node &amp;pre)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pre.next=delNode.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>由于链表存储不连续，一般来讲，访问效率低于数组。但链表的删除插入效率高。</p>
+<h2 id="链表与数组"><a href="#链表与数组" class="headerlink" title="链表与数组"></a>链表与数组</h2><table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">链表</th>
+<th align="left">数组</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">查找</td>
+<td align="left">从头节点开始查找</td>
+<td align="left">从下标 0 开始查找</td>
+</tr>
+<tr>
+<td align="left">插入</td>
+<td align="left">很快，因为只需要修改 pre 以及新节点的 next 编号</td>
+<td align="left">所有后面的节点都要向后移 1 位</td>
+</tr>
+<tr>
+<td align="left">删除</td>
+<td align="left">很快，因为只需要修改 pre 的 next 编号</td>
+<td align="left">所有后面的节点都要向前移 1 位</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -595,7 +653,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%93%BE%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">什么是链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">链表的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">单向链表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.</span> <span class="nav-text">链表的常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E6%93%8D%E4%BD%9CO-n-%EF%BC%88%E6%95%B0%E7%BB%84%E7%9A%84%E7%82%B9%E6%9F%A5%E6%98%AFO-1-%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">查找操作O(n)（数组的点查是O(1)）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9CO-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">插入操作O(1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9CO-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">删除操作O(1)</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%93%BE%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">什么是链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">链表的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">单向链表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.</span> <span class="nav-text">链表的常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E6%93%8D%E4%BD%9CO-n-%EF%BC%88%E6%95%B0%E7%BB%84%E7%9A%84%E7%82%B9%E6%9F%A5%E6%98%AFO-1-%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">查找操作O(n)（数组的点查是O(1)）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9CO-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">插入操作O(1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9CO-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">删除操作O(1)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E4%B8%8E%E6%95%B0%E7%BB%84"><span class="nav-number">1.4.</span> <span class="nav-text">链表与数组</span></a></li></ol></li></ol></div>
             
 
           </div>
