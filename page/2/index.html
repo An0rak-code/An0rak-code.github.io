@@ -297,6 +297,169 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/" itemprop="url">绿城杯2021-easy_re</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-05T11:15:37+08:00">
+                2023-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/re/" itemprop="url" rel="index">
+                    <span itemprop="name">re</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>跟着PZ师傅复现一下绿城杯的easy_re</p>
+<h2 id="伪代码分析"><a href="#伪代码分析" class="headerlink" title="伪代码分析"></a>伪代码分析</h2><img src="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/image-20230105114113281.png" class title="This is an image">
+
+<p>在这里把jz nop掉，后面可以按C将那些数据段都转为代码</p>
+<p>去花后主逻辑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">  memset(S, 0, sizeof(S));</span><br><span class="line">  strcpy(key, &quot;tallmewhy&quot;);</span><br><span class="line">  memset(&amp;key[10], 0, 0xF6u);</span><br><span class="line">  v16[0] = xmmword_4021B0;</span><br><span class="line">  v16[1] = xmmword_4021C0;</span><br><span class="line">  v17 = 0x54E6D699;</span><br><span class="line">  v18 = 0x14504F7A;</span><br><span class="line">  v19 = 0xECE5;</span><br><span class="line">  puts(&quot;Hello, this is my world.If you want flag, give me something I like.&quot;);</span><br><span class="line">  sub_401010(&quot;\n&quot;, S[224]);</span><br><span class="line">  memset(v21, 0, sizeof(v21));</span><br><span class="line">  ((void (__cdecl *)(char *))gets)(v21);</span><br><span class="line">  v3 = strlen(v21);</span><br><span class="line">  key_len = strlen(key);</span><br><span class="line">  memset(T, 0, sizeof(T));</span><br><span class="line">  for ( i = 0; i &lt; 256; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    S[i] = i;</span><br><span class="line">    T[i] = key[i % key_len];</span><br><span class="line">  &#125;</span><br><span class="line">  v6 = 0;</span><br><span class="line">  v7 = 0;</span><br><span class="line">  do</span><br><span class="line">  &#123;</span><br><span class="line">    v8 = S[v6];</span><br><span class="line">    v7 = (v7 + T[v6] + v8) % 256;</span><br><span class="line">    S[v6++] = S[v7];</span><br><span class="line">    S[v7] = v8 ^ 0x37;  //这里作了一些变化</span><br><span class="line">  &#125;</span><br><span class="line">  while ( v6 &lt; 256 );</span><br><span class="line">  sub_401010(&quot;\n\n&quot;, S[252]);</span><br><span class="line">  v9 = 0;</span><br><span class="line">  v20 = 0;</span><br><span class="line">  v10 = 0;</span><br><span class="line">  if ( v3 )</span><br><span class="line">  &#123;</span><br><span class="line">    do</span><br><span class="line">    &#123;</span><br><span class="line">      v9 = (v9 + 1) % 256;</span><br><span class="line">      v11 = S[v9];</span><br><span class="line">      v10 = (v11 + v10) % 256;</span><br><span class="line">      S[v9] = S[v10];</span><br><span class="line">      S[v10] = v11;</span><br><span class="line">      v12 = v20;</span><br><span class="line">      v21[v20] ^= S[(unsigned __int8)(v11 + S[v9])];</span><br><span class="line">      v20 = v12 + 1;</span><br><span class="line">    &#125;</span><br><span class="line">    while ( v12 + 1 &lt; v3 );</span><br><span class="line">    v10 = 0;</span><br><span class="line">  &#125;</span><br><span class="line">  for ( j = 0; j &lt; v3; ++j )</span><br><span class="line">    v10 = v21[j] == *((_BYTE *)v16 + j);</span><br><span class="line">  v14 = (char *)&amp;unk_402184;</span><br><span class="line">  if ( v10 == 1 )</span><br><span class="line">    v14 = aGood;</span><br><span class="line">  sub_401010(v14, S[252]);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很明显的一个RC4加密，key就是“tallmewhy”，有两种方法能拿到flag</p>
+<img src="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/image-20230105120203852.png" class title="This is an image">
+
+<p>这里可以发现数据段是连续的，但要注意一下小端存储的问题</p>
+<h2 id="直接写脚本"><a href="#直接写脚本" class="headerlink" title="直接写脚本"></a>直接写脚本</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> s[<span class="number">256</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">int</span> b[<span class="number">256</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">char</span> key[<span class="number">10</span>] = <span class="string">&quot;tallmewhy&quot;</span>;</span><br><span class="line">	<span class="type">char</span> flag[<span class="number">42</span>] = &#123; <span class="number">0xF5</span>, <span class="number">0x8C</span>, <span class="number">0x8D</span>, <span class="number">0xE4</span>, <span class="number">0x9F</span>, <span class="number">0xA5</span>, <span class="number">0x28</span>, <span class="number">0x65</span>, <span class="number">0x30</span>, <span class="number">0xF4</span>,</span><br><span class="line">		  <span class="number">0xEB</span>, <span class="number">0xD3</span>, <span class="number">0x24</span>, <span class="number">0xA9</span>, <span class="number">0x91</span>, <span class="number">0x1A</span>, <span class="number">0x6F</span>, <span class="number">0xD4</span>, <span class="number">0x6A</span>, <span class="number">0xD7</span>,</span><br><span class="line">		  <span class="number">0x0B</span>, <span class="number">0x8D</span>, <span class="number">0xE8</span>, <span class="number">0xB8</span>, <span class="number">0x83</span>, <span class="number">0x4A</span>, <span class="number">0x5A</span>, <span class="number">0x6E</span>, <span class="number">0xBE</span>, <span class="number">0xCB</span>,</span><br><span class="line">		  <span class="number">0xF4</span>, <span class="number">0x4B</span> ,<span class="number">0x99</span>,<span class="number">0xd6</span>,<span class="number">0xe6</span>,<span class="number">0x54</span>,<span class="number">0x7A</span>,<span class="number">0x4F</span>,<span class="number">0x50</span>,<span class="number">0x14</span>,<span class="number">0xE5</span>,<span class="number">0xEC</span> &#125;;</span><br><span class="line">	<span class="type">int</span> i, j, n, w, t;</span><br><span class="line">	<span class="type">int</span> v8 = <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> v9 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		s[i] = i;</span><br><span class="line">		b[i] = key[i % <span class="number">9</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line"></span><br><span class="line">	&#123;</span><br><span class="line">		v9 = s[i];</span><br><span class="line">		v8 = (v8 + b[i] + v9) % <span class="number">256</span>;</span><br><span class="line">		s[i] = s[v8];</span><br><span class="line">		s[v8] = v9 ^ <span class="number">0x37</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (w = <span class="number">0</span>, v8 = <span class="number">0</span>, i = <span class="number">0</span>; w &lt; <span class="number">42</span>; w++)</span><br><span class="line">	&#123;</span><br><span class="line">		i = (i + <span class="number">1</span>) % <span class="number">256</span>;</span><br><span class="line">		v8 = (v8 + s[i]) % <span class="number">256</span>;</span><br><span class="line">		v9 = s[i];</span><br><span class="line">		s[i] = s[v8];</span><br><span class="line">		s[v8] = v9;</span><br><span class="line">		t = (s[i] + s[v8]) % <span class="number">256</span>;</span><br><span class="line">		flag[i - <span class="number">1</span>] ^= s[t];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">42</span>; i++)</span><br><span class="line">		<span class="built_in">putchar</span>(flag[i]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//flag&#123;c5e0f5f6-f79e-5b9b-988f-28f046117802&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="动调拿数据"><a href="#动调拿数据" class="headerlink" title="动调拿数据"></a>动调拿数据</h2><p>只要拿到密钥流和密文异或就能拿到flag</p>
+<img src="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/image-20230105120557272.png" class title="This is an image">
+
+<p>找到最后异或加密的汇编代码，我们能发现数据在al寄存器中，地址是401252</p>
+<img src="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/image-20230105120905214.png" class title="This is an image">
+
+<p>F9不断运行，可以拿到存储在寄存器中的数据</p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>=[<span class="number">0x93</span>,<span class="number">0xE0</span>,<span class="number">0xec</span>,<span class="number">0x83</span>,<span class="number">0xe4</span>,<span class="number">0xc6</span>,<span class="number">0x1d</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x92</span>,<span class="number">0xde</span>,<span class="number">0xb5</span>,<span class="number">0x12</span>,<span class="number">0x84</span>,<span class="number">0xf7</span>,<span class="number">0x2d</span>,<span class="number">0x56</span>,<span class="number">0xb1</span>,<span class="number">0x47</span>,<span class="number">0xe2</span>,</span><br><span class="line">     <span class="number">0x69</span>,<span class="number">0xb4</span>,<span class="number">0x8a</span>,<span class="number">0x95</span>,<span class="number">0xba</span>,<span class="number">0x72</span>,<span class="number">0x62</span>,<span class="number">0x08</span>,<span class="number">0x93</span>,<span class="number">0xf9</span>,<span class="number">0xcc</span>,<span class="number">0x2d</span>,<span class="number">0xa9</span>,<span class="number">0xe2</span>,<span class="number">0xd0</span>,<span class="number">0x65</span>,<span class="number">0x4b</span>,</span><br><span class="line">     <span class="number">0x78</span>,<span class="number">0x68</span>,<span class="number">0x24</span>,<span class="number">0xd7</span>,<span class="number">0x91</span>]</span><br><span class="line">str2=[<span class="number">0xF5</span>, <span class="number">0x8C</span>, <span class="number">0x8D</span>, <span class="number">0xE4</span>, <span class="number">0x9F</span>, <span class="number">0xA5</span>, <span class="number">0x28</span>, <span class="number">0x65</span>, <span class="number">0x30</span>, <span class="number">0xF4</span>,</span><br><span class="line">  <span class="number">0xEB</span>, <span class="number">0xD3</span>, <span class="number">0x24</span>, <span class="number">0xA9</span>, <span class="number">0x91</span>, <span class="number">0x1A</span>, <span class="number">0x6F</span>, <span class="number">0xD4</span>, <span class="number">0x6A</span>, <span class="number">0xD7</span>,</span><br><span class="line">  <span class="number">0x0B</span>, <span class="number">0x8D</span>, <span class="number">0xE8</span>, <span class="number">0xB8</span>, <span class="number">0x83</span>, <span class="number">0x4A</span>, <span class="number">0x5A</span>, <span class="number">0x6E</span>, <span class="number">0xBE</span>, <span class="number">0xCB</span>,</span><br><span class="line">  <span class="number">0xF4</span>, <span class="number">0x4B</span> ,<span class="number">0x99</span>,<span class="number">0xd6</span>,<span class="number">0xe6</span>,<span class="number">0x54</span>,<span class="number">0x7A</span>,<span class="number">0x4F</span>,<span class="number">0x50</span>,<span class="number">0x14</span>,<span class="number">0xE5</span>,<span class="number">0xEC</span>]</span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">str</span>)):</span><br><span class="line"></span><br><span class="line">    flag+=<span class="built_in">chr</span>(<span class="built_in">str</span>[i]^str2[i])</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment">#flag&#123;c5e0f5f6-f79e-5b9b-988f-28f046117802&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1984,177 +2147,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/13/NSSCTF-encode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Reverse">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/12/13/NSSCTF-encode/" itemprop="url">NSSCTF encode</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-13T08:33:31+08:00">
-                2022-12-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/re/" itemprop="url" rel="index">
-                    <span itemprop="name">re</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在NSS中的一些做题记录</p>
-<h1 id="BJDCTF-2020-encode"><a href="#BJDCTF-2020-encode" class="headerlink" title="[BJDCTF 2020]encode"></a>[BJDCTF 2020]encode</h1><p>查壳，upx简单脱壳</p>
-<p>主要逻辑：</p>
-<p>_posts&#x2F;post_name&#x2F;image-20221213085151395.png</p>
-<img src="/2022/12/13/NSSCTF-encode/image-20221213085151395.png" class title="This is an image">
-
-<p>跟进两个加密函数，可以发现一个是变表的base64，一个是RC4加密</p>
-<p>_posts&#x2F;post_name&#x2F;image-20221213085441778.png</p>
-<img src="/2022/12/13/NSSCTF-encode/image-20221213085441778.png" class title="This is an image">
-
-<p>_posts&#x2F;post_name&#x2F;image-20221213085537087.png</p>
-<img src="/2022/12/13/NSSCTF-encode/image-20221213085537087.png" class title="This is an image">
-
-<p>所以整个思路就是：</p>
-<ul>
-<li>对输入的flag进行变表的base64加密</li>
-<li>进行一个异或操作</li>
-<li>进行RC4加密（密钥为Flag{This_a_Flag}）</li>
-<li>最后进行一个验证</li>
-</ul>
-<p>RC4在线解密：<a target="_blank" rel="noopener" href="http://www.hiencode.com/rc4.html">http://www.hiencode.com/rc4.html</a></p>
-<p>解密后明文：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">23152553081a5938126a3931275b0b1313085c330b356101511f105c</span><br></pre></td></tr></table></figure>
-
-<p>exp</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">str1=<span class="string">&quot;23152553081a5938126a3931275b0b1313085c330b356101511f105c&quot;</span></span><br><span class="line">str2=<span class="string">&quot;Flag&#123;This_a_Flag&#125;&quot;</span></span><br><span class="line"><span class="built_in">str</span>=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(str1),<span class="number">2</span>):</span><br><span class="line">    <span class="built_in">str</span>.append(<span class="built_in">int</span>(<span class="string">&quot;0x&quot;</span>+str1[i:i+<span class="number">2</span>],<span class="number">16</span>))</span><br><span class="line"><span class="comment">#这里由于原来数据都是16进制的，所以进行了一个两位一组分组</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)</span><br><span class="line">base64_encode=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">str</span>)):</span><br><span class="line">    base64_encode+=<span class="built_in">chr</span>(<span class="built_in">str</span>[i]^<span class="built_in">ord</span>(str2[i%<span class="built_in">len</span>(str2)]))</span><br><span class="line"><span class="built_in">print</span>(base64_encode)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">str1 = <span class="string">&quot;eyD4sN1Qa5Xna7jtnN0RlN5i8lO=&quot;</span>   <span class="comment">#str1是要解密的代码</span></span><br><span class="line">string1 = <span class="string">&quot;0123456789+/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>   <span class="comment">#string1是改过之后的base64表</span></span><br><span class="line">string2 = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line"><span class="built_in">print</span>(base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string1,string2))))</span><br><span class="line"><span class="comment">#BJD&#123;0v0_Y0u_g07_1T!&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39542714/article/details/106834866">https://blog.csdn.net/qq_39542714/article/details/106834866</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2205,7 +2197,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2227,7 +2219,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
