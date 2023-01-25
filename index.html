@@ -297,6 +297,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/25/map/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/25/map/" itemprop="url">map</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-25T15:29:23+08:00">
+                2023-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>map 是 C++ 标准库的一个关联容器，是一个模板类。</p>
+<p>它提供一对一（其中第一个可以称为关键字，每个关键字只能在 map 中出现一次，第二个可能称为该关键字的值）的数据处理能力，由于这个特性，它完成有可能在我们处理一对一数据的时候，在编程上提供快速通道。map 就是从键（ key ）到值（ value ）的映射。因为重载了 [ ] 运算符，map 像是数组的“高级版”。</p>
+<p>这里说下 map 内部数据的组织， map 内部自建一颗红黑树(一 种非严格意义上的平衡二叉树)，当我们将不同的键值放入 map，这种数据结构会自动将所有键值变为有序的（按照键 key 排序）。所以在 map 内部所有的数据都是有序的。它的特点是增加和删除节点对迭代器的影响很小，除了那个操作节点，对其他的节点都没有什么影响。</p>
+<h2 id="map功能"><a href="#map功能" class="headerlink" title="map功能"></a>map功能</h2><p>自动建立Key-value的对应。Key和value可以是任意你需要的类型</p>
+<p>根据key值快速查找记录，查找的复杂度基本是log(N)</p>
+<ol>
+<li>快速插入 key-value 记录</li>
+<li>快速删除记录。</li>
+<li>根据 key 修改 value 记录</li>
+<li>遍历所有记录。</li>
+</ol>
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">map&lt;<span class="type">int</span>, string&gt; a;</span><br><span class="line">map&lt;<span class="type">int</span>, string&gt;::iterator it;<span class="comment">//定义一个迭代器</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	a[<span class="number">123</span>] = <span class="string">&quot;hsfjalds&quot;</span>;</span><br><span class="line">	it=a.<span class="built_in">find</span>(<span class="number">123</span>);</span><br><span class="line">	<span class="keyword">if</span> (it != a.<span class="built_in">end</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//key存在</span></span><br><span class="line">		cout &lt;&lt; a[<span class="number">123</span>] &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;NO!&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="map的遍历"><a href="#map的遍历" class="headerlink" title="map的遍历"></a>map的遍历</h2><ul>
+<li>迭代器</li>
+<li>数组</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">map&lt;<span class="type">int</span>, string&gt; a;</span><br><span class="line">map&lt;<span class="type">int</span>, string&gt;::iterator it;<span class="comment">//定义一个迭代器</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	a[<span class="number">1</span>] = <span class="string">&quot;qwe&quot;</span>;</span><br><span class="line">	a[<span class="number">2</span>] = <span class="string">&quot;asd&quot;</span>;</span><br><span class="line">	a[<span class="number">3</span>] = <span class="string">&quot;zxc&quot;</span>;</span><br><span class="line">	a[<span class="number">4</span>] = <span class="string">&quot;rty&quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (it = a.<span class="built_in">begin</span>(); it != a.<span class="built_in">end</span>(); it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; it-&gt;first &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; it-&gt;second &lt;&lt; endl;</span><br><span class="line">		<span class="comment">//first : key ，second :value</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//my_map.begin()返回的是my_map的第一个元素，而my_map.end()，返回的并不是my_map最后一个元素，而是最后一个元素后面的地址</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="其它用法"><a href="#其它用法" class="headerlink" title="其它用法"></a>其它用法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">my_Map.<span class="built_in">size</span>() <span class="comment">//返回元素数目</span></span><br><span class="line">my_Map.<span class="built_in">empty</span>() <span class="comment">//判断是否为空</span></span><br><span class="line">my_Map.<span class="built_in">clear</span>() <span class="comment">//清空所有元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="子集和判断"><a href="#子集和判断" class="headerlink" title="子集和判断"></a>子集和判断</h3><p>给出 2 个集合 A,B ，判断 B 是否为 A 的子集和。由于集合 A,B 本身都可能存在重复的元素，因此如果 B 中某个元素的数量多于 A ，也不认为 B 是 A 的子集。子集忽略集合元素的顺序。</p>
+<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第 1 行：一个数 t ，表示测试集的数量。( 1≤t≤10)<br>每个 test 第 1 行： 2 个数 m,n 中间用空格分隔，对应集合 A,B 的大小（ 2≤m,n≤50000 ）<br>每个 test 第 2 行： m 个数，中间用空格分隔，对应集合 A 的元素。（ 1≤Ai≤50000 ）<br>每个 test 第 3 行： n 个数，中间用空格分隔，对应集合 B 的元素。（ 1≤Bi≤50000 ）</p>
+<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>共 t 行，每行输出 Yes 或 No ，如果 B 是 A 的子集，则输出 Yes，否则输出 No</p>
+<h4 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">3 3</span><br><span class="line">1 1 2</span><br><span class="line">1 2 1</span><br><span class="line">2 3</span><br><span class="line">1 1</span><br><span class="line">1 2 2</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Yes</span><br><span class="line">No</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h4><p>共 t 行，每行输出 Yes 或 No ，如果 B 是 A 的子集，则输出 Yes，否则输出 No</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> t;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);</span><br><span class="line">	map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; mp;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;t;i++)&#123;</span><br><span class="line">		mp.<span class="built_in">clear</span>();</span><br><span class="line">		<span class="type">bool</span> flag=<span class="literal">false</span>;</span><br><span class="line">		<span class="type">int</span> m,n,v;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;m,&amp;n);</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;m;j++)&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;v);</span><br><span class="line">			mp[v]++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;v);</span><br><span class="line">			mp[v]--;</span><br><span class="line">			<span class="keyword">if</span>(mp[v]&lt;<span class="number">0</span>)&#123;</span><br><span class="line">				flag=<span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(flag)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/25/%E9%98%9F%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2069,226 +2241,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/07/%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Reverse">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/01/07/%E6%A0%91/" itemprop="url">树的基本概念</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-07T19:52:18+08:00">
-                2023-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>树是一种非线性的数据结构，用它能很好地描述有分支和层次特性的数据结构</p>
-<h1 id="树的概念"><a href="#树的概念" class="headerlink" title="树的概念"></a>树的概念</h1><h2 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h2><p>一棵树是由n(n&gt;0)个元素组成的有限集合</p>
-<ul>
-<li>每个元素称为结点(node)</li>
-<li>有一个特定的结点，称为根结点或树根(root)</li>
-<li>除根结点外，其余结点能分成m(m&gt;&#x3D;0)个互不相交的有限集合T0,T1,T2….其中的每个子集又都是一颗树，这些集合称为这颗树的子树。</li>
-</ul>
-<h2 id="树的基本术语"><a href="#树的基本术语" class="headerlink" title="树的基本术语"></a>树的基本术语</h2><ul>
-<li>结点(node)：树中的元素</li>
-<li>边：根结点与它的子树根之间形成边</li>
-<li>路径(path)：从某个结点沿树中的边可到达另一个结点，则称这两个结点之间存在一条路径</li>
-<li>双亲(parent)：若一个结点有子树，那么该结点称为子树根的双亲（父结点）</li>
-<li>孩子(child)：某结点的子树的根称为该结点的孩子</li>
-<li>兄弟(sibling)：有相同双亲的结点互为兄弟</li>
-<li>后裔(descendant)：某结点的所有子树上任何结点都是该结点的后裔</li>
-<li>祖先(ancester)：从根结点到某个结点的路径上的所有结点都是该结点的祖先</li>
-<li>结点的度(degree)：结点拥有的子树数</li>
-<li>叶子(leaf)：度为零的结点</li>
-<li>分支结点(branch)：度不为零的结点</li>
-<li>树的度：树中各结点度的最大值</li>
-<li>结点的层次：根结点的层次为为1，其余结点的层次等于其双亲结点的层次加1</li>
-<li>树的高度：树中结点的最大层次</li>
-<li>森林：树的集合，0棵或多棵不相交的树组成森林</li>
-</ul>
-<h1 id="二叉树的定义及性质"><a href="#二叉树的定义及性质" class="headerlink" title="二叉树的定义及性质"></a>二叉树的定义及性质</h1><h2 id="二叉树的定义"><a href="#二叉树的定义" class="headerlink" title="二叉树的定义"></a>二叉树的定义</h2><p>二叉树(binary tree)是结点的有限集合，该集合或者为空集，或者由一个根和两个互不相交的、称为该根的左子树和右子树的二叉树组成</p>
-<h3 id="树与二叉树的区别"><a href="#树与二叉树的区别" class="headerlink" title="树与二叉树的区别"></a>树与二叉树的区别</h3><ul>
-<li>树中结点的子树之间可以是无序的，而二叉树中结点的子树要区分左右子树</li>
-<li>树中每个结点可以有0棵或若干子树，而二叉树的每个结点最多只能有2棵子树</li>
-</ul>
-<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
-<li>二叉树的第i(i&gt;&#x3D;1)层上至多有2的(i-1)次方个结点</li>
-<li>高度为h的二叉树上至多有2的h次方减一个结点（等比数列证明）</li>
-<li>包含n个结点的二叉树的高度最矮为log2(n+1)，最高为n（当每层只有一个结点的时候最高）</li>
-<li>任意一棵二叉树中，若叶节点数量为n0，度为2的结点数量为n2，则有：n0&#x3D;n2+1</li>
-</ul>
-<h2 id="特殊二叉树"><a href="#特殊二叉树" class="headerlink" title="特殊二叉树"></a>特殊二叉树</h2><h4 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a>满二叉树</h4><p>每一层的结点数量都达到饱和状态</p>
-<h4 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h4><ul>
-<li><p>只有最下面两层结点的度可以小于2，其它层中结点的度均等于2</p>
-</li>
-<li><p>最下一层的叶结点均依次集中在靠左的若干位置上</p>
-<h5 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h5></li>
-</ul>
-<p>具有n个结点的完全二叉树的高度为log2(n+1) </p>
-<img src="/2023/01/07/%E6%A0%91/20230107213257.jpg" class title="This is an image">
-
-<h4 id="扩充二叉树"><a href="#扩充二叉树" class="headerlink" title="扩充二叉树"></a>扩充二叉树</h4><p>除叶子结点外，其余结点都必须有两个孩子，也称为2-树（仅存在度有2和0的结点）</p>
-<h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><img src="/2023/01/07/%E6%A0%91/20230107212356.jpg" class title="This is an image">
-
-<p> 满二叉树一定是完全二叉树，也是扩充二叉树</p>
-<h2 id="二叉树ADT（抽象数据类型）"><a href="#二叉树ADT（抽象数据类型）" class="headerlink" title="二叉树ADT（抽象数据类型）"></a>二叉树ADT（抽象数据类型）</h2><p>运算：</p>
-<p>Create(bt)：构造一棵空二叉树bt</p>
-<p>NewNode(x,ln,rn)：创建一个新结点，该结点的值为x，ln和rn为该结点的左右孩子结点</p>
-<p>IsEmpty(bt)：若二叉树bt为空，则返回TRUE，否则返回FALSE</p>
-<p>ClearTree(bt)：清除二叉树bt中所有结点，使之成为空二叉树</p>
-<p>Root(bt,x)：若二叉树bt非空，则获取根结点中的数据，并返回TRUE，否则返回FALSE</p>
-<p>MakeTree(bt,x,left,right)：构造一棵树bt,根结点的值为x，left和right为该根结点的左右子树</p>
-<p>ProOrderTree(bt)：先序遍历二叉树bt</p>
-<p>InOrderTree(bt)：中序遍历二叉树bt</p>
-<p>PostOrderTree(bt)：后序遍历二叉树bt</p>
-<p>LevelOrderTree(bt)：宽度优先(层次)遍历二叉树bt</p>
-<h2 id="完全二叉树是如何存储的？"><a href="#完全二叉树是如何存储的？" class="headerlink" title="完全二叉树是如何存储的？"></a>完全二叉树是如何存储的？</h2><h3 id="顺序存储表示"><a href="#顺序存储表示" class="headerlink" title="顺序存储表示"></a>顺序存储表示</h3><ul>
-<li>结点按从上到下、从左到右，逐层顺序存储于一块连续的存储单元(即数组)</li>
-<li>根结点存储在下标为0的位置，其他结点按上述性质中的编号规则依次顺序存储</li>
-</ul>
-<h3 id="一般二叉树的顺序存储表示"><a href="#一般二叉树的顺序存储表示" class="headerlink" title="一般二叉树的顺序存储表示"></a>一般二叉树的顺序存储表示</h3><p>通过在一般二叉树中增加”空结点“，将二叉树改造成完全二叉树（理论上可行，但可能存在较大的空间浪费）</p>
-<h3 id="二叉树的链接表示"><a href="#二叉树的链接表示" class="headerlink" title="二叉树的链接表示"></a>二叉树的链接表示</h3><img src="/2023/01/07/%E6%A0%91/20230108105128.jpg" class title="This is an image">
-
-<h2 id="二叉树的基本运算"><a href="#二叉树的基本运算" class="headerlink" title="二叉树的基本运算"></a>二叉树的基本运算</h2><p><strong>Create(bt)：构造一棵空二叉树bt</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void Create(BinaryTree *bt)</span><br><span class="line">&#123;</span><br><span class="line">    bt-&gt;root=NULL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>NewNode(x,ln,rn)：创建一个新结点，该结点的值为x，ln和rn为该结点的左右孩子结点</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">BTNode* NewNode(ElemType x,BTNode *ln,BTNode *rn)</span><br><span class="line">&#123;</span><br><span class="line">    BTNode *p=(BTNode*)malloc(sizeof(BTNode));//用malloc函数申请一个BTNode类型的结点空间</span><br><span class="line">    p-&gt;element=x;</span><br><span class="line">    p-&gt;lChild=ln;</span><br><span class="line">    p-&gt;rChild=rn;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Root(bt,x)：若二叉树bt非空，则获取根结点中的数据，并返回TRUE，否则返回FALSE</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">BOOL Root(BinaryTree *bt,ElemType *x)</span><br><span class="line">&#123;</span><br><span class="line">    if(bt-&gt;root)</span><br><span class="line">    &#123;</span><br><span class="line">        x=&amp;bt-&gt;root-&gt;element;</span><br><span class="line">        return TRUE;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    return FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>MakeTree(bt,x,left,right)：构造一棵树bt,根结点的值为e，left和right为该根结点的左右子树</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void MakeTree(BinaryTree *bt,ElemType e,BinaryTree *left,BinaryTree *right)</span><br><span class="line">&#123;</span><br><span class="line">    if(bt-&gt;root||left==right)</span><br><span class="line">    return;</span><br><span class="line">    bt-&gt;root=NewNode(e,left-&gt;root,right-&gt;root);</span><br><span class="line">    left-&gt;root=right-&gt;root=NULL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2339,7 +2291,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2350,7 +2302,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2361,7 +2313,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

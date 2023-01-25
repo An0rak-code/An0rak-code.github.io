@@ -1165,10 +1165,10 @@
 
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>Learn</category>
       </categories>
       <tags>
-        <tag>树</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -1526,6 +1526,48 @@
 ]]></content>
       <categories>
         <category>Learn</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>map</title>
+    <url>/2023/01/25/map/</url>
+    <content><![CDATA[<h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>map 是 C++ 标准库的一个关联容器，是一个模板类。</p>
+<p>它提供一对一（其中第一个可以称为关键字，每个关键字只能在 map 中出现一次，第二个可能称为该关键字的值）的数据处理能力，由于这个特性，它完成有可能在我们处理一对一数据的时候，在编程上提供快速通道。map 就是从键（ key ）到值（ value ）的映射。因为重载了 [ ] 运算符，map 像是数组的“高级版”。</p>
+<p>这里说下 map 内部数据的组织， map 内部自建一颗红黑树(一 种非严格意义上的平衡二叉树)，当我们将不同的键值放入 map，这种数据结构会自动将所有键值变为有序的（按照键 key 排序）。所以在 map 内部所有的数据都是有序的。它的特点是增加和删除节点对迭代器的影响很小，除了那个操作节点，对其他的节点都没有什么影响。</p>
+<h2 id="map功能"><a href="#map功能" class="headerlink" title="map功能"></a>map功能</h2><p>自动建立Key-value的对应。Key和value可以是任意你需要的类型</p>
+<p>根据key值快速查找记录，查找的复杂度基本是log(N)</p>
+<ol>
+<li>快速插入 key-value 记录</li>
+<li>快速删除记录。</li>
+<li>根据 key 修改 value 记录</li>
+<li>遍历所有记录。</li>
+</ol>
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">map&lt;<span class="type">int</span>, string&gt; a;</span><br><span class="line">map&lt;<span class="type">int</span>, string&gt;::iterator it;<span class="comment">//定义一个迭代器</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	a[<span class="number">123</span>] = <span class="string">&quot;hsfjalds&quot;</span>;</span><br><span class="line">	it=a.<span class="built_in">find</span>(<span class="number">123</span>);</span><br><span class="line">	<span class="keyword">if</span> (it != a.<span class="built_in">end</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//key存在</span></span><br><span class="line">		cout &lt;&lt; a[<span class="number">123</span>] &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;NO!&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="map的遍历"><a href="#map的遍历" class="headerlink" title="map的遍历"></a>map的遍历</h2><ul>
+<li>迭代器</li>
+<li>数组</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">map&lt;<span class="type">int</span>, string&gt; a;</span><br><span class="line">map&lt;<span class="type">int</span>, string&gt;::iterator it;<span class="comment">//定义一个迭代器</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	a[<span class="number">1</span>] = <span class="string">&quot;qwe&quot;</span>;</span><br><span class="line">	a[<span class="number">2</span>] = <span class="string">&quot;asd&quot;</span>;</span><br><span class="line">	a[<span class="number">3</span>] = <span class="string">&quot;zxc&quot;</span>;</span><br><span class="line">	a[<span class="number">4</span>] = <span class="string">&quot;rty&quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (it = a.<span class="built_in">begin</span>(); it != a.<span class="built_in">end</span>(); it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; it-&gt;first &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; it-&gt;second &lt;&lt; endl;</span><br><span class="line">		<span class="comment">//first : key ，second :value</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//my_map.begin()返回的是my_map的第一个元素，而my_map.end()，返回的并不是my_map最后一个元素，而是最后一个元素后面的地址</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="其它用法"><a href="#其它用法" class="headerlink" title="其它用法"></a>其它用法</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">my_Map.<span class="built_in">size</span>() <span class="comment">//返回元素数目</span></span><br><span class="line">my_Map.<span class="built_in">empty</span>() <span class="comment">//判断是否为空</span></span><br><span class="line">my_Map.<span class="built_in">clear</span>() <span class="comment">//清空所有元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="子集和判断"><a href="#子集和判断" class="headerlink" title="子集和判断"></a>子集和判断</h3><p>给出 2 个集合 A,B ，判断 B 是否为 A 的子集和。由于集合 A,B 本身都可能存在重复的元素，因此如果 B 中某个元素的数量多于 A ，也不认为 B 是 A 的子集。子集忽略集合元素的顺序。</p>
+<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第 1 行：一个数 t ，表示测试集的数量。( 1≤t≤10)<br>每个 test 第 1 行： 2 个数 m,n 中间用空格分隔，对应集合 A,B 的大小（ 2≤m,n≤50000 ）<br>每个 test 第 2 行： m 个数，中间用空格分隔，对应集合 A 的元素。（ 1≤Ai≤50000 ）<br>每个 test 第 3 行： n 个数，中间用空格分隔，对应集合 B 的元素。（ 1≤Bi≤50000 ）</p>
+<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>共 t 行，每行输出 Yes 或 No ，如果 B 是 A 的子集，则输出 Yes，否则输出 No</p>
+<h4 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">2</span><br><span class="line">3 3</span><br><span class="line">1 1 2</span><br><span class="line">1 2 1</span><br><span class="line">2 3</span><br><span class="line">1 1</span><br><span class="line">1 2 2</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Yes</span><br><span class="line">No</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h4><p>共 t 行，每行输出 Yes 或 No ，如果 B 是 A 的子集，则输出 Yes，否则输出 No</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> t;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);</span><br><span class="line">	map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; mp;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;t;i++)&#123;</span><br><span class="line">		mp.<span class="built_in">clear</span>();</span><br><span class="line">		<span class="type">bool</span> flag=<span class="literal">false</span>;</span><br><span class="line">		<span class="type">int</span> m,n,v;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;m,&amp;n);</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;m;j++)&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;v);</span><br><span class="line">			mp[v]++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;v);</span><br><span class="line">			mp[v]--;</span><br><span class="line">			<span class="keyword">if</span>(mp[v]&lt;<span class="number">0</span>)&#123;</span><br><span class="line">				flag=<span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(flag)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>CTF</category>
       </categories>
       <tags>
         <tag>算法</tag>
