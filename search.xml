@@ -14,10 +14,10 @@
 
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>re</tag>
       </tags>
   </entry>
   <entry>
@@ -35,7 +35,7 @@
 
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
         <tag>buu做题记录</tag>
@@ -62,7 +62,7 @@
 
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
         <tag>buu做题记录</tag>
@@ -98,10 +98,10 @@
 
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>re</tag>
       </tags>
   </entry>
   <entry>
@@ -165,10 +165,10 @@
 
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>re</tag>
       </tags>
   </entry>
   <entry>
@@ -206,10 +206,10 @@
 <p>参考博客：<a href="https://blog.csdn.net/qq_39542714/article/details/106834866">https://blog.csdn.net/qq_39542714/article/details/106834866</a></p>
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>re</tag>
       </tags>
   </entry>
   <entry>
@@ -250,10 +250,10 @@
 
 ]]></content>
       <categories>
-        <category>加密算法</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>加密算法</tag>
       </tags>
   </entry>
   <entry>
@@ -281,7 +281,7 @@
 <p><a href="https://www.52hertz.tech/2020/03/30/wctf2020_official_wp/#level4-12-solves">https://www.52hertz.tech/2020/03/30/wctf2020_official_wp/#level4-12-solves</a></p>
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
         <tag>buu做题记录</tag>
@@ -342,7 +342,7 @@
         <category>Learn</category>
       </categories>
       <tags>
-        <tag>c++</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -433,10 +433,10 @@
 <p><a href="https://github.com/XDSEC/MoeCTF_2022/blob/main/Official_Writeup/Reverse/Reverse_Offical_WriteUp.md">https://github.com/XDSEC/MoeCTF_2022/blob/main/Official_Writeup/Reverse/Reverse_Offical_WriteUp.md</a></p>
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>re</tag>
       </tags>
   </entry>
   <entry>
@@ -537,10 +537,10 @@
 <p>如：针对MFC程序的xspy，针对Delphi程序的Dede。</p>
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>re</tag>
       </tags>
   </entry>
   <entry>
@@ -637,10 +637,10 @@
 <img src="/2022/12/28/sql%E6%B3%A8%E5%85%A5/image-20221229162232278.png" class title="This is an image">
 ]]></content>
       <categories>
-        <category>web</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>web</tag>
       </tags>
   </entry>
   <entry>
@@ -660,7 +660,7 @@
         <category>Learn</category>
       </categories>
       <tags>
-        <tag>python</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -694,10 +694,10 @@
 
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>Learn</category>
       </categories>
       <tags>
-        <tag>vector</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -742,10 +742,10 @@
 <p>(2)求二叉树的高度。如果已经知道左、右子树的高度，那么树的高度就是左、右子树中比较高的那个高度加1。这是一个可以用二叉树后序遍历解决的问题，在遍历过程中，我们将“访问结点”定义为“求左、右子树高度的较大值并加1”。</p>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>Learn</category>
       </categories>
       <tags>
-        <tag>树</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -823,10 +823,10 @@
 <p>以上过程还是自己多动手调调比较好，光看文字是无法理解的，作为一个刚入门的小白，re的挨打之路才刚刚开始</p>
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>re</tag>
       </tags>
   </entry>
   <entry>
@@ -842,10 +842,10 @@
 
 ]]></content>
       <categories>
-        <category>加密算法</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>加密算法</tag>
       </tags>
   </entry>
   <entry>
@@ -964,10 +964,10 @@
 <p>但这里由于运行的编译器版本不同，结果是不同的，所以还是动调把数据拉出来比较好。感谢PZ师傅的指导，不然也不会这么快复现出来。</p>
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>re</tag>
       </tags>
   </entry>
   <entry>
@@ -1087,10 +1087,10 @@
 
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>re</tag>
       </tags>
   </entry>
   <entry>
@@ -1151,10 +1151,10 @@
 <p>无法反编译的情况，也有可能是因为加了花，我们后续再继续介绍。</p>
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>re</tag>
       </tags>
   </entry>
   <entry>
@@ -1182,10 +1182,10 @@
 
 ]]></content>
       <categories>
-        <category>re</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>re</tag>
       </tags>
   </entry>
   <entry>
@@ -1294,10 +1294,10 @@
 
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>Learn</category>
       </categories>
       <tags>
-        <tag>链表</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -1405,10 +1405,21 @@
 
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>Learn</category>
       </categories>
       <tags>
-        <tag>栈</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>队列</title>
+    <url>/2023/01/25/%E9%98%9F%E5%88%97/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Learn</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
 </search>
