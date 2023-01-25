@@ -105,6 +105,47 @@
       </tags>
   </entry>
   <entry>
+    <title>NSSCTF encode</title>
+    <url>/2022/12/13/NSSCTF-encode/</url>
+    <content><![CDATA[<p>在NSS中的一些做题记录</p>
+<h1 id="BJDCTF-2020-encode"><a href="#BJDCTF-2020-encode" class="headerlink" title="[BJDCTF 2020]encode"></a>[BJDCTF 2020]encode</h1><p>查壳，upx简单脱壳</p>
+<p>主要逻辑：</p>
+<p>_posts&#x2F;post_name&#x2F;image-20221213085151395.png</p>
+<img src="/2022/12/13/NSSCTF-encode/image-20221213085151395.png" class title="This is an image">
+
+<p>跟进两个加密函数，可以发现一个是变表的base64，一个是RC4加密</p>
+<p>_posts&#x2F;post_name&#x2F;image-20221213085441778.png</p>
+<img src="/2022/12/13/NSSCTF-encode/image-20221213085441778.png" class title="This is an image">
+
+<p>_posts&#x2F;post_name&#x2F;image-20221213085537087.png</p>
+<img src="/2022/12/13/NSSCTF-encode/image-20221213085537087.png" class title="This is an image">
+
+<p>所以整个思路就是：</p>
+<ul>
+<li>对输入的flag进行变表的base64加密</li>
+<li>进行一个异或操作</li>
+<li>进行RC4加密（密钥为Flag{This_a_Flag}）</li>
+<li>最后进行一个验证</li>
+</ul>
+<p>RC4在线解密：<a href="http://www.hiencode.com/rc4.html">http://www.hiencode.com/rc4.html</a></p>
+<p>解密后明文：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">23152553081a5938126a3931275b0b1313085c330b356101511f105c</span><br></pre></td></tr></table></figure>
+
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str1=<span class="string">&quot;23152553081a5938126a3931275b0b1313085c330b356101511f105c&quot;</span></span><br><span class="line">str2=<span class="string">&quot;Flag&#123;This_a_Flag&#125;&quot;</span></span><br><span class="line"><span class="built_in">str</span>=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(str1),<span class="number">2</span>):</span><br><span class="line">    <span class="built_in">str</span>.append(<span class="built_in">int</span>(<span class="string">&quot;0x&quot;</span>+str1[i:i+<span class="number">2</span>],<span class="number">16</span>))</span><br><span class="line"><span class="comment">#这里由于原来数据都是16进制的，所以进行了一个两位一组分组</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)</span><br><span class="line">base64_encode=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">str</span>)):</span><br><span class="line">    base64_encode+=<span class="built_in">chr</span>(<span class="built_in">str</span>[i]^<span class="built_in">ord</span>(str2[i%<span class="built_in">len</span>(str2)]))</span><br><span class="line"><span class="built_in">print</span>(base64_encode)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">str1 = <span class="string">&quot;eyD4sN1Qa5Xna7jtnN0RlN5i8lO=&quot;</span>   <span class="comment">#str1是要解密的代码</span></span><br><span class="line">string1 = <span class="string">&quot;0123456789+/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>   <span class="comment">#string1是改过之后的base64表</span></span><br><span class="line">string2 = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line"><span class="built_in">print</span>(base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string1,string2))))</span><br><span class="line"><span class="comment">#BJD&#123;0v0_Y0u_g07_1T!&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>参考博客：<a href="https://blog.csdn.net/qq_39542714/article/details/106834866">https://blog.csdn.net/qq_39542714/article/details/106834866</a></p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>re</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hgame2023复现</title>
     <url>/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[<p>新年前，把前面的欠的债还一还，哈哈哈。。</p>
@@ -163,47 +204,6 @@
 <p>key为[2233,4455,6677,8899]</p>
 <h5 id="exp-4"><a href="#exp-4" class="headerlink" title="exp"></a>exp</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">decipher</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> num_rounds, <span class="type">uint32_t</span> v[<span class="number">2</span>], <span class="type">uint32_t</span> <span class="type">const</span> key[<span class="number">4</span>])</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="type">unsigned</span> <span class="type">int</span> i;</span><br><span class="line">	 <span class="type">uint32_t</span> v0 = v[<span class="number">0</span>], v1 = v[<span class="number">1</span>], delta = <span class="number">0x34566543</span>, sum = delta * num_rounds;</span><br><span class="line">		 <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; num_rounds; i++) &#123;</span><br><span class="line">		 sum -= delta;</span><br><span class="line">		 v1 -= (((v0 &lt;&lt; <span class="number">4</span>) ^ (v0 &gt;&gt; <span class="number">5</span>)) + v0) ^ (sum + key[(sum &gt;&gt; <span class="number">11</span>) &amp; <span class="number">3</span>]);</span><br><span class="line">			</span><br><span class="line">		 v0 -= (((v1 &lt;&lt; <span class="number">4</span>) ^ (v1 &gt;&gt; <span class="number">5</span>)) + v1) ^ (sum + key[sum &amp; <span class="number">3</span>]) ^ sum;</span><br><span class="line">			</span><br><span class="line">	&#125;</span><br><span class="line">	 v[<span class="number">0</span>] = v0; v[<span class="number">1</span>] = v1;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">uint32_t</span> ch[] = &#123; <span class="number">637666042</span>, <span class="number">457511012</span>, <span class="number">-2038734351</span>, <span class="number">578827205</span>, <span class="number">-245529892</span>,<span class="number">-1652281167</span>,<span class="number">435335655</span>,<span class="number">733644188</span>,<span class="number">705177885</span>,<span class="number">-596608744</span> &#125;;</span><br><span class="line">	<span class="type">uint32_t</span> num[] = &#123; <span class="number">2233U</span> ,<span class="number">4455u</span>,<span class="number">6677u</span>,<span class="number">8899u</span> &#125;;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">8</span>; i &gt;= <span class="number">0</span>; i -= <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		decipher(<span class="number">33</span>, &amp;ch[i], num);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">puts</span>(ch);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//hgame&#123;d8c1d7d34573434ea8dfe5db40fbb25c0&#125;</span></span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>re</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NSSCTF encode</title>
-    <url>/2022/12/13/NSSCTF-encode/</url>
-    <content><![CDATA[<p>在NSS中的一些做题记录</p>
-<h1 id="BJDCTF-2020-encode"><a href="#BJDCTF-2020-encode" class="headerlink" title="[BJDCTF 2020]encode"></a>[BJDCTF 2020]encode</h1><p>查壳，upx简单脱壳</p>
-<p>主要逻辑：</p>
-<p>_posts&#x2F;post_name&#x2F;image-20221213085151395.png</p>
-<img src="/2022/12/13/NSSCTF-encode/image-20221213085151395.png" class title="This is an image">
-
-<p>跟进两个加密函数，可以发现一个是变表的base64，一个是RC4加密</p>
-<p>_posts&#x2F;post_name&#x2F;image-20221213085441778.png</p>
-<img src="/2022/12/13/NSSCTF-encode/image-20221213085441778.png" class title="This is an image">
-
-<p>_posts&#x2F;post_name&#x2F;image-20221213085537087.png</p>
-<img src="/2022/12/13/NSSCTF-encode/image-20221213085537087.png" class title="This is an image">
-
-<p>所以整个思路就是：</p>
-<ul>
-<li>对输入的flag进行变表的base64加密</li>
-<li>进行一个异或操作</li>
-<li>进行RC4加密（密钥为Flag{This_a_Flag}）</li>
-<li>最后进行一个验证</li>
-</ul>
-<p>RC4在线解密：<a href="http://www.hiencode.com/rc4.html">http://www.hiencode.com/rc4.html</a></p>
-<p>解密后明文：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">23152553081a5938126a3931275b0b1313085c330b356101511f105c</span><br></pre></td></tr></table></figure>
-
-<p>exp</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str1=<span class="string">&quot;23152553081a5938126a3931275b0b1313085c330b356101511f105c&quot;</span></span><br><span class="line">str2=<span class="string">&quot;Flag&#123;This_a_Flag&#125;&quot;</span></span><br><span class="line"><span class="built_in">str</span>=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(str1),<span class="number">2</span>):</span><br><span class="line">    <span class="built_in">str</span>.append(<span class="built_in">int</span>(<span class="string">&quot;0x&quot;</span>+str1[i:i+<span class="number">2</span>],<span class="number">16</span>))</span><br><span class="line"><span class="comment">#这里由于原来数据都是16进制的，所以进行了一个两位一组分组</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)</span><br><span class="line">base64_encode=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">str</span>)):</span><br><span class="line">    base64_encode+=<span class="built_in">chr</span>(<span class="built_in">str</span>[i]^<span class="built_in">ord</span>(str2[i%<span class="built_in">len</span>(str2)]))</span><br><span class="line"><span class="built_in">print</span>(base64_encode)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">str1 = <span class="string">&quot;eyD4sN1Qa5Xna7jtnN0RlN5i8lO=&quot;</span>   <span class="comment">#str1是要解密的代码</span></span><br><span class="line">string1 = <span class="string">&quot;0123456789+/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>   <span class="comment">#string1是改过之后的base64表</span></span><br><span class="line">string2 = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line"><span class="built_in">print</span>(base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string1,string2))))</span><br><span class="line"><span class="comment">#BJD&#123;0v0_Y0u_g07_1T!&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>参考博客：<a href="https://blog.csdn.net/qq_39542714/article/details/106834866">https://blog.csdn.net/qq_39542714/article/details/106834866</a></p>
 ]]></content>
       <categories>
         <category>CTF</category>
@@ -544,6 +544,26 @@
       </tags>
   </entry>
   <entry>
+    <title>python学习</title>
+    <url>/2023/01/04/python%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="Python-字符串-ascii-uppercase"><a href="#Python-字符串-ascii-uppercase" class="headerlink" title="Python 字符串 | ascii_uppercase"></a>Python 字符串 | ascii_uppercase</h1><h3 id="ascii-uppercase"><a href="#ascii-uppercase" class="headerlink" title="ascii_uppercase"></a>ascii_uppercase</h3><p>在 Python3 中，**<code>ascii_uppercase </code>**是用作字符串常量的预初始化字符串</p>
+<p><strong>语法：</strong> string.ascii_uppercase</p>
+<p><strong>参数：</strong>不接受任何参数，因为它不是函数。</p>
+<p><strong>返回：</strong>返回所有大写字母</p>
+<p><strong>ascii_lowercase</strong>上同，返回所有小写字母</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h5 id="检查字符串输入是否只有大写ASCII字符"><a href="#检查字符串输入是否只有大写ASCII字符" class="headerlink" title="检查字符串输入是否只有大写ASCII字符"></a>检查字符串输入是否只有大写ASCII字符</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># importing string library function </span></span><br><span class="line"><span class="keyword">import</span> string </span><br><span class="line">     </span><br><span class="line"><span class="comment"># Function checks if input string </span></span><br><span class="line"><span class="comment"># has upper ascii letters or not </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">value</span>): </span><br><span class="line">    <span class="keyword">for</span> letter <span class="keyword">in</span> value: </span><br><span class="line">             </span><br><span class="line">        <span class="comment"># If anything other than upper ascii </span></span><br><span class="line">        <span class="comment"># letter is present, then return </span></span><br><span class="line">        <span class="comment"># False, else return True </span></span><br><span class="line">        <span class="keyword">if</span> letter <span class="keyword">not</span> <span class="keyword">in</span> string.ascii_uppercase: </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="生成给定大小的强随机密码"><a href="#生成给定大小的强随机密码" class="headerlink" title="生成给定大小的强随机密码"></a>生成给定大小的强随机密码</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Importing random to generate </span></span><br><span class="line"><span class="comment"># random string sequence </span></span><br><span class="line"><span class="keyword">import</span> random </span><br><span class="line">    </span><br><span class="line"><span class="comment"># Importing string library function </span></span><br><span class="line"><span class="keyword">import</span> string </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rand_pass</span>(<span class="params">size</span>): </span><br><span class="line">        </span><br><span class="line">    <span class="comment"># Takes random choices from </span></span><br><span class="line">    <span class="comment"># ascii_letters and digits </span></span><br><span class="line">    generate_pass = <span class="string">&#x27;&#x27;</span>.join([random.choice( </span><br><span class="line">                        string.ascii_uppercase + string.digits) </span><br><span class="line">                        <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(size)]) </span><br><span class="line">                            </span><br><span class="line">    <span class="keyword">return</span> generate_pass </span><br><span class="line">    </span><br><span class="line"><span class="comment"># Driver Code  </span></span><br><span class="line">password = rand_pass(<span class="number">10</span>) </span><br><span class="line"><span class="built_in">print</span>(password) </span><br><span class="line"><span class="comment">#string.digits将给出小写字母 &#x27;0123456789&#x27;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Learn</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>sql注入</title>
     <url>/2022/12/28/sql%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1 id="SQL注入漏洞形成的原因："><a href="#SQL注入漏洞形成的原因：" class="headerlink" title="SQL注入漏洞形成的原因："></a>SQL注入漏洞形成的原因：</h1><h2 id="动态字符串构建引起"><a href="#动态字符串构建引起" class="headerlink" title="动态字符串构建引起"></a>动态字符串构建引起</h2><ul>
@@ -641,26 +661,6 @@
       </categories>
       <tags>
         <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python学习</title>
-    <url>/2023/01/04/python%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h1 id="Python-字符串-ascii-uppercase"><a href="#Python-字符串-ascii-uppercase" class="headerlink" title="Python 字符串 | ascii_uppercase"></a>Python 字符串 | ascii_uppercase</h1><h3 id="ascii-uppercase"><a href="#ascii-uppercase" class="headerlink" title="ascii_uppercase"></a>ascii_uppercase</h3><p>在 Python3 中，**<code>ascii_uppercase </code>**是用作字符串常量的预初始化字符串</p>
-<p><strong>语法：</strong> string.ascii_uppercase</p>
-<p><strong>参数：</strong>不接受任何参数，因为它不是函数。</p>
-<p><strong>返回：</strong>返回所有大写字母</p>
-<p><strong>ascii_lowercase</strong>上同，返回所有小写字母</p>
-<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h5 id="检查字符串输入是否只有大写ASCII字符"><a href="#检查字符串输入是否只有大写ASCII字符" class="headerlink" title="检查字符串输入是否只有大写ASCII字符"></a>检查字符串输入是否只有大写ASCII字符</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># importing string library function </span></span><br><span class="line"><span class="keyword">import</span> string </span><br><span class="line">     </span><br><span class="line"><span class="comment"># Function checks if input string </span></span><br><span class="line"><span class="comment"># has upper ascii letters or not </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">value</span>): </span><br><span class="line">    <span class="keyword">for</span> letter <span class="keyword">in</span> value: </span><br><span class="line">             </span><br><span class="line">        <span class="comment"># If anything other than upper ascii </span></span><br><span class="line">        <span class="comment"># letter is present, then return </span></span><br><span class="line">        <span class="comment"># False, else return True </span></span><br><span class="line">        <span class="keyword">if</span> letter <span class="keyword">not</span> <span class="keyword">in</span> string.ascii_uppercase: </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="生成给定大小的强随机密码"><a href="#生成给定大小的强随机密码" class="headerlink" title="生成给定大小的强随机密码"></a>生成给定大小的强随机密码</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Importing random to generate </span></span><br><span class="line"><span class="comment"># random string sequence </span></span><br><span class="line"><span class="keyword">import</span> random </span><br><span class="line">    </span><br><span class="line"><span class="comment"># Importing string library function </span></span><br><span class="line"><span class="keyword">import</span> string </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rand_pass</span>(<span class="params">size</span>): </span><br><span class="line">        </span><br><span class="line">    <span class="comment"># Takes random choices from </span></span><br><span class="line">    <span class="comment"># ascii_letters and digits </span></span><br><span class="line">    generate_pass = <span class="string">&#x27;&#x27;</span>.join([random.choice( </span><br><span class="line">                        string.ascii_uppercase + string.digits) </span><br><span class="line">                        <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(size)]) </span><br><span class="line">                            </span><br><span class="line">    <span class="keyword">return</span> generate_pass </span><br><span class="line">    </span><br><span class="line"><span class="comment"># Driver Code  </span></span><br><span class="line">password = rand_pass(<span class="number">10</span>) </span><br><span class="line"><span class="built_in">print</span>(password) </span><br><span class="line"><span class="comment">#string.digits将给出小写字母 &#x27;0123456789&#x27;</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Learn</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -971,6 +971,117 @@
       </tags>
   </entry>
   <entry>
+    <title>栈</title>
+    <url>/2023/01/24/%E6%A0%88/</url>
+    <content><![CDATA[<h2 id="什么是栈"><a href="#什么是栈" class="headerlink" title="什么是栈"></a>什么是栈</h2><p>栈是一种先进后出的数据结构， 就好比我们生活中的乒乓球桶， 只有一端开口。它按照先进后出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据（最后一个数据被第一个读出来）。 我们学习递归的时候， 在计算机内部就是用栈实现的递归。在计算机中，它是一种运算受限的线性表。其限制是仅允许在表的一端进行插入和删除运算，这一端被称为栈顶，相对地，把另一端称为栈底。</p>
+<h2 id="写一个栈"><a href="#写一个栈" class="headerlink" title="写一个栈"></a>写一个栈</h2><table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">函数</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">入栈</td>
+<td align="left">push(x)</td>
+<td align="left">将x元素入栈</td>
+</tr>
+<tr>
+<td align="left">出栈</td>
+<td align="left">pop()</td>
+<td align="left">弹出栈的第一个元素，返回值为栈顶元素值</td>
+</tr>
+<tr>
+<td align="left">元素个数</td>
+<td align="left">size()</td>
+<td align="left">获取栈中的元素个数，返回int</td>
+</tr>
+<tr>
+<td align="left">获取栈顶元素</td>
+<td align="left">top()</td>
+<td align="left">获取栈顶元素的值</td>
+</tr>
+</tbody></table>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MaxN = <span class="number">100000</span>;</span><br><span class="line"><span class="type">int</span> st[MaxN + <span class="number">5</span>];</span><br><span class="line"><span class="type">int</span> total;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">push</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	total = total + <span class="number">1</span>;</span><br><span class="line">	st[total] = x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">pop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> value = st[total];</span><br><span class="line">	total = total - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">size</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">top</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> st[total];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">3</span>);</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">5</span>);</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">6</span>);</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">10</span>);</span><br><span class="line">	cout &lt;&lt; <span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">pop</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">top</span>() &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="stack的基本操作"><a href="#stack的基本操作" class="headerlink" title="stack的基本操作"></a>stack的基本操作</h2><p>在 C++ 的标准库中， 有封装好的栈 stack ，stack是一个模板类，定义的示例代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">stack&lt;类型&gt; 对象：</span><br><span class="line">stack&lt;<span class="type">int</span>&gt;  s;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">代码</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">入栈</td>
+<td align="left">s.push(x)</td>
+<td align="left">将x元素入栈</td>
+</tr>
+<tr>
+<td align="left">出栈</td>
+<td align="left">s.pop()</td>
+<td align="left">弹出栈的第一个元素，并不会返回元素的值</td>
+</tr>
+<tr>
+<td align="left">栈顶元素</td>
+<td align="left">s.top()</td>
+<td align="left">获取栈的第一个元素</td>
+</tr>
+<tr>
+<td align="left">元素个数</td>
+<td align="left">s.size()</td>
+<td align="left">获取栈中的元素个数，返回int</td>
+</tr>
+<tr>
+<td align="left">判空</td>
+<td align="left">s.empty()</td>
+<td align="left">栈是否为空，返回bool，相当于s.size() &#x3D;&#x3D; 0</td>
+</tr>
+</tbody></table>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="操作栈"><a href="#操作栈" class="headerlink" title="操作栈"></a>操作栈</h3><p>有一个初始为空的栈，我们对这个栈进行 n 次操作，操作共分为 2 种：</p>
+<p>1.1x （将数字 x 放入栈）</p>
+<p>2.2 （将栈顶元素弹出）</p>
+<p>对于第 2 种操作，你需要把弹出的这个数字输出，如果进行操作 2 时，栈为空，则输出” empty” 。</p>
+<p>例如： n&#x3D;5 ，对应的操作为：</p>
+<p>1123 （操作后栈里面的元素为： 123 ）</p>
+<p>1234 （操作后栈里面的元素为： 123,234 ）</p>
+<p>2 （输出： 234 ，操作后栈里面的元素为： 123 ）</p>
+<p>2 （输出： 123 ，操作后栈里面的元素为：空）</p>
+<p>2 （输出： empty ）</p>
+<p>对应后面 3 个第 2 类操作，你的程序需要输出，</p>
+<p>234</p>
+<p>123</p>
+<p>empty</p>
+<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第一行： 1 个数 n(1≤n≤10000)<br>后面 n 行：每行 1 种操作， 1X 或者 2 （ 0≤x≤10000)</p>
+<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>对应所有操作 2 ，输出被弹出的数或者” empty”</p>
+<h4 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5</span><br><span class="line">1 123</span><br><span class="line">1 234</span><br><span class="line">2</span><br><span class="line">2</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">234</span><br><span class="line">123</span><br><span class="line">empty</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MaxN = <span class="number">100000</span>;</span><br><span class="line"><span class="type">int</span> st[MaxN + <span class="number">5</span>];</span><br><span class="line"><span class="type">int</span> total;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	stack &lt;<span class="type">int</span>&gt; st;</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	cin &gt;&gt; n ;</span><br><span class="line">	<span class="type">int</span> x, y;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cin &gt;&gt; x;</span><br><span class="line">		<span class="keyword">if</span> (x == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			cin &gt;&gt; y;</span><br><span class="line">			st.<span class="built_in">push</span>(y);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (x == <span class="number">2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (st.<span class="built_in">empty</span>())</span><br><span class="line">			&#123;</span><br><span class="line">				cout &lt;&lt; <span class="string">&quot;Empty&quot;</span> &lt;&lt; endl;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			cout &lt;&lt; st.<span class="built_in">top</span>() &lt;&lt; endl;</span><br><span class="line">			st.<span class="built_in">pop</span>();</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数字游戏"><a href="#数字游戏" class="headerlink" title="数字游戏"></a>数字游戏</h3><p>现在有 n 个数字依次进入一个栈，每个数字 a 进入栈的时候，如果栈顶元素小于 a ，则会将栈顶元素弹出，新的栈顶元素如果仍然小于 a ，则会将新的栈顶元素继续弹出，直到栈顶元素大于等于 a 为止， a 才会加入栈。问 n 个数字依次进入后，最后栈里的数字依次是？</p>
+<h4 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h4><p>输入第一行一个整数 n （ n≤100000 ），表示有 n 个数字依次进入栈。<br>接下来 n 行，每行一个整数，表示第 i 个数字。</p>
+<h4 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h4><p>若干行，表示最后栈中的数字。</p>
+<h4 id="输入样例-1"><a href="#输入样例-1" class="headerlink" title="输入样例"></a>输入样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5</span><br><span class="line">5</span><br><span class="line">3</span><br><span class="line">2 </span><br><span class="line">4</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出样例-1"><a href="#输出样例-1" class="headerlink" title="输出样例"></a>输出样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5</span><br><span class="line">4</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10000</span>;</span><br><span class="line">stack&lt;<span class="type">int</span>&gt; s;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;<span class="comment">//有n个数字依次进入栈</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a;</span><br><span class="line">        cin &gt;&gt; a;</span><br><span class="line">        <span class="keyword">while</span> (!s.<span class="built_in">empty</span>() &amp;&amp; s.<span class="built_in">top</span>() &lt; a)</span><br><span class="line">        &#123;</span><br><span class="line">            s.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        s.<span class="built_in">push</span>(a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> arr[N];</span><br><span class="line">    <span class="keyword">while</span> (!s.<span class="built_in">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        arr[i++] = s.<span class="built_in">top</span>();</span><br><span class="line">        s.<span class="built_in">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = i - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, arr[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Learn</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>树的基本概念</title>
     <url>/2023/01/07/%E6%A0%91/</url>
     <content><![CDATA[<p>树是一种非线性的数据结构，用它能很好地描述有分支和层次特性的数据结构</p>
@@ -1061,39 +1172,6 @@
       </tags>
   </entry>
   <entry>
-    <title>绿城杯2021-easy_re</title>
-    <url>/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/</url>
-    <content><![CDATA[<p>跟着PZ师傅复现一下绿城杯的easy_re</p>
-<h2 id="伪代码分析"><a href="#伪代码分析" class="headerlink" title="伪代码分析"></a>伪代码分析</h2><img src="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/image-20230105114113281.png" class title="This is an image">
-
-<p>在这里把jz nop掉，后面可以按C将那些数据段都转为代码</p>
-<p>去花后主逻辑</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  memset(S, 0, sizeof(S));</span><br><span class="line">  strcpy(key, &quot;tallmewhy&quot;);</span><br><span class="line">  memset(&amp;key[10], 0, 0xF6u);</span><br><span class="line">  v16[0] = xmmword_4021B0;</span><br><span class="line">  v16[1] = xmmword_4021C0;</span><br><span class="line">  v17 = 0x54E6D699;</span><br><span class="line">  v18 = 0x14504F7A;</span><br><span class="line">  v19 = 0xECE5;</span><br><span class="line">  puts(&quot;Hello, this is my world.If you want flag, give me something I like.&quot;);</span><br><span class="line">  sub_401010(&quot;\n&quot;, S[224]);</span><br><span class="line">  memset(v21, 0, sizeof(v21));</span><br><span class="line">  ((void (__cdecl *)(char *))gets)(v21);</span><br><span class="line">  v3 = strlen(v21);</span><br><span class="line">  key_len = strlen(key);</span><br><span class="line">  memset(T, 0, sizeof(T));</span><br><span class="line">  for ( i = 0; i &lt; 256; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    S[i] = i;</span><br><span class="line">    T[i] = key[i % key_len];</span><br><span class="line">  &#125;</span><br><span class="line">  v6 = 0;</span><br><span class="line">  v7 = 0;</span><br><span class="line">  do</span><br><span class="line">  &#123;</span><br><span class="line">    v8 = S[v6];</span><br><span class="line">    v7 = (v7 + T[v6] + v8) % 256;</span><br><span class="line">    S[v6++] = S[v7];</span><br><span class="line">    S[v7] = v8 ^ 0x37;  //这里作了一些变化</span><br><span class="line">  &#125;</span><br><span class="line">  while ( v6 &lt; 256 );</span><br><span class="line">  sub_401010(&quot;\n\n&quot;, S[252]);</span><br><span class="line">  v9 = 0;</span><br><span class="line">  v20 = 0;</span><br><span class="line">  v10 = 0;</span><br><span class="line">  if ( v3 )</span><br><span class="line">  &#123;</span><br><span class="line">    do</span><br><span class="line">    &#123;</span><br><span class="line">      v9 = (v9 + 1) % 256;</span><br><span class="line">      v11 = S[v9];</span><br><span class="line">      v10 = (v11 + v10) % 256;</span><br><span class="line">      S[v9] = S[v10];</span><br><span class="line">      S[v10] = v11;</span><br><span class="line">      v12 = v20;</span><br><span class="line">      v21[v20] ^= S[(unsigned __int8)(v11 + S[v9])];</span><br><span class="line">      v20 = v12 + 1;</span><br><span class="line">    &#125;</span><br><span class="line">    while ( v12 + 1 &lt; v3 );</span><br><span class="line">    v10 = 0;</span><br><span class="line">  &#125;</span><br><span class="line">  for ( j = 0; j &lt; v3; ++j )</span><br><span class="line">    v10 = v21[j] == *((_BYTE *)v16 + j);</span><br><span class="line">  v14 = (char *)&amp;unk_402184;</span><br><span class="line">  if ( v10 == 1 )</span><br><span class="line">    v14 = aGood;</span><br><span class="line">  sub_401010(v14, S[252]);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>很明显的一个RC4加密，key就是“tallmewhy”，有两种方法能拿到flag</p>
-<img src="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/image-20230105120203852.png" class title="This is an image">
-
-<p>这里可以发现数据段是连续的，但要注意一下小端存储的问题</p>
-<h2 id="直接写脚本"><a href="#直接写脚本" class="headerlink" title="直接写脚本"></a>直接写脚本</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> s[<span class="number">256</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">int</span> b[<span class="number">256</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">char</span> key[<span class="number">10</span>] = <span class="string">&quot;tallmewhy&quot;</span>;</span><br><span class="line">	<span class="type">char</span> flag[<span class="number">42</span>] = &#123; <span class="number">0xF5</span>, <span class="number">0x8C</span>, <span class="number">0x8D</span>, <span class="number">0xE4</span>, <span class="number">0x9F</span>, <span class="number">0xA5</span>, <span class="number">0x28</span>, <span class="number">0x65</span>, <span class="number">0x30</span>, <span class="number">0xF4</span>,</span><br><span class="line">		  <span class="number">0xEB</span>, <span class="number">0xD3</span>, <span class="number">0x24</span>, <span class="number">0xA9</span>, <span class="number">0x91</span>, <span class="number">0x1A</span>, <span class="number">0x6F</span>, <span class="number">0xD4</span>, <span class="number">0x6A</span>, <span class="number">0xD7</span>,</span><br><span class="line">		  <span class="number">0x0B</span>, <span class="number">0x8D</span>, <span class="number">0xE8</span>, <span class="number">0xB8</span>, <span class="number">0x83</span>, <span class="number">0x4A</span>, <span class="number">0x5A</span>, <span class="number">0x6E</span>, <span class="number">0xBE</span>, <span class="number">0xCB</span>,</span><br><span class="line">		  <span class="number">0xF4</span>, <span class="number">0x4B</span> ,<span class="number">0x99</span>,<span class="number">0xd6</span>,<span class="number">0xe6</span>,<span class="number">0x54</span>,<span class="number">0x7A</span>,<span class="number">0x4F</span>,<span class="number">0x50</span>,<span class="number">0x14</span>,<span class="number">0xE5</span>,<span class="number">0xEC</span> &#125;;</span><br><span class="line">	<span class="type">int</span> i, j, n, w, t;</span><br><span class="line">	<span class="type">int</span> v8 = <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> v9 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		s[i] = i;</span><br><span class="line">		b[i] = key[i % <span class="number">9</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line"></span><br><span class="line">	&#123;</span><br><span class="line">		v9 = s[i];</span><br><span class="line">		v8 = (v8 + b[i] + v9) % <span class="number">256</span>;</span><br><span class="line">		s[i] = s[v8];</span><br><span class="line">		s[v8] = v9 ^ <span class="number">0x37</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (w = <span class="number">0</span>, v8 = <span class="number">0</span>, i = <span class="number">0</span>; w &lt; <span class="number">42</span>; w++)</span><br><span class="line">	&#123;</span><br><span class="line">		i = (i + <span class="number">1</span>) % <span class="number">256</span>;</span><br><span class="line">		v8 = (v8 + s[i]) % <span class="number">256</span>;</span><br><span class="line">		v9 = s[i];</span><br><span class="line">		s[i] = s[v8];</span><br><span class="line">		s[v8] = v9;</span><br><span class="line">		t = (s[i] + s[v8]) % <span class="number">256</span>;</span><br><span class="line">		flag[i - <span class="number">1</span>] ^= s[t];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">42</span>; i++)</span><br><span class="line">		<span class="built_in">putchar</span>(flag[i]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//flag&#123;c5e0f5f6-f79e-5b9b-988f-28f046117802&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="动调拿数据"><a href="#动调拿数据" class="headerlink" title="动调拿数据"></a>动调拿数据</h2><p>只要拿到密钥流和密文异或就能拿到flag</p>
-<img src="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/image-20230105120557272.png" class title="This is an image">
-
-<p>找到最后异或加密的汇编代码，我们能发现数据在al寄存器中，地址是401252</p>
-<img src="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/image-20230105120905214.png" class title="This is an image">
-
-<p>F9不断运行，可以拿到存储在寄存器中的数据</p>
-<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span>=[<span class="number">0x93</span>,<span class="number">0xE0</span>,<span class="number">0xec</span>,<span class="number">0x83</span>,<span class="number">0xe4</span>,<span class="number">0xc6</span>,<span class="number">0x1d</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x92</span>,<span class="number">0xde</span>,<span class="number">0xb5</span>,<span class="number">0x12</span>,<span class="number">0x84</span>,<span class="number">0xf7</span>,<span class="number">0x2d</span>,<span class="number">0x56</span>,<span class="number">0xb1</span>,<span class="number">0x47</span>,<span class="number">0xe2</span>,</span><br><span class="line">     <span class="number">0x69</span>,<span class="number">0xb4</span>,<span class="number">0x8a</span>,<span class="number">0x95</span>,<span class="number">0xba</span>,<span class="number">0x72</span>,<span class="number">0x62</span>,<span class="number">0x08</span>,<span class="number">0x93</span>,<span class="number">0xf9</span>,<span class="number">0xcc</span>,<span class="number">0x2d</span>,<span class="number">0xa9</span>,<span class="number">0xe2</span>,<span class="number">0xd0</span>,<span class="number">0x65</span>,<span class="number">0x4b</span>,</span><br><span class="line">     <span class="number">0x78</span>,<span class="number">0x68</span>,<span class="number">0x24</span>,<span class="number">0xd7</span>,<span class="number">0x91</span>]</span><br><span class="line">str2=[<span class="number">0xF5</span>, <span class="number">0x8C</span>, <span class="number">0x8D</span>, <span class="number">0xE4</span>, <span class="number">0x9F</span>, <span class="number">0xA5</span>, <span class="number">0x28</span>, <span class="number">0x65</span>, <span class="number">0x30</span>, <span class="number">0xF4</span>,</span><br><span class="line">  <span class="number">0xEB</span>, <span class="number">0xD3</span>, <span class="number">0x24</span>, <span class="number">0xA9</span>, <span class="number">0x91</span>, <span class="number">0x1A</span>, <span class="number">0x6F</span>, <span class="number">0xD4</span>, <span class="number">0x6A</span>, <span class="number">0xD7</span>,</span><br><span class="line">  <span class="number">0x0B</span>, <span class="number">0x8D</span>, <span class="number">0xE8</span>, <span class="number">0xB8</span>, <span class="number">0x83</span>, <span class="number">0x4A</span>, <span class="number">0x5A</span>, <span class="number">0x6E</span>, <span class="number">0xBE</span>, <span class="number">0xCB</span>,</span><br><span class="line">  <span class="number">0xF4</span>, <span class="number">0x4B</span> ,<span class="number">0x99</span>,<span class="number">0xd6</span>,<span class="number">0xe6</span>,<span class="number">0x54</span>,<span class="number">0x7A</span>,<span class="number">0x4F</span>,<span class="number">0x50</span>,<span class="number">0x14</span>,<span class="number">0xE5</span>,<span class="number">0xEC</span>]</span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">str</span>)):</span><br><span class="line"></span><br><span class="line">    flag+=<span class="built_in">chr</span>(<span class="built_in">str</span>[i]^str2[i])</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment">#flag&#123;c5e0f5f6-f79e-5b9b-988f-28f046117802&#125;</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>re</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>浅谈python逆向</title>
     <url>/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="pyc文件结构解析"><a href="#pyc文件结构解析" class="headerlink" title="pyc文件结构解析"></a>pyc文件结构解析</h2><p>pyc文件是python在编译过程中出现的主要中间过程文件，pyc文件是二进制的，可以由python虚拟机直接执行的程序，要注意的是pyc的内容和python版本是密切相关的</p>
@@ -1149,6 +1227,39 @@
 <img src="/2022/12/27/%E6%B5%85%E8%B0%88python%E9%80%86%E5%90%91/image-20221227163112058.png" class title="This is an image">
 
 <p>无法反编译的情况，也有可能是因为加了花，我们后续再继续介绍。</p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>re</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>绿城杯2021-easy_re</title>
+    <url>/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/</url>
+    <content><![CDATA[<p>跟着PZ师傅复现一下绿城杯的easy_re</p>
+<h2 id="伪代码分析"><a href="#伪代码分析" class="headerlink" title="伪代码分析"></a>伪代码分析</h2><img src="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/image-20230105114113281.png" class title="This is an image">
+
+<p>在这里把jz nop掉，后面可以按C将那些数据段都转为代码</p>
+<p>去花后主逻辑</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  memset(S, 0, sizeof(S));</span><br><span class="line">  strcpy(key, &quot;tallmewhy&quot;);</span><br><span class="line">  memset(&amp;key[10], 0, 0xF6u);</span><br><span class="line">  v16[0] = xmmword_4021B0;</span><br><span class="line">  v16[1] = xmmword_4021C0;</span><br><span class="line">  v17 = 0x54E6D699;</span><br><span class="line">  v18 = 0x14504F7A;</span><br><span class="line">  v19 = 0xECE5;</span><br><span class="line">  puts(&quot;Hello, this is my world.If you want flag, give me something I like.&quot;);</span><br><span class="line">  sub_401010(&quot;\n&quot;, S[224]);</span><br><span class="line">  memset(v21, 0, sizeof(v21));</span><br><span class="line">  ((void (__cdecl *)(char *))gets)(v21);</span><br><span class="line">  v3 = strlen(v21);</span><br><span class="line">  key_len = strlen(key);</span><br><span class="line">  memset(T, 0, sizeof(T));</span><br><span class="line">  for ( i = 0; i &lt; 256; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    S[i] = i;</span><br><span class="line">    T[i] = key[i % key_len];</span><br><span class="line">  &#125;</span><br><span class="line">  v6 = 0;</span><br><span class="line">  v7 = 0;</span><br><span class="line">  do</span><br><span class="line">  &#123;</span><br><span class="line">    v8 = S[v6];</span><br><span class="line">    v7 = (v7 + T[v6] + v8) % 256;</span><br><span class="line">    S[v6++] = S[v7];</span><br><span class="line">    S[v7] = v8 ^ 0x37;  //这里作了一些变化</span><br><span class="line">  &#125;</span><br><span class="line">  while ( v6 &lt; 256 );</span><br><span class="line">  sub_401010(&quot;\n\n&quot;, S[252]);</span><br><span class="line">  v9 = 0;</span><br><span class="line">  v20 = 0;</span><br><span class="line">  v10 = 0;</span><br><span class="line">  if ( v3 )</span><br><span class="line">  &#123;</span><br><span class="line">    do</span><br><span class="line">    &#123;</span><br><span class="line">      v9 = (v9 + 1) % 256;</span><br><span class="line">      v11 = S[v9];</span><br><span class="line">      v10 = (v11 + v10) % 256;</span><br><span class="line">      S[v9] = S[v10];</span><br><span class="line">      S[v10] = v11;</span><br><span class="line">      v12 = v20;</span><br><span class="line">      v21[v20] ^= S[(unsigned __int8)(v11 + S[v9])];</span><br><span class="line">      v20 = v12 + 1;</span><br><span class="line">    &#125;</span><br><span class="line">    while ( v12 + 1 &lt; v3 );</span><br><span class="line">    v10 = 0;</span><br><span class="line">  &#125;</span><br><span class="line">  for ( j = 0; j &lt; v3; ++j )</span><br><span class="line">    v10 = v21[j] == *((_BYTE *)v16 + j);</span><br><span class="line">  v14 = (char *)&amp;unk_402184;</span><br><span class="line">  if ( v10 == 1 )</span><br><span class="line">    v14 = aGood;</span><br><span class="line">  sub_401010(v14, S[252]);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很明显的一个RC4加密，key就是“tallmewhy”，有两种方法能拿到flag</p>
+<img src="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/image-20230105120203852.png" class title="This is an image">
+
+<p>这里可以发现数据段是连续的，但要注意一下小端存储的问题</p>
+<h2 id="直接写脚本"><a href="#直接写脚本" class="headerlink" title="直接写脚本"></a>直接写脚本</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> s[<span class="number">256</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">int</span> b[<span class="number">256</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">char</span> key[<span class="number">10</span>] = <span class="string">&quot;tallmewhy&quot;</span>;</span><br><span class="line">	<span class="type">char</span> flag[<span class="number">42</span>] = &#123; <span class="number">0xF5</span>, <span class="number">0x8C</span>, <span class="number">0x8D</span>, <span class="number">0xE4</span>, <span class="number">0x9F</span>, <span class="number">0xA5</span>, <span class="number">0x28</span>, <span class="number">0x65</span>, <span class="number">0x30</span>, <span class="number">0xF4</span>,</span><br><span class="line">		  <span class="number">0xEB</span>, <span class="number">0xD3</span>, <span class="number">0x24</span>, <span class="number">0xA9</span>, <span class="number">0x91</span>, <span class="number">0x1A</span>, <span class="number">0x6F</span>, <span class="number">0xD4</span>, <span class="number">0x6A</span>, <span class="number">0xD7</span>,</span><br><span class="line">		  <span class="number">0x0B</span>, <span class="number">0x8D</span>, <span class="number">0xE8</span>, <span class="number">0xB8</span>, <span class="number">0x83</span>, <span class="number">0x4A</span>, <span class="number">0x5A</span>, <span class="number">0x6E</span>, <span class="number">0xBE</span>, <span class="number">0xCB</span>,</span><br><span class="line">		  <span class="number">0xF4</span>, <span class="number">0x4B</span> ,<span class="number">0x99</span>,<span class="number">0xd6</span>,<span class="number">0xe6</span>,<span class="number">0x54</span>,<span class="number">0x7A</span>,<span class="number">0x4F</span>,<span class="number">0x50</span>,<span class="number">0x14</span>,<span class="number">0xE5</span>,<span class="number">0xEC</span> &#125;;</span><br><span class="line">	<span class="type">int</span> i, j, n, w, t;</span><br><span class="line">	<span class="type">int</span> v8 = <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> v9 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		s[i] = i;</span><br><span class="line">		b[i] = key[i % <span class="number">9</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line"></span><br><span class="line">	&#123;</span><br><span class="line">		v9 = s[i];</span><br><span class="line">		v8 = (v8 + b[i] + v9) % <span class="number">256</span>;</span><br><span class="line">		s[i] = s[v8];</span><br><span class="line">		s[v8] = v9 ^ <span class="number">0x37</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (w = <span class="number">0</span>, v8 = <span class="number">0</span>, i = <span class="number">0</span>; w &lt; <span class="number">42</span>; w++)</span><br><span class="line">	&#123;</span><br><span class="line">		i = (i + <span class="number">1</span>) % <span class="number">256</span>;</span><br><span class="line">		v8 = (v8 + s[i]) % <span class="number">256</span>;</span><br><span class="line">		v9 = s[i];</span><br><span class="line">		s[i] = s[v8];</span><br><span class="line">		s[v8] = v9;</span><br><span class="line">		t = (s[i] + s[v8]) % <span class="number">256</span>;</span><br><span class="line">		flag[i - <span class="number">1</span>] ^= s[t];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">42</span>; i++)</span><br><span class="line">		<span class="built_in">putchar</span>(flag[i]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//flag&#123;c5e0f5f6-f79e-5b9b-988f-28f046117802&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="动调拿数据"><a href="#动调拿数据" class="headerlink" title="动调拿数据"></a>动调拿数据</h2><p>只要拿到密钥流和密文异或就能拿到flag</p>
+<img src="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/image-20230105120557272.png" class title="This is an image">
+
+<p>找到最后异或加密的汇编代码，我们能发现数据在al寄存器中，地址是401252</p>
+<img src="/2023/01/05/%E7%BB%BF%E5%9F%8E%E6%9D%AF2021-easy-re/image-20230105120905214.png" class title="This is an image">
+
+<p>F9不断运行，可以拿到存储在寄存器中的数据</p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span>=[<span class="number">0x93</span>,<span class="number">0xE0</span>,<span class="number">0xec</span>,<span class="number">0x83</span>,<span class="number">0xe4</span>,<span class="number">0xc6</span>,<span class="number">0x1d</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x92</span>,<span class="number">0xde</span>,<span class="number">0xb5</span>,<span class="number">0x12</span>,<span class="number">0x84</span>,<span class="number">0xf7</span>,<span class="number">0x2d</span>,<span class="number">0x56</span>,<span class="number">0xb1</span>,<span class="number">0x47</span>,<span class="number">0xe2</span>,</span><br><span class="line">     <span class="number">0x69</span>,<span class="number">0xb4</span>,<span class="number">0x8a</span>,<span class="number">0x95</span>,<span class="number">0xba</span>,<span class="number">0x72</span>,<span class="number">0x62</span>,<span class="number">0x08</span>,<span class="number">0x93</span>,<span class="number">0xf9</span>,<span class="number">0xcc</span>,<span class="number">0x2d</span>,<span class="number">0xa9</span>,<span class="number">0xe2</span>,<span class="number">0xd0</span>,<span class="number">0x65</span>,<span class="number">0x4b</span>,</span><br><span class="line">     <span class="number">0x78</span>,<span class="number">0x68</span>,<span class="number">0x24</span>,<span class="number">0xd7</span>,<span class="number">0x91</span>]</span><br><span class="line">str2=[<span class="number">0xF5</span>, <span class="number">0x8C</span>, <span class="number">0x8D</span>, <span class="number">0xE4</span>, <span class="number">0x9F</span>, <span class="number">0xA5</span>, <span class="number">0x28</span>, <span class="number">0x65</span>, <span class="number">0x30</span>, <span class="number">0xF4</span>,</span><br><span class="line">  <span class="number">0xEB</span>, <span class="number">0xD3</span>, <span class="number">0x24</span>, <span class="number">0xA9</span>, <span class="number">0x91</span>, <span class="number">0x1A</span>, <span class="number">0x6F</span>, <span class="number">0xD4</span>, <span class="number">0x6A</span>, <span class="number">0xD7</span>,</span><br><span class="line">  <span class="number">0x0B</span>, <span class="number">0x8D</span>, <span class="number">0xE8</span>, <span class="number">0xB8</span>, <span class="number">0x83</span>, <span class="number">0x4A</span>, <span class="number">0x5A</span>, <span class="number">0x6E</span>, <span class="number">0xBE</span>, <span class="number">0xCB</span>,</span><br><span class="line">  <span class="number">0xF4</span>, <span class="number">0x4B</span> ,<span class="number">0x99</span>,<span class="number">0xd6</span>,<span class="number">0xe6</span>,<span class="number">0x54</span>,<span class="number">0x7A</span>,<span class="number">0x4F</span>,<span class="number">0x50</span>,<span class="number">0x14</span>,<span class="number">0xE5</span>,<span class="number">0xEC</span>]</span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">str</span>)):</span><br><span class="line"></span><br><span class="line">    flag+=<span class="built_in">chr</span>(<span class="built_in">str</span>[i]^str2[i])</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment">#flag&#123;c5e0f5f6-f79e-5b9b-988f-28f046117802&#125;</span></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>CTF</category>
@@ -1291,117 +1402,6 @@
 <h4 id="输出样例-1"><a href="#输出样例-1" class="headerlink" title="输出样例"></a>输出样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line">5</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">2</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span> &#123;</span><br><span class="line">	<span class="type">int</span> next;</span><br><span class="line">&#125;a[<span class="number">100100</span>];</span><br><span class="line"><span class="type">bool</span> h[<span class="number">100200</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n, m,head;</span><br><span class="line">	cin &gt;&gt; n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> x,y;</span><br><span class="line">		cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">		a[x].next = y;</span><br><span class="line">		h[y] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> x, y;<span class="comment">//x是原来的节点，y插入在x后面</span></span><br><span class="line">		cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">		a[y].next = a[x].next;</span><br><span class="line">		a[x].next = y;</span><br><span class="line">		h[y] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n + m; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (!h[i])</span><br><span class="line">		&#123;</span><br><span class="line">			head = i;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = head; i != <span class="number">0</span>; i = a[i].next)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Learn</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>栈</title>
-    <url>/2023/01/24/%E6%A0%88/</url>
-    <content><![CDATA[<h2 id="什么是栈"><a href="#什么是栈" class="headerlink" title="什么是栈"></a>什么是栈</h2><p>栈是一种先进后出的数据结构， 就好比我们生活中的乒乓球桶， 只有一端开口。它按照先进后出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据（最后一个数据被第一个读出来）。 我们学习递归的时候， 在计算机内部就是用栈实现的递归。在计算机中，它是一种运算受限的线性表。其限制是仅允许在表的一端进行插入和删除运算，这一端被称为栈顶，相对地，把另一端称为栈底。</p>
-<h2 id="写一个栈"><a href="#写一个栈" class="headerlink" title="写一个栈"></a>写一个栈</h2><table>
-<thead>
-<tr>
-<th align="left">操作</th>
-<th align="left">函数</th>
-<th align="left">解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">入栈</td>
-<td align="left">push(x)</td>
-<td align="left">将x元素入栈</td>
-</tr>
-<tr>
-<td align="left">出栈</td>
-<td align="left">pop()</td>
-<td align="left">弹出栈的第一个元素，返回值为栈顶元素值</td>
-</tr>
-<tr>
-<td align="left">元素个数</td>
-<td align="left">size()</td>
-<td align="left">获取栈中的元素个数，返回int</td>
-</tr>
-<tr>
-<td align="left">获取栈顶元素</td>
-<td align="left">top()</td>
-<td align="left">获取栈顶元素的值</td>
-</tr>
-</tbody></table>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MaxN = <span class="number">100000</span>;</span><br><span class="line"><span class="type">int</span> st[MaxN + <span class="number">5</span>];</span><br><span class="line"><span class="type">int</span> total;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">push</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	total = total + <span class="number">1</span>;</span><br><span class="line">	st[total] = x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">pop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> value = st[total];</span><br><span class="line">	total = total - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">size</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">top</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> st[total];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">3</span>);</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">5</span>);</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">6</span>);</span><br><span class="line">	<span class="built_in">push</span>(<span class="number">10</span>);</span><br><span class="line">	cout &lt;&lt; <span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">pop</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">top</span>() &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="stack的基本操作"><a href="#stack的基本操作" class="headerlink" title="stack的基本操作"></a>stack的基本操作</h2><p>在 C++ 的标准库中， 有封装好的栈 stack ，stack是一个模板类，定义的示例代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">stack&lt;类型&gt; 对象：</span><br><span class="line">stack&lt;<span class="type">int</span>&gt;  s;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th align="left">操作</th>
-<th align="left">代码</th>
-<th align="left">解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">入栈</td>
-<td align="left">s.push(x)</td>
-<td align="left">将x元素入栈</td>
-</tr>
-<tr>
-<td align="left">出栈</td>
-<td align="left">s.pop()</td>
-<td align="left">弹出栈的第一个元素，并不会返回元素的值</td>
-</tr>
-<tr>
-<td align="left">栈顶元素</td>
-<td align="left">s.top()</td>
-<td align="left">获取栈的第一个元素</td>
-</tr>
-<tr>
-<td align="left">元素个数</td>
-<td align="left">s.size()</td>
-<td align="left">获取栈中的元素个数，返回int</td>
-</tr>
-<tr>
-<td align="left">判空</td>
-<td align="left">s.empty()</td>
-<td align="left">栈是否为空，返回bool，相当于s.size() &#x3D;&#x3D; 0</td>
-</tr>
-</tbody></table>
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="操作栈"><a href="#操作栈" class="headerlink" title="操作栈"></a>操作栈</h3><p>有一个初始为空的栈，我们对这个栈进行 n 次操作，操作共分为 2 种：</p>
-<p>1.1x （将数字 x 放入栈）</p>
-<p>2.2 （将栈顶元素弹出）</p>
-<p>对于第 2 种操作，你需要把弹出的这个数字输出，如果进行操作 2 时，栈为空，则输出” empty” 。</p>
-<p>例如： n&#x3D;5 ，对应的操作为：</p>
-<p>1123 （操作后栈里面的元素为： 123 ）</p>
-<p>1234 （操作后栈里面的元素为： 123,234 ）</p>
-<p>2 （输出： 234 ，操作后栈里面的元素为： 123 ）</p>
-<p>2 （输出： 123 ，操作后栈里面的元素为：空）</p>
-<p>2 （输出： empty ）</p>
-<p>对应后面 3 个第 2 类操作，你的程序需要输出，</p>
-<p>234</p>
-<p>123</p>
-<p>empty</p>
-<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第一行： 1 个数 n(1≤n≤10000)<br>后面 n 行：每行 1 种操作， 1X 或者 2 （ 0≤x≤10000)</p>
-<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>对应所有操作 2 ，输出被弹出的数或者” empty”</p>
-<h4 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5</span><br><span class="line">1 123</span><br><span class="line">1 234</span><br><span class="line">2</span><br><span class="line">2</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
-
-<h4 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">234</span><br><span class="line">123</span><br><span class="line">empty</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MaxN = <span class="number">100000</span>;</span><br><span class="line"><span class="type">int</span> st[MaxN + <span class="number">5</span>];</span><br><span class="line"><span class="type">int</span> total;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	stack &lt;<span class="type">int</span>&gt; st;</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	cin &gt;&gt; n ;</span><br><span class="line">	<span class="type">int</span> x, y;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cin &gt;&gt; x;</span><br><span class="line">		<span class="keyword">if</span> (x == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			cin &gt;&gt; y;</span><br><span class="line">			st.<span class="built_in">push</span>(y);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (x == <span class="number">2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (st.<span class="built_in">empty</span>())</span><br><span class="line">			&#123;</span><br><span class="line">				cout &lt;&lt; <span class="string">&quot;Empty&quot;</span> &lt;&lt; endl;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			cout &lt;&lt; st.<span class="built_in">top</span>() &lt;&lt; endl;</span><br><span class="line">			st.<span class="built_in">pop</span>();</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="数字游戏"><a href="#数字游戏" class="headerlink" title="数字游戏"></a>数字游戏</h3><p>现在有 n 个数字依次进入一个栈，每个数字 a 进入栈的时候，如果栈顶元素小于 a ，则会将栈顶元素弹出，新的栈顶元素如果仍然小于 a ，则会将新的栈顶元素继续弹出，直到栈顶元素大于等于 a 为止， a 才会加入栈。问 n 个数字依次进入后，最后栈里的数字依次是？</p>
-<h4 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h4><p>输入第一行一个整数 n （ n≤100000 ），表示有 n 个数字依次进入栈。<br>接下来 n 行，每行一个整数，表示第 i 个数字。</p>
-<h4 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h4><p>若干行，表示最后栈中的数字。</p>
-<h4 id="输入样例-1"><a href="#输入样例-1" class="headerlink" title="输入样例"></a>输入样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5</span><br><span class="line">5</span><br><span class="line">3</span><br><span class="line">2 </span><br><span class="line">4</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
-
-<h4 id="输出样例-1"><a href="#输出样例-1" class="headerlink" title="输出样例"></a>输出样例</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5</span><br><span class="line">4</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10000</span>;</span><br><span class="line">stack&lt;<span class="type">int</span>&gt; s;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;<span class="comment">//有n个数字依次进入栈</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> a;</span><br><span class="line">        cin &gt;&gt; a;</span><br><span class="line">        <span class="keyword">while</span> (!s.<span class="built_in">empty</span>() &amp;&amp; s.<span class="built_in">top</span>() &lt; a)</span><br><span class="line">        &#123;</span><br><span class="line">            s.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        s.<span class="built_in">push</span>(a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> arr[N];</span><br><span class="line">    <span class="keyword">while</span> (!s.<span class="built_in">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        arr[i++] = s.<span class="built_in">top</span>();</span><br><span class="line">        s.<span class="built_in">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = i - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, arr[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
