@@ -297,6 +297,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/04/%E5%87%AF%E6%92%92%E5%AF%86%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/04/%E5%87%AF%E6%92%92%E5%AF%86%E7%A0%81/" itemprop="url">凯撒密码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-04T10:49:08+08:00">
+                2023-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="凯撒密码"><a href="#凯撒密码" class="headerlink" title="凯撒密码"></a>凯撒密码</h1><p><strong>凯撒密码</strong>（英语：Caesar cipher），或称<strong>凯撒加密</strong>、<strong>凯撒变换</strong>、<strong>变换加密</strong>，是一种最简单且最广为人知的加密技术。凯撒密码是一种<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9B%BF%E6%8D%A2%E5%BC%8F%E5%AF%86%E7%A0%81">替换加密</a>技术，<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%98%8E%E6%96%87">明文</a>中的所有字母都在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AD%97%E6%AF%8D%E8%A1%A8">字母表</a>上向后（或向前）按照一个固定数目进行偏移后被替换成<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E6%96%87">密文</a>。例如，当偏移量是3的时候，所有的字母A将被替换成D，B变成E，以此类推。这个加密方法是以<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BE%85%E9%A6%AC%E5%85%B1%E5%92%8C">罗马共和</a>时期<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%87%B1%E6%92%92">凯撒</a>的名字命名的，据称当年凯撒曾用此方法与其将军们进行联系。</p>
+<h4 id="公式："><a href="#公式：" class="headerlink" title="公式："></a>公式：</h4><p>凯撒密码的加密、解密方法还能够通过<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%90%8C%E4%BD%99">同余</a>的数学方法进行计算。首先将字母用数字代替，A&#x3D;0，B&#x3D;1，…，Z&#x3D;25。此时偏移量为N的加密方法即为：</p>
+<p>加密公式： f(a)&#x3D;(a+N) mod 26</p>
+<p>解密公式： f(a)&#x3D;(a+(26-N)) mod 26</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 凯撒密码</span></span><br><span class="line">ptxt = <span class="built_in">input</span>(<span class="string">&quot;请输入加密文本：&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> ptxt:</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;a&#x27;</span> &lt;= p &lt;= <span class="string">&#x27;z&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>) + (<span class="built_in">ord</span>(p) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>) + <span class="number">3</span>) % <span class="number">26</span>), end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;A&#x27;</span> &lt;= p &lt;= <span class="string">&#x27;Z&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>) + (<span class="built_in">ord</span>(p) - <span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>) + <span class="number">3</span>) % <span class="number">26</span>), end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(p, end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解密</span></span><br><span class="line"><span class="built_in">print</span>()</span><br><span class="line">password = <span class="built_in">input</span>(<span class="string">&quot;请输入密文：&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> password:</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;a&#x27;</span> &lt;= p &lt;= <span class="string">&#x27;z&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>) + (<span class="built_in">ord</span>(p) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>) - <span class="number">3</span>) % <span class="number">26</span>), end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;A&#x27;</span> &lt;= p &lt;= <span class="string">&#x27;Z&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>) + (<span class="built_in">ord</span>(p) - <span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>) - <span class="number">3</span>) % <span class="number">26</span>), end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(p, end=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//加密</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">kaisa_encrypt</span><span class="params">(<span class="type">char</span> *text,<span class="type">char</span> *result,<span class="type">int</span> k)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> small_letter[<span class="number">26</span>]=&#123;<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;i&#x27;</span>,<span class="string">&#x27;j&#x27;</span>,<span class="string">&#x27;k&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;m&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;p&#x27;</span>,<span class="string">&#x27;q&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;t&#x27;</span>,<span class="string">&#x27;u&#x27;</span>,<span class="string">&#x27;v&#x27;</span>,<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;z&#x27;</span>&#125;;</span><br><span class="line">    <span class="type">char</span> big_letter[<span class="number">26</span>]=&#123;<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;F&#x27;</span>,<span class="string">&#x27;G&#x27;</span>,<span class="string">&#x27;H&#x27;</span>,<span class="string">&#x27;I&#x27;</span>,<span class="string">&#x27;J&#x27;</span>,<span class="string">&#x27;K&#x27;</span>,<span class="string">&#x27;L&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="string">&#x27;N&#x27;</span>,<span class="string">&#x27;O&#x27;</span>,<span class="string">&#x27;P&#x27;</span>,<span class="string">&#x27;Q&#x27;</span>,<span class="string">&#x27;R&#x27;</span>,<span class="string">&#x27;S&#x27;</span>,<span class="string">&#x27;T&#x27;</span>,<span class="string">&#x27;U&#x27;</span>,<span class="string">&#x27;V&#x27;</span>,<span class="string">&#x27;W&#x27;</span>,<span class="string">&#x27;X&#x27;</span>,<span class="string">&#x27;Y&#x27;</span>,<span class="string">&#x27;Z&#x27;</span>&#125;;</span><br><span class="line">    <span class="comment">//判断是否符合</span></span><br><span class="line">    <span class="keyword">if</span>(text == <span class="literal">NULL</span> || k &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> m = <span class="built_in">strlen</span>(text); <span class="comment">//获取明文的长度</span></span><br><span class="line">    <span class="keyword">if</span>(m &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;m;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (text[i] &gt;= <span class="string">&#x27;A&#x27;</span> &amp;&amp; text[i] &lt;= <span class="string">&#x27;Z&#x27;</span>) &#123;</span><br><span class="line">            result[i] = big_letter[((text[i] - <span class="string">&#x27;A&#x27;</span>) + k) % <span class="number">26</span>];</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (text[i] &gt;= <span class="string">&#x27;a&#x27;</span> &amp;&amp; text[i] &lt;= <span class="string">&#x27;z&#x27;</span>) &#123;</span><br><span class="line">            result[i] = small_letter[((text[i] - <span class="string">&#x27;a&#x27;</span>) + k) % <span class="number">26</span>];</span><br><span class="line">        &#125; <span class="keyword">else</span> result[i] = text[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//解密</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">kaisa_decrypt</span><span class="params">(<span class="type">char</span> *text,<span class="type">char</span> *result,<span class="type">int</span> k)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> p;</span><br><span class="line">    <span class="type">char</span> small_letter[<span class="number">26</span>]=&#123;<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;i&#x27;</span>,<span class="string">&#x27;j&#x27;</span>,<span class="string">&#x27;k&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;m&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;p&#x27;</span>,<span class="string">&#x27;q&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;t&#x27;</span>,<span class="string">&#x27;u&#x27;</span>,<span class="string">&#x27;v&#x27;</span>,<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;z&#x27;</span>&#125;;</span><br><span class="line">    <span class="type">char</span> big_letter[<span class="number">26</span>]=&#123;<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;F&#x27;</span>,<span class="string">&#x27;G&#x27;</span>,<span class="string">&#x27;H&#x27;</span>,<span class="string">&#x27;I&#x27;</span>,<span class="string">&#x27;J&#x27;</span>,<span class="string">&#x27;K&#x27;</span>,<span class="string">&#x27;L&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="string">&#x27;N&#x27;</span>,<span class="string">&#x27;O&#x27;</span>,<span class="string">&#x27;P&#x27;</span>,<span class="string">&#x27;Q&#x27;</span>,<span class="string">&#x27;R&#x27;</span>,<span class="string">&#x27;S&#x27;</span>,<span class="string">&#x27;T&#x27;</span>,<span class="string">&#x27;U&#x27;</span>,<span class="string">&#x27;V&#x27;</span>,<span class="string">&#x27;W&#x27;</span>,<span class="string">&#x27;X&#x27;</span>,<span class="string">&#x27;Y&#x27;</span>,<span class="string">&#x27;Z&#x27;</span>&#125;;</span><br><span class="line">    <span class="keyword">if</span>(text == <span class="literal">NULL</span> || k &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> m = <span class="built_in">strlen</span>(text);</span><br><span class="line">    <span class="keyword">if</span>(m &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;m;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (text[i] &gt;= <span class="string">&#x27;A&#x27;</span> &amp;&amp; text[i] &lt;= <span class="string">&#x27;Z&#x27;</span>) &#123;</span><br><span class="line">            p = ((text[i] - <span class="string">&#x27;A&#x27;</span>) - k);</span><br><span class="line">            <span class="keyword">while</span> (p &lt; <span class="number">0</span>)p += <span class="number">26</span>;</span><br><span class="line">            result[i] = big_letter[p];</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (text[i] &gt;= <span class="string">&#x27;a&#x27;</span> &amp;&amp; text[i] &lt;= <span class="string">&#x27;z&#x27;</span>) &#123;</span><br><span class="line">            p = ((text[i] - <span class="string">&#x27;a&#x27;</span>) - k);</span><br><span class="line">            <span class="keyword">while</span> (p &lt; <span class="number">0</span>)p += <span class="number">26</span>;</span><br><span class="line">            result[i] = small_letter[p];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> result[i] = text[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> text[<span class="number">50</span>]=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="type">char</span> result[<span class="number">50</span>]=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="type">int</span> k;</span><br><span class="line">    <span class="type">int</span> type;</span><br><span class="line">    <span class="comment">/**欢迎**/</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;--------欢迎使用凯撒密码-----------\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请填写明文或者密文\n&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%[^\n]&quot;</span>,text);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请选择加密方式，输入1加密，输入2解密\n&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;type);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入密钥k\n&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;k);</span><br><span class="line">    <span class="keyword">if</span>(type == <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="comment">/***加密****/</span></span><br><span class="line">        kaisa_encrypt(text,result,k);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;明文%s的密文为:%s\n&quot;</span>,text,result);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(type == <span class="number">2</span>)&#123;</span><br><span class="line">        <span class="comment">/***解密****/</span></span><br><span class="line">        kaisa_decrypt(text,result,k);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;密文%s的明文为:%s\n&quot;</span>,text,result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/31/moectf2022-re%E5%A4%8D%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1964,7 +2113,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

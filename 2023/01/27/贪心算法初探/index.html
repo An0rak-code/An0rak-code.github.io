@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="re," />
+  <meta name="keywords" content="算法," />
 
 
 
@@ -81,26 +81,18 @@
 
 
 
-<meta name="description" content="TTTTTTTTTea    一个稍微魔改的tea加密 exp123456789101112131415161718192021222324252627282930#include &lt;stdint.h&gt;#include &lt;string.h&gt;#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#define DELTA 0x9e3">
+<meta name="description" content="贪心算法贪心算法（又称贪婪算法）是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，他所做出的是在某种意义上的局部最优解。 贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。 举例来说：用 2，4，6，8 组成最大的4位数。我们很自然的会想到 8642 ，因为">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HNCTF2022复现">
-<meta property="og:url" content="http://example.com/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:title" content="贪心算法初探">
+<meta property="og:url" content="http://example.com/2023/01/27/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2/index.html">
 <meta property="og:site_name" content="Reverse">
-<meta property="og:description" content="TTTTTTTTTea    一个稍微魔改的tea加密 exp123456789101112131415161718192021222324252627282930#include &lt;stdint.h&gt;#include &lt;string.h&gt;#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#define DELTA 0x9e3">
+<meta property="og:description" content="贪心算法贪心算法（又称贪婪算法）是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，他所做出的是在某种意义上的局部最优解。 贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。 举例来说：用 2，4，6，8 组成最大的4位数。我们很自然的会想到 8642 ，因为">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230107142707236.png">
-<meta property="og:image" content="http://example.com/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230107142805483.png">
-<meta property="og:image" content="http://example.com/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230109000008446.png">
-<meta property="og:image" content="http://example.com/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230109000200292.png">
-<meta property="og:image" content="http://example.com/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230109000411806.png">
-<meta property="og:image" content="http://example.com/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230109000635845.png">
-<meta property="og:image" content="http://example.com/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230109110906854.png">
-<meta property="article:published_time" content="2023-01-07T06:24:59.000Z">
-<meta property="article:modified_time" content="2023-01-25T03:34:50.895Z">
+<meta property="article:published_time" content="2023-01-27T03:17:27.000Z">
+<meta property="article:modified_time" content="2023-01-27T08:47:27.694Z">
 <meta property="article:author" content="An0rak">
-<meta property="article:tag" content="re">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230107142707236.png">
 
 
 
@@ -130,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/01/07/HNCTF2022复现/"/>
+  <link rel="canonical" href="http://example.com/2023/01/27/贪心算法初探/"/>
 
 
 
 
 
-  <title>HNCTF2022复现 | Reverse</title>
+  <title>贪心算法初探 | Reverse</title>
   
 
 
@@ -307,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/27/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -324,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">HNCTF2022复现</h1>
+          <h1 class="post-title" itemprop="name headline">贪心算法初探</h1>
         
 
         <div class="post-meta">
@@ -336,8 +328,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-07T14:24:59+08:00">
-                2023-01-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-27T11:17:27+08:00">
+                2023-01-27
               </time>
             
 
@@ -359,8 +351,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
+                  <a href="/categories/Learn/" itemprop="url" rel="index">
+                    <span itemprop="name">Learn</span>
                   </a>
                 </span>
 
@@ -401,30 +393,20 @@
       
 
       
-        <h1 id="TTTTTTTTTea"><a href="#TTTTTTTTTea" class="headerlink" title="TTTTTTTTTea"></a>TTTTTTTTTea</h1><img src="/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230107142707236.png" class title="This is an image">
+        <h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><p>贪心算法（又称贪婪算法）是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，他所做出的是在某种意义上的局部最优解。</p>
+<p>贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。</p>
+<p>举例来说：用 2，4，6，8 组成最大的4位数。我们很自然的会想到 8642 ，因为在选择千位的数字时，我们只需要考虑让这一位最大，而后面的不论如何选，都不会影响这一位的选择，因此我们会选择 8 ，后面的处理也是一样。</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="排队接水"><a href="#排队接水" class="headerlink" title="排队接水"></a>排队接水</h3><p>n 个人一起排队接水，第 i 个人需要 b[i] 的时间来接水。（ 1&lt;&#x3D;n&lt;&#x3D;1000 ， 0&lt;&#x3D;b[i]&lt;&#x3D;1000 ）</p>
+<p>同时只能有一个人接水，正在接水的人和没有接水的人都需要等待。</p>
+<p>完成接水的人会立刻消失，不会继续等待。</p>
+<p>你可以决定所有人接水的顺序，并希望最小化所有人等待时间的总和。</p>
+<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第一行一个整数 i<br>       接下来 n 行，每行一个整数表示 b[i]</p>
+<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>一行一个整数，表示所有人等待时间的总和的最小值</p>
+<h4 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
 
-<img src="/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230107142805483.png" class title="This is an image">
+<h4 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10</span><br></pre></td></tr></table></figure>
 
-<p>一个稍微魔改的tea加密</p>
-<h5 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DELTA 0x9e3779b9</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">decrypt</span><span class="params">(<span class="type">uint32_t</span>* v, <span class="type">uint32_t</span>* k)</span> &#123;</span><br><span class="line">	<span class="type">uint32_t</span> v0 = v[<span class="number">0</span>], v1 = v[<span class="number">1</span>], sum = <span class="number">0x9e3779b9</span> * <span class="number">32</span>, i;</span><br><span class="line">	<span class="type">uint32_t</span> delta = <span class="number">0x9e3779b9</span>;</span><br><span class="line">	<span class="type">uint32_t</span> k0 = k[<span class="number">0</span>], k1 = k[<span class="number">1</span>], k2 = k[<span class="number">2</span>], k3 = k[<span class="number">3</span>]; </span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">		v1 -= (((v0 &lt;&lt; <span class="number">4</span>) ^ (v0 &gt;&gt; <span class="number">5</span>)) + v0) ^ (sum + k[(sum &gt;&gt; <span class="number">11</span>) &amp; <span class="number">3</span>]);</span><br><span class="line">		sum -= DELTA;</span><br><span class="line">		v0 -= (((v1 &lt;&lt; <span class="number">4</span>) ^ (v1 &gt;&gt; <span class="number">5</span>)) + v1) ^ (sum + k[sum &amp; <span class="number">3</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	v[<span class="number">0</span>] = v0;</span><br><span class="line">	v[<span class="number">1</span>] = v1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">uint32_t</span> key[<span class="number">4</span>] = &#123; <span class="number">0x00010203</span>,<span class="number">0x04050607</span>,<span class="number">0x08090a0b</span>,<span class="number">0x0c0d0e0f</span> &#125;;</span><br><span class="line">	<span class="type">uint32_t</span> enc[] = &#123; <span class="number">0xC11EE75A</span>,<span class="number">0xA4AD0973</span>,<span class="number">0xF61C9018</span>,<span class="number">0x32E37BCD</span>,<span class="number">0x2DCC1F26</span>,<span class="number">0x344380CC</span> &#125;;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		decrypt(&amp;enc[<span class="number">2</span> * i], key);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, (<span class="type">char</span>*)(enc));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="官方exp"><a href="#官方exp" class="headerlink" title="官方exp"></a>官方exp</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DELTA 0x9e3779b9</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">tea_encrypt</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span>* v, <span class="type">unsigned</span> <span class="type">int</span>* key)</span> &#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> l = v[<span class="number">0</span>], r = v[<span class="number">1</span>], sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123; <span class="comment">//进行32次迭代加密，Tea算法作者的建议迭代次数</span></span><br><span class="line">    l += (((r &lt;&lt; <span class="number">4</span>) ^ (r &gt;&gt; <span class="number">5</span>)) + r) ^ (sum + key[sum &amp; <span class="number">3</span>]);</span><br><span class="line">    sum += DELTA; <span class="comment">//累加Delta的值</span></span><br><span class="line">    r += (((l &lt;&lt; <span class="number">4</span>) ^ (l &gt;&gt; <span class="number">5</span>)) + l) ^ (sum + key[(sum &gt;&gt; <span class="number">11</span>) &amp; <span class="number">3</span>]); <span class="comment">//利用多次双位移和异或将明文与密钥扩散混乱，并将两个明文互相加密</span></span><br><span class="line">  &#125;</span><br><span class="line">  v[<span class="number">0</span>] = l;</span><br><span class="line">  v[<span class="number">1</span>] = r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">tea_decrypt</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span>* v, <span class="type">unsigned</span> <span class="type">int</span>* key)</span> &#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> l = v[<span class="number">0</span>], r = v[<span class="number">1</span>], sum = <span class="number">0</span>;</span><br><span class="line">  sum = DELTA * <span class="number">32</span>; <span class="comment">//32次迭代累加后delta的值</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">    r -= (((l &lt;&lt; <span class="number">4</span>) ^ (l &gt;&gt; <span class="number">5</span>)) + l) ^ (sum + key[(sum &gt;&gt; <span class="number">11</span>) &amp; <span class="number">3</span>]);</span><br><span class="line">    sum -= DELTA;</span><br><span class="line">    l -= (((r &lt;&lt; <span class="number">4</span>) ^ (r &gt;&gt; <span class="number">5</span>)) + r) ^ (sum + key[sum &amp; <span class="number">3</span>]);</span><br><span class="line">  &#125;</span><br><span class="line">  v[<span class="number">0</span>] = l;</span><br><span class="line">  v[<span class="number">1</span>] = r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> key[<span class="number">4</span>]=&#123;<span class="number">0x00010203</span>,<span class="number">0x04050607</span>,<span class="number">0x08090a0b</span>,<span class="number">0x0c0d0e0f</span>&#125;;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//char a[24] =&quot;NSSCTF&#123;Tea_TEA_TeA_TEa+&#125;&quot;;</span></span><br><span class="line">        <span class="type">int</span> c[<span class="number">6</span>] = &#123;<span class="number">0xc11ee75a</span>,<span class="number">0xa4ad0973</span>,<span class="number">0xf61c9018</span>,<span class="number">0x32e37bcd</span>,<span class="number">0x2dcc1f26</span>,<span class="number">0x344380cc</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">                tea_decrypt(&amp;c[<span class="number">2</span>*i],key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">char</span> *p = (<span class="type">char</span>*)c;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">24</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,*p);</span><br><span class="line">                p++;</span><br><span class="line">         &#125; </span><br><span class="line">        <span class="comment">//printf(&quot;you are right!&quot;);</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="HNCTF-2022-WEEK3-What’s-1n-DLL"><a href="#HNCTF-2022-WEEK3-What’s-1n-DLL" class="headerlink" title="[HNCTF 2022 WEEK3]What’s 1n DLL?"></a>[HNCTF 2022 WEEK3]What’s 1n DLL?</h1><img src="/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230109000008446.png" class title="This is an image">
-
-<p>通过分析应该可以看出关键的加密函数应该在dll文件中</p>
-<img src="/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230109000200292.png" class title="This is an image">
-
-<img src="/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230109000411806.png" class title="This is an image">
-
-<p>但是查壳发现是UPX加壳，并且修改了标志位</p>
-<p>修改后：</p>
-<img src="/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230109000635845.png" class title="This is an image">
-
-<p>看导出表ttt，是一个xxtea</p>
-<img src="/2023/01/07/HNCTF2022%E5%A4%8D%E7%8E%B0/image-20230109110906854.png" class title="This is an image">
-
-<h4 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MX (((z&gt;&gt;5^y<span class="string">&lt;&lt;2) + (y&gt;</span>&gt;3^z&lt;&lt;4)) ^ ((sum^y) + (k[(p&amp;3)^e] ^ z)))  </span></span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">xxtea</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span>* v, <span class="type">int</span> n, <span class="type">unsigned</span> <span class="type">int</span>* k)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span> z = v[n - <span class="number">1</span>], y = v[<span class="number">0</span>], sum = <span class="number">0</span>, e, DELTA = <span class="number">0x9e3779b9</span>;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span> p, q;</span><br><span class="line">	<span class="keyword">if</span> (n &gt; <span class="number">1</span>)  <span class="comment">//coding part</span></span><br><span class="line">	&#123;</span><br><span class="line">		q = <span class="number">6</span> + <span class="number">52</span> / n;</span><br><span class="line">		<span class="keyword">do</span></span><br><span class="line">		&#123;</span><br><span class="line"></span><br><span class="line">			sum += DELTA;</span><br><span class="line">			e = (sum &gt;&gt; <span class="number">2</span>) &amp; <span class="number">3</span>;</span><br><span class="line">			<span class="keyword">for</span> (p = <span class="number">0</span>; p &lt; n - <span class="number">1</span>; p++)</span><br><span class="line"></span><br><span class="line">			&#123;</span><br><span class="line">				y = v[p + <span class="number">1</span>];</span><br><span class="line">				z = v[p] += MX;</span><br><span class="line">			&#125;</span><br><span class="line">			y = v[<span class="number">0</span>];</span><br><span class="line">			z = v[n - <span class="number">1</span>] += MX;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125; <span class="keyword">while</span> (--q);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (n &lt; <span class="number">-1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		n = -n;</span><br><span class="line">		q = <span class="number">6</span> + <span class="number">52</span> / n;</span><br><span class="line">		sum = q * DELTA;</span><br><span class="line">		<span class="keyword">do</span></span><br><span class="line">		&#123;</span><br><span class="line">			e = (sum &gt;&gt; <span class="number">2</span>) &amp; <span class="number">3</span>;</span><br><span class="line">			<span class="keyword">for</span> (p = n - <span class="number">1</span>; p &gt; <span class="number">0</span>; p--)</span><br><span class="line">			&#123;</span><br><span class="line">				z = v[p - <span class="number">1</span>];</span><br><span class="line">				y = v[p] -= MX;</span><br><span class="line">			&#125;</span><br><span class="line">			z = v[n - <span class="number">1</span>];</span><br><span class="line">			y = v[<span class="number">0</span>] -= MX;</span><br><span class="line">			sum -= DELTA;</span><br><span class="line">		&#125; <span class="keyword">while</span> (--q);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">unsigned</span> <span class="type">int</span> v[<span class="number">5</span>] = &#123; <span class="number">0x22a577c1</span>,<span class="number">0x1c12c03</span>,<span class="number">0xc74c3ebd</span>,<span class="number">0xa9d03c85</span>,<span class="number">0xadb8ffb3</span> &#125;;</span><br><span class="line">		<span class="type">unsigned</span> <span class="type">int</span> key[<span class="number">4</span>] = &#123; <span class="number">55</span>,<span class="number">66</span>,<span class="number">77</span>,<span class="number">88</span> &#125;;</span><br><span class="line">		xxtea(v, <span class="number">-5</span>, key);</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%x&quot;</span>, v[i]);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	<span class="type">int</span> b[<span class="number">1005</span>];</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf_s</span>(<span class="string">&quot;%d&quot;</span>, &amp;b[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sort</span>(b , b + n);</span><br><span class="line">	<span class="type">int</span> ans = <span class="number">0</span>, sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		sum += b[i];</span><br><span class="line">		ans += sum;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; ans;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -443,7 +425,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/re/" rel="tag"># re</a>
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
           
         </div>
       
@@ -456,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2023/01/07/0xGame2022%E5%A4%8D%E7%8E%B0/" rel="next" title="0xGame2022复现">
-                <i class="fa fa-chevron-left"></i> 0xGame2022复现
+              <a href="/2023/01/26/set/" rel="next" title="set">
+                <i class="fa fa-chevron-left"></i> set
               </a>
             
           </div>
@@ -465,10 +447,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/01/07/%E6%A0%91/" rel="prev" title="树的基本概念">
-                树的基本概念 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -607,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TTTTTTTTTea"><span class="nav-number">1.</span> <span class="nav-text">TTTTTTTTTea</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#exp"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">exp</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%98%E6%96%B9exp"><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">官方exp</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HNCTF-2022-WEEK3-What%E2%80%99s-1n-DLL"><span class="nav-number">2.</span> <span class="nav-text">[HNCTF 2022 WEEK3]What’s 1n DLL?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#exp-1"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">exp</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">贪心算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">2.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E9%98%9F%E6%8E%A5%E6%B0%B4"><span class="nav-number">2.1.</span> <span class="nav-text">排队接水</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.1.1.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.1.2.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B"><span class="nav-number">2.1.3.</span> <span class="nav-text">输入样例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B"><span class="nav-number">2.1.4.</span> <span class="nav-text">输出样例</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
