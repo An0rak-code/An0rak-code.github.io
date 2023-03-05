@@ -368,7 +368,8 @@
       
         
           
-            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="计算机网络在信息时代中的作用"><a href="#计算机网络在信息时代中的作用" class="headerlink" title="计算机网络在信息时代中的作用"></a>计算机网络在信息时代中的作用</h2><h3 id="21世纪的重要特征"><a href="#21世纪的重要特征" class="headerlink" title="21世纪的重要特征"></a>21世纪的重要特征</h3><ul>
+            <p>[TOC]</p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="计算机网络在信息时代中的作用"><a href="#计算机网络在信息时代中的作用" class="headerlink" title="计算机网络在信息时代中的作用"></a>计算机网络在信息时代中的作用</h2><h3 id="21世纪的重要特征"><a href="#21世纪的重要特征" class="headerlink" title="21世纪的重要特征"></a>21世纪的重要特征</h3><ul>
 <li>数字化</li>
 <li>网络化</li>
 <li>信息化</li>
@@ -434,8 +435,7 @@
 <li>专用网：某个部门为满足本单位的特殊业务工作的需要而建造的网络</li>
 </ul>
 <h5 id="用来把用户接入到互联网的网络"><a href="#用来把用户接入到互联网的网络" class="headerlink" title="用来把用户接入到互联网的网络"></a>用来把用户接入到互联网的网络</h5><p>接入网，又称本地接入网或居民接入网</p>
-<h3 id="计算机网络的性能"><a href="#计算机网络的性能" class="headerlink" title="计算机网络的性能"></a>计算机网络的性能</h3><p>常见的7个性能指标</p>
-<h5 id="速率"><a href="#速率" class="headerlink" title="速率"></a>速率</h5><p>网络技术中的速率指的是数据的传送速率，也称数据率或比特率。</p>
+<h3 id="计算机网络的性能"><a href="#计算机网络的性能" class="headerlink" title="计算机网络的性能"></a>计算机网络的性能</h3><h4 id="常见的7个性能指标"><a href="#常见的7个性能指标" class="headerlink" title="常见的7个性能指标"></a>常见的7个性能指标</h4><h5 id="速率"><a href="#速率" class="headerlink" title="速率"></a>速率</h5><p>网络技术中的速率指的是数据的传送速率，也称数据率或比特率。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">k=10^3=千 </span><br><span class="line">M=10^6=兆</span><br><span class="line">G=10^9=吉</span><br></pre></td></tr></table></figure>
 
 <p><strong>注意：</strong></p>
@@ -471,6 +471,44 @@
 <li>信道利用率：指某信道有百分之几的时间是被利用的(有数据通过)</li>
 <li>网络利用率：全网络的信道利用率的加权平均值</li>
 </ul>
+<p><strong>注：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">信道利用率并非越高越好，根据排队论理论,当某信道的利用率增大时，该信道引起的时延也就迅速增加。</span><br></pre></td></tr></table></figure>
+
+<p>可以用以下公式来表示D(表示网络当前的时延),D0(表示网络空闲时的时延),U(利用率)之间的关系<br>$$<br>D&#x3D;D0&#x2F;(1-U)<br>$$<br>U是网络利用率，数值在0和1之间。当网络的利用率达到其容量的1&#x2F;2时，时延就要加倍。当网络的利用率接近最大值1时，网络的时延就趋于无穷大。即，信道或网络的利用率过高就会产生非常大的时延。</p>
+<img src="/2023/03/01/%E8%AE%A1%E7%BD%91%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/image-20230305110158979.png" class title="This is an image">
+
+<h4 id="非性能特征"><a href="#非性能特征" class="headerlink" title="非性能特征"></a>非性能特征</h4><ul>
+<li>费用</li>
+<li>质量</li>
+<li>标准化</li>
+<li>可靠性</li>
+<li>可扩展性和可升级性</li>
+<li>易于管理和维护</li>
+</ul>
+<h3 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h3><h4 id="OSI"><a href="#OSI" class="headerlink" title="OSI"></a>OSI</h4><p>为使各种计算机在世界范围内互连成网的标准框架，ISO提出了<strong>开放系统互连基本参考模型OSI&#x2F;RM</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">结果：</span><br><span class="line">OSI只获得了一些理论研究的成果，但在市场化方面却失败了。现今规模最大的、覆盖全球的、基于TCP/IP的互联网并未使用OSI标准</span><br><span class="line">失败原因：</span><br><span class="line">1.缺少实际经验</span><br><span class="line">2.协议实现起来太过复杂，而且运行效率很低</span><br><span class="line">3.制定周期长，产生的相应产品无法及时进入市场</span><br><span class="line">4.层次划分不太合理，有些功能在多个层次中重复出现</span><br></pre></td></tr></table></figure>
+
+<h4 id="协议与划分层次"><a href="#协议与划分层次" class="headerlink" title="协议与划分层次"></a>协议与划分层次</h4><p>网络协议：为进行网络中的数据交换而建立的规则、标准或约定</p>
+<p><strong>三要素：</strong></p>
+<ul>
+<li>语法：数据与控制信息的结构或格式</li>
+<li>语义：需要发出何种控制信息，完成何种动作以及做出何种响应</li>
+<li>同步：事件实现顺序的详细说明</li>
+</ul>
+<p>协议通常有两种不同的形式：</p>
+<p>1.使用便于人来阅读和理解的文字描述</p>
+<p>2.使用让计算机能够理解的程序代码</p>
+<p>体系结构是抽象的，而实现是具体的，是真正在运行的计算机硬件和软件</p>
+<img src="/2023/03/01/%E8%AE%A1%E7%BD%91%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/image-20230305132032434.png" class title="This is an image">
+
+<p>我们在学习的时候会采取折中的方法，综合OSI和TCP&#x2F;IP的优点，采用一种只有五层协议的体系结构（只是为介绍网络原理而设计）。具体各层作用我们后面介绍。</p>
+<h4 id="TCP-x2F-IP"><a href="#TCP-x2F-IP" class="headerlink" title="TCP&#x2F;IP"></a>TCP&#x2F;IP</h4><img src="/2023/03/01/%E8%AE%A1%E7%BD%91%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/image-20230305132753033.png" class title="This is an image">
+
+<p>实际上的使用结构：</p>
+<img src="/2023/03/01/%E8%AE%A1%E7%BD%91%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/image-20230305133000742.png" class title="This is an image">
+
+<p>分层次画出具体的协议来表示TCP&#x2F;IP协议族（表明TCP&#x2F;IP协议可以为各式各样的应用提供服务，同时也允许IP协议在各式各样的网络构成的互联网上运行）：</p>
+<img src="/2023/03/01/%E8%AE%A1%E7%BD%91%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/image-20230305133358049.png" class title="This is an image">
 
           
         
