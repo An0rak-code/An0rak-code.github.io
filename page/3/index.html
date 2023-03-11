@@ -297,6 +297,313 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/" itemprop="url">ACTF新生赛2020-usualCrypt</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-04T16:03:37+08:00">
+                2023-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="伪代码分析"><a href="#伪代码分析" class="headerlink" title="伪代码分析"></a>伪代码分析</h2><p>有个明显的base64表，交叉引用，会发现使用多次</p>
+<img src="/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/image-20230104160550446.png" class title="This is an image">
+
+<p>一个个跟进去会发现函数sub_401000对码表进行了变表处理</p>
+<img src="/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/image-20230104160845152.png" class title="This is an image">
+
+<p>跟进函数sub_401030，发现进行了一个大小写转换</p>
+<img src="/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/image-20230104161054534.png" class title="This is an image">
+
+<p>所以我们只要先对密文进行大小写转换，用变表base64解密就能拿到flag</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="string">&quot;zMXHz3TIgnxLxJhFAdtZn2fFk3lYCrtPC2l9&quot;</span></span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)):</span><br><span class="line">    <span class="keyword">if</span> <span class="number">65</span>&lt;=<span class="built_in">ord</span>(a[i]) <span class="keyword">and</span> <span class="built_in">ord</span>(a[i])&lt;=<span class="number">90</span>:</span><br><span class="line">        flag+=<span class="built_in">chr</span>(<span class="built_in">ord</span>(a[i])+<span class="number">32</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="number">97</span>&lt;=<span class="built_in">ord</span>(a[i]) <span class="keyword">and</span> <span class="built_in">ord</span>(a[i])&lt;=<span class="number">122</span>:</span><br><span class="line">        flag+=<span class="built_in">chr</span>(<span class="built_in">ord</span>(a[i])-<span class="number">32</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        flag+=a[i]</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment">#ZmxhZ3tiGNXlXjHfaDTzN2FfK3LycRTpc2L9</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">str1 = <span class="string">&quot;ZmxhZ3tiGNXlXjHfaDTzN2FfK3LycRTpc2L9&quot;</span>   <span class="comment">#str1是要解密的代码</span></span><br><span class="line">string1 = <span class="string">&quot;ABCDEFQRSTUVWXYPGHIJKLMNOZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span>   <span class="comment">#string1是改过之后的base64表</span></span><br><span class="line">string2 = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line"><span class="built_in">print</span>(base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string1,string2))))</span><br><span class="line"><span class="comment">#flag&#123;bAse64_h2s_a_Surprise&#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">Str = <span class="built_in">list</span>(<span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span>)</span><br><span class="line">model = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>,<span class="number">15</span>):</span><br><span class="line">    Str[i],Str[i+<span class="number">10</span>] = Str[i+<span class="number">10</span>],Str[i]</span><br><span class="line">Str = <span class="string">&#x27;&#x27;</span>.join(Str)</span><br><span class="line">enc = <span class="string">&quot;zMXHz3TIgnxLxJhFAdtZn2fFk3lYCrtPC2l9&quot;</span>.swapcase()</span><br><span class="line">dec = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(enc)):</span><br><span class="line">    dec += model[Str.find(enc[i])]</span><br><span class="line"><span class="built_in">print</span>(dec)</span><br><span class="line"><span class="built_in">print</span>(Str)</span><br><span class="line"><span class="built_in">print</span>(base64.b64decode(dec))</span><br><span class="line"><span class="comment">#网上的脚本，更明了</span></span><br><span class="line"><span class="comment">#Python swapcase() 方法用于对字符串的大小写字母进行转换，即将大写字母转换为小写字母，小写字母会转换为大写字母。</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/04/python%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/04/python%E5%AD%A6%E4%B9%A0/" itemprop="url">python学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-04T12:54:46+08:00">
+                2023-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index">
+                    <span itemprop="name">Learn</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Python-字符串-ascii-uppercase"><a href="#Python-字符串-ascii-uppercase" class="headerlink" title="Python 字符串 | ascii_uppercase"></a>Python 字符串 | ascii_uppercase</h1><h3 id="ascii-uppercase"><a href="#ascii-uppercase" class="headerlink" title="ascii_uppercase"></a>ascii_uppercase</h3><p>在 Python3 中，**<code>ascii_uppercase </code>**是用作字符串常量的预初始化字符串</p>
+<p><strong>语法：</strong> string.ascii_uppercase</p>
+<p><strong>参数：</strong>不接受任何参数，因为它不是函数。</p>
+<p><strong>返回：</strong>返回所有大写字母</p>
+<p><strong>ascii_lowercase</strong>上同，返回所有小写字母</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h5 id="检查字符串输入是否只有大写ASCII字符"><a href="#检查字符串输入是否只有大写ASCII字符" class="headerlink" title="检查字符串输入是否只有大写ASCII字符"></a>检查字符串输入是否只有大写ASCII字符</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># importing string library function </span></span><br><span class="line"><span class="keyword">import</span> string </span><br><span class="line">     </span><br><span class="line"><span class="comment"># Function checks if input string </span></span><br><span class="line"><span class="comment"># has upper ascii letters or not </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">value</span>): </span><br><span class="line">    <span class="keyword">for</span> letter <span class="keyword">in</span> value: </span><br><span class="line">             </span><br><span class="line">        <span class="comment"># If anything other than upper ascii </span></span><br><span class="line">        <span class="comment"># letter is present, then return </span></span><br><span class="line">        <span class="comment"># False, else return True </span></span><br><span class="line">        <span class="keyword">if</span> letter <span class="keyword">not</span> <span class="keyword">in</span> string.ascii_uppercase: </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="生成给定大小的强随机密码"><a href="#生成给定大小的强随机密码" class="headerlink" title="生成给定大小的强随机密码"></a>生成给定大小的强随机密码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Importing random to generate </span></span><br><span class="line"><span class="comment"># random string sequence </span></span><br><span class="line"><span class="keyword">import</span> random </span><br><span class="line">    </span><br><span class="line"><span class="comment"># Importing string library function </span></span><br><span class="line"><span class="keyword">import</span> string </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rand_pass</span>(<span class="params">size</span>): </span><br><span class="line">        </span><br><span class="line">    <span class="comment"># Takes random choices from </span></span><br><span class="line">    <span class="comment"># ascii_letters and digits </span></span><br><span class="line">    generate_pass = <span class="string">&#x27;&#x27;</span>.join([random.choice( </span><br><span class="line">                        string.ascii_uppercase + string.digits) </span><br><span class="line">                        <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(size)]) </span><br><span class="line">                            </span><br><span class="line">    <span class="keyword">return</span> generate_pass </span><br><span class="line">    </span><br><span class="line"><span class="comment"># Driver Code  </span></span><br><span class="line">password = rand_pass(<span class="number">10</span>) </span><br><span class="line"><span class="built_in">print</span>(password) </span><br><span class="line"><span class="comment">#string.digits将给出小写字母 &#x27;0123456789&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-rome/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1848,377 +2155,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/12/re%E6%B1%82%E5%AD%A6%E4%B9%8B%E8%B7%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Reverse">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/12/12/re%E6%B1%82%E5%AD%A6%E4%B9%8B%E8%B7%AF/" itemprop="url">re求学之路</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-12T20:45:19+08:00">
-                2022-12-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>简单介绍，其实只是想试试新搭建的博客能不能用</p>
-<p>Reverse即软件逆向工程，是对编译成型的二进制程序进行代码、逻辑和功能分析的过程。在CTF中主要</p>
-<p>考察软件静态分析和动态调试能力，常见的逆向目标为Windows、Linux平台下x86、x64二进制可执行</p>
-<p>程序。</p>
-<p><strong>能力要求</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">熟悉如操作系统，汇编语言，加解密等相关知识。</span><br><span class="line"></span><br><span class="line">具有丰富的多种高级语言的编程经验。</span><br><span class="line"></span><br><span class="line">熟悉多种编译器的编译原理。</span><br><span class="line"></span><br><span class="line">较强的程序理解和逆向分析能力。</span><br></pre></td></tr></table></figure>
-
-<p><strong>逆向分析的主要方法</strong></p>
-<p><strong>静态分析法</strong></p>
-<p>静态分析法是在不执行代码文件的情况下，对代码进行静态分析的一种方法，主要观察代码文件的外部特性，包括文件类型分析和静态反汇编、反编译。通常使用反汇编工具查看内部代码，分析代码结构。</p>
-<p><strong>动态分析法</strong></p>
-<p>动态分析法是在程序文件的执行过程中对代码进行动态分析的一种方法，其通过调试来分析代码、获取内存的状态等，目的在于定位关键代码后，在程序运行的过程中，借由输出信息（寄存器，内存变化，程序输出）等来验证自己的推断或是理解程序功能。通常使用调试器来分析程序的内部结构和实现原理。</p>
-<p><strong>调试工具</strong></p>
-<p>调试工具有以下两个重要功能：</p>
-<p>\1. 断点设置</p>
-<p>允许用户选在程序中任意位置的某行代码，一旦程序运行到这一行，将知识调试工具停止运</p>
-<p>行程序，并显示程序的当前状态。</p>
-<p>\2. 代码跟踪（单步调试）</p>
-<p>允许用户在程序运行时跟踪他的执行，程序每执行一条汇编代码后都会暂停，允许用户观察</p>
-<p>甚至改变程序的状态。</p>
-<p>调试工具主要根据操作系统来选择</p>
-<p><strong>Windows——Ollydbg</strong></p>
-<p>Ollydbg是Windows下一款具有可视化界面的用户态调试工具，推荐从吾爱破解论坛上下载</p>
-<p>吾爱破解专用版Ollydbg，这个版本有对抗反调试的功能。</p>
-<p><strong>Linux——GDB</strong></p>
-<p>GDB是一款功能强大的程序调试工具，是动态调试必不可少的工具，可以很方便的查看堆中</p>
-<p>链表的状态，各个地址的内容。GDB拥有多个插件（peda、pwndbg、gef等）这些插件提供</p>
-<p>了一些额外的命令，在可视化和功能上都进行了扩展。推荐安装一个插件即可，多个插件的切换与系统环境变量相关，自行百度。</p>
-<p><strong>Trace类工具</strong></p>
-<p>Trace类工具通过一定的方式监控并记录程序的运行，然后使分析者在记录的信息中得到程序的一些动态</p>
-<p>信息。</p>
-<p>Strace</p>
-<p>Strace使Linux下一个用来跟踪系统调用的工具，可以监控用户空间进程和内核的交互，比如</p>
-<p>系统调用、信号传递、进程状态变更等。</p>
-<p><strong>Qira</strong></p>
-<p>Qira是一个强大的Trace类工具，可以将程序整个执行流全部记录下来，然后给予用户<strong>回溯</strong>、</p>
-<p>查看命中断点的所有指令（即交叉引用）等。</p>
-<p>Qira的安装比较难，多多百度&#x2F;谷歌。</p>
-<h3 id="常规逆向分析流程"><a href="#常规逆向分析流程" class="headerlink" title="常规逆向分析流程"></a><strong>常规逆向分析流程</strong></h3><h4 id="1、收集信息"><a href="#1、收集信息" class="headerlink" title="1、收集信息"></a>1、收集信息</h4><p>使用strings&#x2F;file&#x2F;binwalk&#x2F;IDA等静态分析工具收集信息，并根据这些静态信息进行google&#x2F;github搜索</p>
-<h4 id="2、干扰分析技术"><a href="#2、干扰分析技术" class="headerlink" title="2、干扰分析技术"></a>2、干扰分析技术</h4><p>程序为了保护代码，通常会使用一系列技术来干扰逆向分析，这里会介绍一些常见的干扰分析技术。</p>
-<p>花指令</p>
-<p>花指令是代码保护中一种简单的技巧，原理是在原始代码中插入一段无用的或者能够干扰反</p>
-<p>汇编引擎的代码。花指令主要影响静态分析，在IDA中表现为一些指令无法识别，导致某些函</p>
-<p>数未能识别，从而无法对这些函数进行反编译。</p>
-<p>要破解花指令，可以在IDA中手动将花指令patch成nop空指令，从而去除花指令。如果程序</p>
-<p>中花指令较多，可以通过分析花指令的特定模式，编写IDAPython脚本对花指令进行自动化</p>
-<p>搜索和patch。</p>
-<h5 id="反调试"><a href="#反调试" class="headerlink" title="反调试"></a>反调试</h5><p>反调试技术是指程序在运行时会检测其是否处于被调试状态，如果发现其正在被调试，就无</p>
-<p>法正常运行。</p>
-<p>Windows下通过Ollydbg的StringOD插件可以过滤掉大多数的反调试方法。</p>
-<p>Liunx下主要利用ptrace系统调用、proc文件系统检测和父进程检测来检测自身是否正在被调</p>
-<p>试，针对这些反调试方法，常用的方法就是定位到反调试的代码，然后对程序进行patch，在</p>
-<p>不影响程序正常功能的情况下，跳过对调试器的检测代码。</p>
-<h5 id="加壳"><a href="#加壳" class="headerlink" title="加壳"></a>加壳</h5><p>加壳是指在二进制的程序中植入一段代码。在运行的时候优先取得程序的控制权，这段代码</p>
-<p>会在执行的过程中对原始指令进行解密还原，之后再将控制权交还给原始代码，执行原来的</p>
-<p>代码。</p>
-<p>被加过壳的程序，其真正的代码是加密存放在二进制文件中的，只有在执行时才从内存中解</p>
-<p>密还原出来，因此没法对加了壳的程序直接进行静态分析。</p>
-<p>在CTF比赛中出现的带壳程序通常为已知的壳，大部分都可以通过使用专用工具或者脚本的</p>
-<p>脱壳。可以使用PEiD工具查询该带壳程序用的什么壳，再用对应工具或脚本脱壳。</p>
-<h5 id="控制流混淆"><a href="#控制流混淆" class="headerlink" title="控制流混淆"></a>控制流混淆</h5><p>对于控制流混淆的程序，没有办法直接进行静态分析，也无法进行反编译，而调试器调试也</p>
-<p>会陷入控制流的跳转混乱中。</p>
-<p>对于控制流混淆的程序，通常通过Trace工具记录下程序运行的所有指令，然后再运行这些指</p>
-<p>令的基础上进行数据流分析。</p>
-<h5 id="双进程保护（Debug-Blocker）"><a href="#双进程保护（Debug-Blocker）" class="headerlink" title="双进程保护（Debug Blocker）"></a>双进程保护（Debug Blocker）</h5><p>双进程保护是一种在调试模式下运行自身程序的方法。这种保护通常存在两个进程，由父进</p>
-<p>程调试子进程。实际功能的代码运行在子进程中，但是因为子进程已经处于调试状态，无法</p>
-<p>再使用其他调试器进行附加操作。同时父进程能够控制子进程，通过处理子进程的异常，可</p>
-<p>以控制子进程正常运行。</p>
-<p>双进程保护技术的难点在于，真正的功能运行在子进程中，若要调试子进程，就需要断开其</p>
-<p>与父进程之间的链接，但是一旦断开，没有父进程处理子进程的异常，会导致子进程无法正</p>
-<p>常运行。</p>
-<p>对于双进程保护的程序，其父进程通常功能单一，因此先针对父进程，了解其处理子进程异</p>
-<p>常的逻辑，然后调试子程序，使其脱离父进程之后仍能正常运行，最后在对子进程进行调试</p>
-<p>分析。</p>
-<h4 id="3、关键代码定位"><a href="#3、关键代码定位" class="headerlink" title="3、关键代码定位"></a>3、关键代码定位</h4><p>在一个可执行程序中，汇编代码数量庞大，所以要能够定位出真正需要分析的关键代码，只有找到关键</p>
-<p>代码之后，才能对关键代码采用的算法进行分析，理清程序功能，最后针对程序功能，写出对应脚本，</p>
-<p>解出flag。</p>
-<p>这里给出3个常用的关键代码定位法</p>
-<p><strong>API断点法</strong></p>
-<p>例如：在获取文本输入时，窗口类程序获取文本的方式主要是通过GetWindowsText和</p>
-<p>GetDlgItemText两个API来获取。在输出结果时，会弹出对话框，这时调用的API通常为</p>
-<p>MessageBox。在这些API函数中下断点，在调试工具中断下来后，通过栈回溯即可定位到关</p>
-<p>键代码。</p>
-<p><strong>字符串检索法</strong></p>
-<p>在IDA中</p>
-<p>打开Strings子窗口，通过Ctrl+F输入想要查找的字符串。</p>
-<p>在Ollydbg中</p>
-<p>通过Alt+E，可以查看可执行模块，找到主模块，点击右键，选择中文搜索引擎，根据需</p>
-<p>要搜索ASCII或者UNICODE。</p>
-<p><strong>辅助工具定位法</strong></p>
-<p>针对特定语言或编译器生成的程序，可以用一些辅助工具帮助快速定位案件处理程序的地</p>
-<p>址。</p>
-<p>如：针对MFC程序的xspy，针对Delphi程序的Dede。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/25/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Reverse">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/25/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-09-25T10:32:10+08:00">
-                2022-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
   </nav>
 
 
@@ -2264,7 +2205,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2286,7 +2227,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

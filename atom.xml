@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-03-05T06:03:04.179Z</updated>
+  <updated>2023-03-11T11:34:48.517Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NSS做题记录</title>
+    <link href="http://example.com/2023/03/08/NSS%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+    <id>http://example.com/2023/03/08/NSS%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/</id>
+    <published>2023-03-08T00:58:16.000Z</published>
+    <updated>2023-03-11T11:34:48.517Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;长城杯-2022-高校组-baby-re&quot;&gt;&lt;a href=&quot;#长城杯-2022-高校组-baby-re&quot; class=&quot;headerlink&quot; title=&quot;[长城杯 2022 高校组]baby_re&quot;&gt;&lt;/a&gt;[长城杯 2022</summary>
+        
+      
+    
+    
+    
+    <category term="CTF" scheme="http://example.com/categories/CTF/"/>
+    
+    
+    <category term="NSS" scheme="http://example.com/tags/NSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>仿射密码</title>
+    <link href="http://example.com/2023/03/05/%E4%BB%BF%E5%B0%84%E5%AF%86%E7%A0%81/"/>
+    <id>http://example.com/2023/03/05/%E4%BB%BF%E5%B0%84%E5%AF%86%E7%A0%81/</id>
+    <published>2023-03-05T06:16:27.000Z</published>
+    <updated>2023-03-05T10:27:54.730Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;仿射密码是一种替换密码，也为单表加密的一种，字母系统中所有字母都藉一简单数学方程加密，对应至数值，或转回字母。</summary>
+        
+      
+    
+    
+    
+    <category term="Learn" scheme="http://example.com/categories/Learn/"/>
+    
+    
+    <category term="Crypto" scheme="http://example.com/tags/Crypto/"/>
+    
+  </entry>
   
   <entry>
     <title>计网学习记录</title>
@@ -465,57 +515,6 @@
     
     
     <category term="re" scheme="http://example.com/tags/re/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ACTF新生赛2020-usualCrypt</title>
-    <link href="http://example.com/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/"/>
-    <id>http://example.com/2023/01/04/ACTF%E6%96%B0%E7%94%9F%E8%B5%9B2020-usualCrypt/</id>
-    <published>2023-01-04T08:03:37.000Z</published>
-    <updated>2023-01-25T03:34:24.155Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;伪代码分析&quot;&gt;&lt;a href=&quot;#伪代码分析&quot; class=&quot;headerlink&quot; title=&quot;伪代码分析&quot;&gt;&lt;/a&gt;伪代码分析&lt;/h2&gt;&lt;p&gt;有个明显的base64表，交叉引用，会发现使用多次&lt;/p&gt;
-&lt;img</summary>
-        
-      
-    
-    
-    
-    <category term="CTF" scheme="http://example.com/categories/CTF/"/>
-    
-    
-    <category term="buu做题记录" scheme="http://example.com/tags/buu%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python学习</title>
-    <link href="http://example.com/2023/01/04/python%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://example.com/2023/01/04/python%E5%AD%A6%E4%B9%A0/</id>
-    <published>2023-01-04T04:54:46.000Z</published>
-    <updated>2023-01-25T03:32:00.721Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Python-字符串-ascii-uppercase&quot;&gt;&lt;a href=&quot;#Python-字符串-ascii-uppercase&quot; class=&quot;headerlink&quot; title=&quot;Python 字符串 |</summary>
-        
-      
-    
-    
-    
-    <category term="Learn" scheme="http://example.com/categories/Learn/"/>
-    
-    
-    <category term="随笔" scheme="http://example.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   

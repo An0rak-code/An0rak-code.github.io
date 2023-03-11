@@ -297,6 +297,328 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/08/NSS%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/03/08/NSS%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/" itemprop="url">NSS做题记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-03-08T08:58:16+08:00">
+                2023-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="长城杯-2022-高校组-baby-re"><a href="#长城杯-2022-高校组-baby-re" class="headerlink" title="[长城杯 2022 高校组]baby_re"></a>[长城杯 2022 高校组]baby_re</h2><p>pyinstxtractor解包，uncompyle6反编译</p>
+<img src="/2023/03/08/NSS%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/image-20230308090405078.png" class title="This is an image">
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> new <span class="keyword">import</span> *</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;welcome!!!&#x27;</span>)</span><br><span class="line">flag_input = <span class="built_in">input</span>(<span class="string">&#x27;please input flag:&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">set</span>(word) &gt;= <span class="built_in">set</span>(flag_input):</span><br><span class="line">    pt = mmo(flag_input)</span><br><span class="line">    flag = pt()</span><br><span class="line">    <span class="keyword">if</span> flag == <span class="string">&#x27;5WEU5ROREb0hK+AurHXCD80or/h96jqpjEhcoh2CuDh=&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;right!!!&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;your flag: flag&#123;&#x27;</span> + flag_input + <span class="string">&#x27;&#125;&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Error&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;please input again!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>发现用到了new库，但这不是现有的库，可以找到new.cp37-win_amd64.pyd文件，看密文可以猜到可能有base64</p>
+<p><strong>注：</strong>pyd一般是python外的其他语言如c&#x2F;c++编写的python扩展模块，即，python的一个动态链接库，与dll文件相当。在linux系统中一般为.so文件。有的时候，为了对python文件进行加密，会把python模块编译成.pyd文件，供其它人使用。</p>
+<p>ida打开pyd分析，发现被upx加壳，脱壳分析</p>
+<img src="/2023/03/08/NSS%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/image-20230308091936796.png" class title="This is an image">
+
+<img src="/2023/03/08/NSS%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/image-20230308092933690.png" class title="This is an image">
+
+<p>可以考虑到应该是换表了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">str1 = <span class="string">&quot;5WEU5ROREb0hK+AurHXCD80or/h96jqpjEhcoh2CuDh=&quot;</span>   <span class="comment">#str1是要解密的代码</span></span><br><span class="line">string1 = <span class="string">&quot;uKbnhWvcAesT74M6D2CU/EjrgLYo50GiOtFPXI1HaB3yZqkd+JSR8lzVNpwf9xQm&quot;</span>   <span class="comment">#string1是改过之后的base64表</span></span><br><span class="line">string2 = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line"><span class="built_in">print</span> (base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string1,string2))))</span><br><span class="line"><span class="comment">#b&quot;pUSs83T&#x27;D\x07\x02\x00^y\x12CG[]A&lt;=kyYQ\x07lDR\x01\x01&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>发现不对，这里可能还使用了其它的加密函数，做到这就卡了，，，去参考了下别的大佬博客，大部分都是用了爆破，这里开始就不太懂了，希望有大佬能指点下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> new <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">a=<span class="built_in">list</span>(<span class="built_in">set</span>(word))</span><br><span class="line">l=&#123;&#125;</span><br><span class="line">enc= <span class="string">&#x27;5WEU5ROREb0hK+AurHXCD80or/h96jqpjEhcoh2CuDh=&#x27;</span></span><br><span class="line"><span class="keyword">for</span> a1 <span class="keyword">in</span> a:</span><br><span class="line">    <span class="keyword">for</span> a2 <span class="keyword">in</span> a:</span><br><span class="line">        <span class="keyword">for</span> a3 <span class="keyword">in</span> a:</span><br><span class="line">            t=<span class="string">&quot;&quot;</span>+a1+a2+a3</span><br><span class="line">            pt = mmo(t)</span><br><span class="line">            flag = pt()</span><br><span class="line">            <span class="keyword">if</span> enc.startswith(flag):</span><br><span class="line">                <span class="built_in">print</span>(t)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="羊城杯-2020-Bytecode"><a href="#羊城杯-2020-Bytecode" class="headerlink" title="[羊城杯 2020]Bytecode"></a>[羊城杯 2020]Bytecode</h2><p>根据字节码，可以转出代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">en = [<span class="number">3</span>, <span class="number">37</span>, <span class="number">72</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">132</span>]</span><br><span class="line">output = [<span class="number">101</span>, <span class="number">96</span>, <span class="number">23</span>, <span class="number">68</span>, <span class="number">112</span>, <span class="number">42</span>, <span class="number">107</span>, <span class="number">62</span>, <span class="number">96</span>, <span class="number">53</span>, <span class="number">176</span>, <span class="number">179</span>,</span><br><span class="line">          <span class="number">98</span>, <span class="number">53</span>, <span class="number">67</span>, <span class="number">29</span>, <span class="number">41</span>, <span class="number">120</span>, <span class="number">60</span>, <span class="number">106</span>, <span class="number">51</span>, <span class="number">101</span>, <span class="number">178</span>, <span class="number">189</span>, <span class="number">101</span>, <span class="number">48</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;welcome to GWHT2020&#x27;</span>)</span><br><span class="line"></span><br><span class="line">flag = <span class="built_in">input</span>(<span class="string">&#x27;please input your flag:&#x27;</span>)</span><br><span class="line"><span class="built_in">str</span> = flag</span><br><span class="line"></span><br><span class="line">a = <span class="built_in">len</span>(<span class="built_in">str</span>)</span><br><span class="line"><span class="keyword">if</span> a &lt; <span class="number">38</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;lenth wrong!&#x27;</span>)</span><br><span class="line">    exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">ord</span>(<span class="built_in">str</span>[<span class="number">0</span>]) + <span class="number">2020</span> * <span class="built_in">ord</span>(<span class="built_in">str</span>[<span class="number">1</span>]) + <span class="number">2020</span> * <span class="built_in">ord</span>(<span class="built_in">str</span>[<span class="number">3</span>]) + <span class="number">2020</span> * <span class="built_in">ord</span>(<span class="built_in">str</span>[<span class="number">4</span>]) == <span class="number">1182843538814603</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;good!continue\xe2\x80\xa6\xe2\x80\xa6&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;bye~&#x27;</span>)</span><br><span class="line">    exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">x = []</span><br><span class="line">k = <span class="number">5</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">13</span>):</span><br><span class="line">    b = <span class="built_in">ord</span>(<span class="built_in">str</span>[k])</span><br><span class="line">    c = <span class="built_in">ord</span>(<span class="built_in">str</span>[k + <span class="number">1</span>])</span><br><span class="line">    a11 = c ^ en[i % <span class="number">6</span>]</span><br><span class="line">    a22 = b ^ en[i % <span class="number">6</span>]</span><br><span class="line">    x.append(a11)</span><br><span class="line">    x.append(a22)</span><br><span class="line">    k += <span class="number">2</span></span><br><span class="line"><span class="keyword">if</span> x == output:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;good!continue\xe2\x80\xa6\xe2\x80\xa6&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;oh,you are wrong!&#x27;</span>)</span><br><span class="line">    exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">l = <span class="built_in">len</span>(<span class="built_in">str</span>)</span><br><span class="line">a1 = <span class="built_in">ord</span>(<span class="built_in">str</span>[l - <span class="number">7</span>])</span><br><span class="line">a2 = <span class="built_in">ord</span>(<span class="built_in">str</span>[l - <span class="number">6</span>])</span><br><span class="line">a3 = <span class="built_in">ord</span>(<span class="built_in">str</span>[l - <span class="number">5</span>])</span><br><span class="line">a4 = <span class="built_in">ord</span>(<span class="built_in">str</span>[l - <span class="number">4</span>])</span><br><span class="line">a5 = <span class="built_in">ord</span>(<span class="built_in">str</span>[l - <span class="number">3</span>])</span><br><span class="line">a6 = <span class="built_in">ord</span>(<span class="built_in">str</span>[l - <span class="number">2</span>])</span><br><span class="line"><span class="keyword">if</span> a1 * <span class="number">3</span> + a2 * <span class="number">2</span> + a3 * <span class="number">5</span> == <span class="number">1003</span>:</span><br><span class="line">    <span class="keyword">if</span> a1 * <span class="number">4</span> + a2 * <span class="number">7</span> + a3 * <span class="number">9</span> == <span class="number">2013</span>:</span><br><span class="line">        <span class="keyword">if</span> a1 + a2 * <span class="number">8</span> + a3 * <span class="number">2</span> == <span class="number">1109</span>:</span><br><span class="line">            <span class="keyword">if</span> a1 * <span class="number">3</span> + a5 * <span class="number">2</span> + a6 * <span class="number">5</span> == <span class="number">671</span>:</span><br><span class="line">                <span class="keyword">if</span> a4 * <span class="number">4</span> + a5 * <span class="number">7</span> + a6 * <span class="number">9</span> == <span class="number">1252</span>:</span><br><span class="line">                    <span class="keyword">if</span> a4 + a5 * <span class="number">8</span> + a6 * <span class="number">2</span> == <span class="number">644</span>:</span><br><span class="line">                        <span class="built_in">print</span>(<span class="string">&#x27;congraduation!you get the right flag!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> z3 <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">en = [<span class="number">3</span>, <span class="number">37</span>, <span class="number">72</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">132</span>]</span><br><span class="line">output = [<span class="number">101</span>, <span class="number">96</span>, <span class="number">23</span>, <span class="number">68</span>, <span class="number">112</span>, <span class="number">42</span>, <span class="number">107</span>, <span class="number">62</span>, <span class="number">96</span>, <span class="number">53</span>, <span class="number">176</span>, <span class="number">179</span>, <span class="number">98</span>, <span class="number">53</span>, <span class="number">67</span>, <span class="number">29</span>, <span class="number">41</span>, <span class="number">120</span>, <span class="number">60</span>, <span class="number">106</span>, <span class="number">51</span>, <span class="number">101</span>, <span class="number">178</span>, <span class="number">189</span>, <span class="number">101</span>,</span><br><span class="line">          <span class="number">48</span>]</span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line">k = <span class="number">0</span></span><br><span class="line">x = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">13</span>):</span><br><span class="line">    c = <span class="built_in">chr</span>(output[k] ^ en[i % <span class="number">6</span>])</span><br><span class="line">    b = <span class="built_in">chr</span>(output[k + <span class="number">1</span>] ^ en[i % <span class="number">6</span>])</span><br><span class="line">    x.append(b)</span><br><span class="line">    x.append(c)</span><br><span class="line">    k += <span class="number">2</span></span><br><span class="line"></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span>.join(x)</span><br><span class="line"><span class="comment"># print(flag)</span></span><br><span class="line"></span><br><span class="line">a1 = Int(<span class="string">&#x27;a1&#x27;</span>)</span><br><span class="line">a2 = Int(<span class="string">&#x27;a2&#x27;</span>)</span><br><span class="line">a3 = Int(<span class="string">&#x27;a3&#x27;</span>)</span><br><span class="line">a4 = Int(<span class="string">&#x27;a4&#x27;</span>)</span><br><span class="line">a5 = Int(<span class="string">&#x27;a5&#x27;</span>)</span><br><span class="line">a6 = Int(<span class="string">&#x27;a6&#x27;</span>)</span><br><span class="line">s = Solver()</span><br><span class="line">s.add(a1 * <span class="number">3</span> + a2 * <span class="number">2</span> + a3 * <span class="number">5</span> == <span class="number">1003</span>)</span><br><span class="line">s.add(a1 * <span class="number">4</span> + a2 * <span class="number">7</span> + a3 * <span class="number">9</span> == <span class="number">2013</span>)</span><br><span class="line">s.add(a1 + a2 * <span class="number">8</span> + a3 * <span class="number">2</span> == <span class="number">1109</span>)</span><br><span class="line">s.add(a4 * <span class="number">3</span> + a5 * <span class="number">2</span> + a6 * <span class="number">5</span> == <span class="number">671</span>)</span><br><span class="line">s.add(a4 * <span class="number">4</span> + a5 * <span class="number">7</span> + a6 * <span class="number">9</span> == <span class="number">1252</span>)</span><br><span class="line">s.add(a4 + a5 * <span class="number">8</span> + a6 * <span class="number">2</span> == <span class="number">644</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> s.check() == sat:</span><br><span class="line">    result = s.model()</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line">s = [<span class="number">97</span>, <span class="number">101</span>, <span class="number">102</span>, <span class="number">102</span>, <span class="number">55</span>, <span class="number">51</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>):</span><br><span class="line">    flag += <span class="built_in">chr</span>(s[i])</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>其它几道题，好难啊，没有什么思路，加上这周感冒了几天，其它几道题都出不了，哭了，，，，</p>
+<p>hana esp脱壳后，不太了解易语言，看不懂逻辑</p>
+<p>鲨鲨的秘密处理不好反调试</p>
+<p>baby_net 没有什么思路。。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/05/%E4%BB%BF%E5%B0%84%E5%AF%86%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reverse">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/03/05/%E4%BB%BF%E5%B0%84%E5%AF%86%E7%A0%81/" itemprop="url">仿射密码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-03-05T14:16:27+08:00">
+                2023-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index">
+                    <span itemprop="name">Learn</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>仿射密码是一种替换密码，也为单表加密的一种，字母系统中所有字母都藉一简单数学方程加密，对应至数值，或转回字母。 其仍有所有替代密码之弱处。所有字母皆借由方程 (ax+b) mod(26)加密， b为移动大小。</p>
+<p>加密函数为：<br>$$<br>e(x)&#x3D;ax+b{\quad}(mod{\quad}m)<br>$$<br>解密函数为：<br>$$<br>d(x)&#x3D;a^{-1}(x-b){\quad}(mod {\quad}m)<br>$$<br>其中：</p>
+<ul>
+<li>a和m互质</li>
+<li>m是字母的数目(26)</li>
+<li>a^(-1)是a在Z(m)的乘法逆元</li>
+</ul>
+<img src="/2023/03/05/%E4%BB%BF%E5%B0%84%E5%AF%86%E7%A0%81/image-20230305153616097.png" class title="This is an image">
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;math.h&gt;</span></span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">encode</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b,<span class="type">int</span> m)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> en;</span><br><span class="line">	en = (a * m + b)%<span class="number">26</span>;</span><br><span class="line">	<span class="keyword">return</span> en;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入密钥：&quot;</span>);</span><br><span class="line">	<span class="type">int</span> a, b,m,n;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入需要加密的明文个数：&quot;</span>);</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入明文:&quot;</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; m;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; encode(a, b, m) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//简单实现过程</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/01/%E8%AE%A1%E7%BD%91%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2049,403 +2371,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/23/c++%E7%9A%84%E4%B8%80%E7%82%B9%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Reverse">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/01/23/c++%E7%9A%84%E4%B8%80%E7%82%B9%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url">c++的一点学习记录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-23T10:58:04+08:00">
-                2023-01-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Learn/" itemprop="url" rel="index">
-                    <span itemprop="name">Learn</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h2 id="字符出现位置"><a href="#字符出现位置" class="headerlink" title="字符出现位置"></a>字符出现位置</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n;<span class="comment">//字符串长度</span></span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	string str;</span><br><span class="line">	cin &gt;&gt; str;<span class="comment">//字符串</span></span><br><span class="line">	<span class="type">char</span> m;</span><br><span class="line">	cin &gt;&gt; m;<span class="comment">//要查询的字母</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (str[i] == m)</span><br><span class="line">		&#123;</span><br><span class="line">			cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	cout &lt;&lt; <span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="字符串出现位置"><a href="#字符串出现位置" class="headerlink" title="字符串出现位置"></a>字符串出现位置</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string str1, str2;</span><br><span class="line">    cin &gt;&gt; str1;</span><br><span class="line">    cin &gt;&gt; str2;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= str1.<span class="built_in">length</span>() - str2.<span class="built_in">length</span>(); i++) <span class="comment">//枚举开头位置</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">bool</span> equal = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; i + str2.<span class="built_in">length</span>(); j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (str1[j] != str2[j - i]) &#123;</span><br><span class="line">                equal = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (equal) &#123;</span><br><span class="line">            cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="字典序"><a href="#字典序" class="headerlink" title="字典序"></a>字典序</h1><h2 id="printf"><a href="#printf" class="headerlink" title="printf()"></a>printf()</h2><p>printf并不能直接处理string类型的变量，只能处理字符数组，在输出的时候要用c_str()做一个转换</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	string b=<span class="string">&quot;ajhk&quot;</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, b.<span class="built_in">c_str</span>());</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="数组的字典序"><a href="#数组的字典序" class="headerlink" title="数组的字典序"></a>数组的字典序</h2><p>从两个数组的第一个值开始比较，一旦出现不相等，便可以按照那一位的大小判断整个数组的大小，如果没有，比较数组长度</p>
-<h2 id="字符转义"><a href="#字符转义" class="headerlink" title="字符转义"></a>字符转义</h2><p>字符串赋值时，用一对双引号表示赋值的内容，如：s&#x3D;”hello world”，如果希望s的值里包括双引号这个字符，则需要进行转义处理</p>
-<p>s&#x3D;”I’m &quot;ajkhdskjad”</p>
-<h2 id="按照字典序定义，比较字符串大小"><a href="#按照字典序定义，比较字符串大小" class="headerlink" title="按照字典序定义，比较字符串大小"></a>按照字典序定义，比较字符串大小</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	string str1, str2;</span><br><span class="line">	cin &gt;&gt; str1;</span><br><span class="line">	cin &gt;&gt; str2;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">min</span>(str1.<span class="built_in">length</span>(), str2.<span class="built_in">length</span>()); i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (str1[i] &lt; str2[i])</span><br><span class="line">		&#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;YES&quot;</span> &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (str1[i] &gt; str2[i])</span><br><span class="line">		&#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;NO&quot;</span> &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (str1.<span class="built_in">length</span>() &lt; str2.<span class="built_in">length</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;YES&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;NO&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="地外遗迹"><a href="#地外遗迹" class="headerlink" title="地外遗迹"></a>地外遗迹</h2><p>你的朋友琼斯是一个星际冒险家，你知道的，星际冒险家总是会遇见一些奇怪的情况。今天琼斯发了一个信息向你求助。</p>
-<p>琼斯在距离地球不远的星球上发现了一座远古遗迹，远古遗迹的大门上有着奇怪的机关。琼斯通过一段时间的摸索结合他的冒险经验得出了一个结论：机关的屏幕上每次会出现两个单词，如果第一个单词的字典序小于第二个单词的字典序，就需要按下绿色的按钮；反之则按下红色的按钮。</p>
-<p>有一个<strong>额外</strong>的问题需要注意。因为遗迹的年代久远，遗迹主人所使用的的语言<strong>与我们的语言的字典序有一些差别</strong>。当然，见多识广的琼斯肯定是了解这些差别的，他会告诉你正确的字典序。那么你能帮他写一个程序解开大门的机关么？</p>
-<p>PS: 单词只包含小写字母</p>
-<p>例如： uvwxyzabcdefghijklmnopqrst</p>
-<p>表示，在遗迹语言中， u是字典序最小的，而 t 是字典序最大的。按照他们的字典序来排， u 排在 a 的前面。</p>
-<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第一行，一个长度为 26 的小写字母的字符串（就是琼斯告诉你的字典序，字母越前字典序越小，不会出现重复的小写字母）<br>第二行，一个数字 n ，表示后面需要进行 n 次比较（ 1≤n≤100000 ）<br>之后的 n 行，每行两个单词，中间用空格隔开</p>
-<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>如果输入的两个单词，按照遗迹的字典序，第一个单词的字典序小于第二个单词的字典序，输出 “ green ”，否则输出 “ red ”。</p>
-<h4 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">uvwxyzabcdefghijklmnopqrst</span><br><span class="line">5</span><br><span class="line">apple banana</span><br><span class="line">banana blueberry</span><br><span class="line">apple watermelon</span><br><span class="line">vegetable banana</span><br><span class="line">apple ap</span><br></pre></td></tr></table></figure>
-
-<h4 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">green</span><br><span class="line">green</span><br><span class="line">red</span><br><span class="line">green</span><br><span class="line">red</span><br></pre></td></tr></table></figure>
-
-<p>思路：可以把2个单词转为正常字典序下的单词，然后直接进行比较</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">string table, rTable, a, b;</span><br><span class="line"><span class="function">string <span class="title">replace</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">		s[i] = rTable[s[i] - <span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	cin &gt;&gt; table &gt;&gt; n;</span><br><span class="line">	rTable = table;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) &#123;</span><br><span class="line">		rTable[table[i] - <span class="string">&#x27;a&#x27;</span>] = (<span class="type">char</span>)(<span class="string">&#x27;a&#x27;</span> + i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">		a = <span class="built_in">replace</span>(a);</span><br><span class="line">		b = <span class="built_in">replace</span>(b);</span><br><span class="line">		<span class="keyword">if</span> (a &lt; b)</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;green&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;red&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="基础排序"><a href="#基础排序" class="headerlink" title="基础排序"></a>基础排序</h1><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>Selection sort是一种简单直观的排序算法。原理：第一次从待排序的数据元素中选出最小（最大）的一个元素，存放在序列的起始位置，然后再从剩余的未排序元素中寻找到最小（大）元素，然后放到已排序的序列的末尾。以此类推，直到全部待排序的数据元素的个数为零。选择排序是不稳定的排序方法。</p>
-<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">sort</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)  </span><br><span class="line">     &#123;</span><br><span class="line">         <span class="type">int</span> minIndex = i;</span><br><span class="line">         <span class="keyword">for</span>(<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; n; j++)</span><br><span class="line">             <span class="keyword">if</span>(nums[j] &lt; nums[minIndex])</span><br><span class="line">                 minIndex = j;</span><br><span class="line">         <span class="comment">//交换当前和最小</span></span><br><span class="line">         <span class="type">int</span> t = nums[minIndex];</span><br><span class="line">         nums[minIndex] = nums[i];</span><br><span class="line">         nums[i] = t;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>Bubble Sort，是一种计算机科学领域的较简单的排序算法。</p>
-<p>它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果顺序错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素列已经排序完成。</p>
-<p>这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端（升序或降序排列），就如同碳酸饮料中二氧化碳的气泡最终会上浮到顶端一样，故名“冒泡排序”。</p>
-<h3 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">sort</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j]&lt;nums[j<span class="number">-1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">int</span> t=nums[j];</span><br><span class="line">                nums[j]=nums[j<span class="number">-1</span>];</span><br><span class="line">                nums[j<span class="number">-1</span>]=t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>冒泡排序中，交换数字次数等于逆序数</p>
-<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>基本思想：每步将一个待排序的数，按值的大小插入前面已经排序的数组中的适当位置上，直到全部插入完为止。</p>
-<h3 id="算法实现-2"><a href="#算法实现-2" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">sort</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)  </span><br><span class="line">     &#123;</span><br><span class="line">         <span class="keyword">for</span>(<span class="type">int</span> j = i; j &gt; <span class="number">0</span>; j--)</span><br><span class="line">         &#123;</span><br><span class="line">             <span class="comment">//如果当前的更小，则交换</span></span><br><span class="line">             <span class="keyword">if</span>(nums[j] &lt; nums[j<span class="number">-1</span>])</span><br><span class="line">             &#123;</span><br><span class="line">                 <span class="type">int</span> t = nums[j];</span><br><span class="line">                 nums[j] = nums[j - <span class="number">1</span>];</span><br><span class="line">                 nums[j - <span class="number">1</span>] = t;</span><br><span class="line">             &#125;</span><br><span class="line">             <span class="keyword">else</span></span><br><span class="line">                 <span class="keyword">break</span>;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="sort函数"><a href="#sort函数" class="headerlink" title="sort函数"></a>sort函数</h2><p>需要传入三个参数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第一个是被排序数组的起始地址。</span><br><span class="line"></span><br><span class="line">第二个是被排序数组结束地址的下一个地址， 即数组[开始, 结束]的左闭右开区间。</span><br><span class="line"></span><br><span class="line">第三个参数是数组的比较函数，就是我们规定的排序规则，可以不填， 默认不填排序规则是从小到大。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">10</span>] = &#123; <span class="number">9</span>,<span class="number">6</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">0</span> &#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++) </span><br><span class="line">        cout &lt;&lt; a[i];</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">sort</span>(a, a + <span class="number">10</span>);<span class="comment">//第三个参数不用写（如果是从小到大排序的话） </span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++) </span><br><span class="line">        cout &lt;&lt; a[i];</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>大到小排序</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b;                           <span class="comment">//降序就是a &gt; b</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">10</span>] = &#123; <span class="number">9</span>,<span class="number">6</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">0</span> &#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) cout &lt;&lt; a[i];</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">sort</span>(a, a + <span class="number">10</span>, cmp);                  <span class="comment">//指针</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) cout &lt;&lt; a[i];</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Reverse">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/" itemprop="url">Hgame2023复现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-01-21T19:37:03+08:00">
-                2023-01-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>新年前，把前面的欠的债还一还，哈哈哈。。</p>
-<h1 id="Week1"><a href="#Week1" class="headerlink" title="Week1"></a>Week1</h1><h2 id="easyenc"><a href="#easyenc" class="headerlink" title="easyenc"></a>easyenc</h2><img src="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/image-20230121195537303.png" class title="This is an image">
-
-<p>其实就是一个普通的异或处理，但苦于脚本能力并不好，感觉写的exp有点傻，因为要注意一个小端存储的问题，但在c语言中就不用管这么多，可以直接全文复制，不用管int怎么转char</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">v5=[<span class="number">0x04</span>,<span class="number">0xff</span>,<span class="number">0xfd</span>,<span class="number">0x09</span>,<span class="number">0x01</span>,<span class="number">0xf3</span>,<span class="number">0xb0</span>,<span class="number">0x0</span>,<span class="number">0x00</span>,<span class="number">0x05</span>,<span class="number">0xf0</span>,<span class="number">0xad</span>,<span class="number">0x07</span>,<span class="number">0x06</span>,<span class="number">0x17</span>,<span class="number">0x05</span>,<span class="number">0xeb</span>,<span class="number">0x17</span>,<span class="number">0xfd</span>,<span class="number">0x17</span>,<span class="number">0xea</span>,<span class="number">0x01</span>,<span class="number">0xee</span>,<span class="number">0x01</span>,<span class="number">0xea</span>,<span class="number">0xb1</span>,<span class="number">0x05</span>,<span class="number">0xfa</span>,<span class="number">0x08</span>,<span class="number">0x01</span>,<span class="number">0x17</span>,<span class="number">0xac</span>,<span class="number">0xec</span>,<span class="number">0x01</span>,<span class="number">0xea</span>,</span><br><span class="line">    <span class="number">0xfd</span>,<span class="number">0xf0</span>,<span class="number">0x05</span>,<span class="number">0x07</span>,<span class="number">0x06</span>,-<span class="number">7</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(v5))</span><br><span class="line">flag=[<span class="number">0</span>]*<span class="number">41</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(v5)):</span><br><span class="line">    flag[i]=(v5[i]+<span class="number">86</span>)^<span class="number">0x32</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">hex</span>(flag[i]))</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="built_in">hex</span>=<span class="string">&#x27;6867616d657b3464646974316f6e5f69735f615f72657665723569626c655f307065726174696f6e7d&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(binascii.unhexlify(<span class="built_in">hex</span>))</span><br></pre></td></tr></table></figure>
-
-<p>官方放出的wp用的是c语言，很方便</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="type">int</span> v8[<span class="number">11</span>];</span><br><span class="line">	 v8[<span class="number">0</span>] = <span class="number">167640836</span>;</span><br><span class="line">	 v8[<span class="number">1</span>] = <span class="number">11596545</span>;</span><br><span class="line">	 v8[<span class="number">2</span>] = <span class="number">-1376779008</span>;</span><br><span class="line">	 v8[<span class="number">3</span>] = <span class="number">85394951</span>;</span><br><span class="line">	 v8[<span class="number">4</span>] = <span class="number">402462699</span>;</span><br><span class="line">	 v8[<span class="number">5</span>] = <span class="number">32375274</span>;</span><br><span class="line">	 v8[<span class="number">6</span>] = <span class="number">-100290070</span>;</span><br><span class="line">	 v8[<span class="number">7</span>] = <span class="number">-1407778552</span>;</span><br><span class="line">	 v8[<span class="number">8</span>] = <span class="number">-34995732</span>;</span><br><span class="line">	 v8[<span class="number">9</span>] = <span class="number">101123568</span>;</span><br><span class="line">	 v8[<span class="number">10</span>] = <span class="number">-7</span>;</span><br><span class="line">	 <span class="type">char</span>* p = v8;</span><br><span class="line">	 <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">41</span>; i++)</span><br><span class="line">		 &#123;</span><br><span class="line">		 <span class="built_in">putchar</span>((p[i] + <span class="number">86</span>) ^ <span class="number">0x32</span>);</span><br><span class="line">		 &#125;</span><br><span class="line">	</span><br><span class="line">	 &#125;</span><br><span class="line"><span class="comment">//hgame&#123;4ddit1on_is_a_rever5ible_0peration&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="encode"><a href="#encode" class="headerlink" title="encode"></a>encode</h2><img src="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/image-20230121201602252.png" class title="This is an image">
-
-<p>但逻辑其实不难，就是做了一个处理，然后对数据进行一个比较，但是对数据的处理部分可能一开始看会比较的迷..可以运行几个数尝试下，看看实现了什么功能</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>=<span class="string">&quot;hgame&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(<span class="string">&#x27;h&#x27;</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">ord</span>(<span class="built_in">str</span>[<span class="number">0</span>])&amp;<span class="number">0xf</span>)</span><br><span class="line"><span class="built_in">print</span>((<span class="built_in">ord</span>(<span class="built_in">str</span>[<span class="number">0</span>])&gt;&gt;<span class="number">4</span>)&amp;<span class="number">0xf</span>)</span><br></pre></td></tr></table></figure>
-
-<p>从结果来看，把一个8bit的char用位运算拆为两个4bit的数字，然后开始比较，这里比较麻烦的应该是数据的提取，双击进去dword_403000，然后按y设置成int数组，再shift+E导出数据</p>
-<h5 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>=[<span class="number">8</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">11</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">15</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">13</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">50</span>):</span><br><span class="line">    flag+=<span class="built_in">chr</span>(<span class="built_in">str</span>[i*<span class="number">2</span>]+(<span class="built_in">str</span>[i*<span class="number">2</span>+<span class="number">1</span>]&lt;&lt;<span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment">#hgame&#123;encode_is_easy_for_a_reverse_engineer&#125;      </span></span><br></pre></td></tr></table></figure>
-
-<h2 id="a-cup-of-tea"><a href="#a-cup-of-tea" class="headerlink" title="a_cup_of_tea"></a>a_cup_of_tea</h2><p>一个魔改的tea加密</p>
-<img src="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/image-20230121205044461.png" class title="This is an image">
-
-<p>直接给exp了</p>
-<h5 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">decrypt</span><span class="params">(<span class="type">uint32_t</span>* v, <span class="type">uint32_t</span>* k)</span> &#123;</span><br><span class="line">	<span class="type">uint32_t</span> v0 = v[<span class="number">0</span>], v1 = v[<span class="number">1</span>], sum = <span class="number">-0x543210DD</span> * <span class="number">32</span>, i;</span><br><span class="line">	<span class="type">uint32_t</span> delta = <span class="number">0x543210DD</span>;</span><br><span class="line">	<span class="type">uint32_t</span> k0 = k[<span class="number">0</span>], k1 = k[<span class="number">1</span>], k2 = k[<span class="number">2</span>], k3 = k[<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">		v1 -= ((v0 +k2) &lt;&lt;<span class="number">4</span>) ^ (v0 + sum) ^ ((v0 &gt;&gt; <span class="number">5</span>) + k3);</span><br><span class="line">		v0 -= ((v1 &lt;&lt; <span class="number">4</span>) + k0) ^ (v1 + sum) ^ ((v1 &gt;&gt; <span class="number">5</span>) + k1);</span><br><span class="line">		sum += delta;</span><br><span class="line">	&#125;</span><br><span class="line">	v[<span class="number">0</span>] = v0; v[<span class="number">1</span>] = v1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">uint32_t</span> key[<span class="number">6</span>] = &#123; <span class="number">0x12345678</span>, <span class="number">0x23456789</span>,<span class="number">0x3456789</span>,<span class="number">0x45678901</span> &#125;;</span><br><span class="line">	<span class="type">uint32_t</span> enc[] = &#123; <span class="number">0x2E63829D</span>,<span class="number">0xC14E400F</span>,<span class="number">0x9B39BFB9</span>,<span class="number">0x5A1F8B14</span>,<span class="number">0x61886DDE</span>,<span class="number">0x6565C6CF</span>,<span class="number">0x9F064F64</span>,<span class="number">0x236A43F6</span>,<span class="number">0x7D6B</span>&#125;;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i += <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		decrypt(enc + i, (<span class="type">uint32_t</span>*)key);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, (<span class="type">char</span>*)(enc));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//hgame&#123;Tea_15_4_v3ry_h3a1thy_drlnk&#125;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//官方exp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">decrypt</span><span class="params">(<span class="type">uint32_t</span>* v, <span class="type">uint32_t</span>* k)</span> </span><br><span class="line">&#123;</span><br><span class="line">	 <span class="type">uint32_t</span> v0 = v[<span class="number">0</span>], v1 = v[<span class="number">1</span>], sum = <span class="number">-0x543210DD</span> * <span class="number">32</span>, i; </span><br><span class="line">	 <span class="type">uint32_t</span> delta = <span class="number">0x543210DD</span>;</span><br><span class="line">	 <span class="type">uint32_t</span> k0 = k[<span class="number">0</span>], k1 = k[<span class="number">1</span>], k2 = k[<span class="number">2</span>], k3 = k[<span class="number">3</span>]; </span><br><span class="line">	 <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) </span><br><span class="line">	 &#123;</span><br><span class="line">     v1 -= ((v0 &lt;&lt; <span class="number">4</span>) + k2) ^ (v0 + sum) ^ ((v0 &gt;&gt; <span class="number">5</span>) + k3);</span><br><span class="line">	 v0 -= ((v1 &lt;&lt; <span class="number">4</span>) + k0) ^ (v1 + sum) ^ ((v1 &gt;&gt; <span class="number">5</span>) + k1);</span><br><span class="line">	 sum += delta;</span><br><span class="line">	 &#125;</span><br><span class="line">		 v[<span class="number">0</span>] = v0; v[<span class="number">1</span>] = v1;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	 <span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">		 &#123;</span><br><span class="line">		 <span class="type">int</span> key[<span class="number">4</span>] =</span><br><span class="line">			 &#123; <span class="number">305419896</span>, <span class="number">591751049</span>, <span class="number">878082192</span>, <span class="number">1164413185</span> &#125;;</span><br><span class="line">		 <span class="type">int</span> Buf2[<span class="number">9</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">		 Buf2[<span class="number">0</span>] = <span class="number">778273437</span>;</span><br><span class="line">		 Buf2[<span class="number">1</span>] = <span class="number">-1051836401</span>;</span><br><span class="line">		 Buf2[<span class="number">2</span>] = <span class="number">-1690714183</span>;</span><br><span class="line">		 Buf2[<span class="number">3</span>] = <span class="number">1512016660</span>;</span><br><span class="line">		 Buf2[<span class="number">4</span>] = <span class="number">1636330974</span>;</span><br><span class="line">		 Buf2[<span class="number">5</span>] = <span class="number">1701168847</span>;</span><br><span class="line">		 Buf2[<span class="number">6</span>] = <span class="number">-1626976412</span>;</span><br><span class="line">		 Buf2[<span class="number">7</span>] = <span class="number">594166774</span>;</span><br><span class="line">		 Buf2[<span class="number">8</span>] = <span class="number">0x7D6B</span>;</span><br><span class="line">		 decrypt(Buf2, key);</span><br><span class="line">		 decrypt(Buf2 + <span class="number">2</span>, key);</span><br><span class="line">		 decrypt(Buf2 + <span class="number">4</span>, key);</span><br><span class="line">		 decrypt(Buf2 + <span class="number">6</span>, key);</span><br><span class="line">		 <span class="built_in">puts</span>(Buf2);</span><br><span class="line">		 &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Week2"><a href="#Week2" class="headerlink" title="Week2"></a>Week2</h1><h2 id="stream"><a href="#stream" class="headerlink" title="stream"></a>stream</h2><p>RC4+base64</p>
-<p>这题我遇到的问题主要出现在一开始反编译一直不成功，只能转成字节码，最后还是用在线反编译成功转成了代码，一直不知道问题在哪，可能是版本问题</p>
-<p><strong><a target="_blank" rel="noopener" href="https://github.com/extremecoders-re/pyinstxtractor">pyinstxtractor</a></strong></p>
-<img src="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/image-20230122114013068.png" class title="This is an image">
-
-<h5 id="exp-2"><a href="#exp-2" class="headerlink" title="exp"></a>exp</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> xor</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gen</span>(<span class="params">key</span>):</span><br><span class="line">    s = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">256</span>))</span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">        j = (j + s[i] + <span class="built_in">ord</span>(key[i % <span class="built_in">len</span>(key)])) % <span class="number">256</span></span><br><span class="line">        tmp = s[i]</span><br><span class="line">        s[i] = s[j]</span><br><span class="line">        s[j] = tmp</span><br><span class="line">    i = j = <span class="number">0</span></span><br><span class="line">    data = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">50</span>):</span><br><span class="line">        i = (i + <span class="number">1</span>) % <span class="number">256</span></span><br><span class="line">        j = (j + s[i]) % <span class="number">256</span></span><br><span class="line">        tmp = s[i]</span><br><span class="line">        s[i] = s[j]</span><br><span class="line">        s[j] = tmp</span><br><span class="line">        data.append(s[(s[i] + s[j]) % <span class="number">256</span>])</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line">key = <span class="string">&#x27;As_we_do_as_you_know&#x27;</span></span><br><span class="line">enc = <span class="string">&#x27;wr3ClVcSw7nCmMOcHcKgacOtMkvDjxZ6asKWw4nChMK8IsK7KMOOasOrdgbDlx3DqcKqwr0hw701Ly57w63CtcOl&#x27;</span></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> c,k <span class="keyword">in</span> <span class="built_in">zip</span>(base64.b64decode(enc).decode(),gen(key)):</span><br><span class="line">    flag += <span class="built_in">chr</span>(<span class="built_in">ord</span>(c) ^ k)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment">#hgame&#123;python_reverse_is_easy_with_internet&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="before-main"><a href="#before-main" class="headerlink" title="before_main"></a>before_main</h2><p>只看出考察的是base64，但没想到就是一个简单的换表</p>
-<p><strong>考点：</strong>gcc <strong>attribute</strong> ((constructor)), base64，ptrace反调试</p>
-<p>使⽤ <strong>attribute</strong> ((constructor)) 属性修饰函数，使得该函数可以在main函数之前由libc_start_main调⽤</p>
-<img src="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/image-20230122115433564.png" class title="This is an image">
-
-<p>这才是真正修改后的表</p>
-<p>并且该函数使⽤ptrace检测是否处于调试状态，所以调试时不会触发换表操作</p>
-<p> ptrace提供了一种使父进程得以监视和控制其它进程的方式，它还能够改变子进程中的寄存器和内核映像，因而可以实现断点调试和系统调用的跟踪。</p>
-<img src="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/image-20230122120401820.png" class title="This is an image">
-
-<h5 id="exp-3"><a href="#exp-3" class="headerlink" title="exp"></a>exp</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">str1 = <span class="string">&quot;AMHo7dLxUEabf6Z3PdWr6cOy75i4fdfeUzL17kaV7rG=&quot;</span>   <span class="comment">#str1是要解密的代码</span></span><br><span class="line">string1 = <span class="string">&quot;qaCpwYM2tO/RP0XeSZv8kLd6nfA7UHJ1No4gF5zr3VsBQbl9juhEGymc+WTxIiDK&quot;</span>   <span class="comment">#string1是改过之后的base64表</span></span><br><span class="line">string2 = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line"><span class="built_in">print</span> (base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string1,string2))))</span><br><span class="line"><span class="comment">#hgame&#123;s0meth1ng_run_befOre_m@in&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="math"><a href="#math" class="headerlink" title="math"></a>math</h2><img src="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/image-20230122130234011.png" class title="This is an image">
-
-<p>其实就是解一个5*5的矩阵方程</p>
-<img src="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/image-20230122170526228.png" class title="This is an image">
-
-<h3 id="exp-4"><a href="#exp-4" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a=[[<span class="number">63998</span>,<span class="number">33111</span>,<span class="number">67762</span>,<span class="number">54789</span>,<span class="number">61979</span>,],[<span class="number">69619</span>,<span class="number">37190</span>,<span class="number">70162</span>,<span class="number">53110</span>,<span class="number">68678</span>,],[<span class="number">63339</span>,<span class="number">30687</span>,<span class="number">66494</span>,<span class="number">50936</span>,<span class="number">60810</span>],[<span class="number">48784</span>,<span class="number">30188</span>,<span class="number">60104</span>,<span class="number">44599</span>,<span class="number">52265</span>],[<span class="number">43048</span>,<span class="number">23660</span>,<span class="number">43850</span>,<span class="number">33646</span>,<span class="number">44270</span>]]</span><br><span class="line">b=[[<span class="number">126</span>, <span class="number">225</span>, <span class="number">62</span>, <span class="number">40</span>, <span class="number">216</span>,],[ <span class="number">253</span>, <span class="number">20</span>, <span class="number">124</span>, <span class="number">232</span>, <span class="number">122</span>,],[ <span class="number">62</span>, <span class="number">23</span>, <span class="number">100</span>, <span class="number">161</span>,<span class="number">36</span>],[<span class="number">118</span>,<span class="number">21</span>,<span class="number">184</span>,<span class="number">26</span>,<span class="number">142</span>],[<span class="number">59</span>,<span class="number">31</span>,<span class="number">186</span>,<span class="number">82</span>,<span class="number">79</span>]]</span><br><span class="line">a=np.array(a)</span><br><span class="line">b=np.array(b)</span><br><span class="line"><span class="built_in">print</span>(a.dot(np.linalg.inv(b)))</span><br><span class="line">c=[<span class="number">104</span>,<span class="number">103</span>,<span class="number">97</span>,<span class="number">109</span>,<span class="number">101</span>,<span class="number">123</span>,<span class="number">121</span>,<span class="number">48</span>,<span class="number">117</span>,<span class="number">95</span>,<span class="number">109</span>,<span class="number">64</span>,<span class="number">116</span>,<span class="number">95</span>,<span class="number">49</span>,<span class="number">115</span>,<span class="number">95</span>,<span class="number">79</span>,<span class="number">48</span>,<span class="number">100</span>,<span class="number">125</span>]</span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(c)):</span><br><span class="line">    flag+=<span class="built_in">chr</span>(c[i])</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment">#hgame&#123;y0u_m@t_1s_O0d&#125;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="numpy中的矩阵乘法"><a href="#numpy中的矩阵乘法" class="headerlink" title="numpy中的矩阵乘法"></a>numpy中的矩阵乘法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line">a = numpy.array([[<span class="number">1</span>,<span class="number">2</span>],</span><br><span class="line">                 [<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line">b = numpy.array([[<span class="number">5</span>,<span class="number">6</span>],</span><br><span class="line">                 [<span class="number">7</span>,<span class="number">8</span>]])</span><br><span class="line"></span><br><span class="line">a*b   <span class="comment">#对应位置相乘</span></span><br><span class="line">&gt;&gt;&gt;array([[ <span class="number">5</span>, <span class="number">12</span>],</span><br><span class="line">          [<span class="number">21</span>, <span class="number">32</span>]])</span><br><span class="line"></span><br><span class="line">a.dot(b)   <span class="comment">#矩阵乘法</span></span><br><span class="line">&gt;&gt;&gt;array([[<span class="number">19</span>, <span class="number">22</span>],</span><br><span class="line">          [<span class="number">43</span>, <span class="number">50</span>]])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="VidarCamera"><a href="#VidarCamera" class="headerlink" title="VidarCamera"></a>VidarCamera</h2><img src="/2023/01/21/Hgame2023%E5%A4%8D%E7%8E%B0/image-20230122171856511.png" class title="This is an image">
-
-<p>一个xtea加密，迭代次数为33轮</p>
-<p>key为[2233,4455,6677,8899]</p>
-<h5 id="exp-5"><a href="#exp-5" class="headerlink" title="exp"></a>exp</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">decipher</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> num_rounds, <span class="type">uint32_t</span> v[<span class="number">2</span>], <span class="type">uint32_t</span> <span class="type">const</span> key[<span class="number">4</span>])</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="type">unsigned</span> <span class="type">int</span> i;</span><br><span class="line">	 <span class="type">uint32_t</span> v0 = v[<span class="number">0</span>], v1 = v[<span class="number">1</span>], delta = <span class="number">0x34566543</span>, sum = delta * num_rounds;</span><br><span class="line">		 <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; num_rounds; i++) &#123;</span><br><span class="line">		 sum -= delta;</span><br><span class="line">		 v1 -= (((v0 &lt;&lt; <span class="number">4</span>) ^ (v0 &gt;&gt; <span class="number">5</span>)) + v0) ^ (sum + key[(sum &gt;&gt; <span class="number">11</span>) &amp; <span class="number">3</span>]);</span><br><span class="line">			</span><br><span class="line">		 v0 -= (((v1 &lt;&lt; <span class="number">4</span>) ^ (v1 &gt;&gt; <span class="number">5</span>)) + v1) ^ (sum + key[sum &amp; <span class="number">3</span>]) ^ sum;</span><br><span class="line">			</span><br><span class="line">	&#125;</span><br><span class="line">	 v[<span class="number">0</span>] = v0; v[<span class="number">1</span>] = v1;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">uint32_t</span> ch[] = &#123; <span class="number">637666042</span>, <span class="number">457511012</span>, <span class="number">-2038734351</span>, <span class="number">578827205</span>, <span class="number">-245529892</span>,<span class="number">-1652281167</span>,<span class="number">435335655</span>,<span class="number">733644188</span>,<span class="number">705177885</span>,<span class="number">-596608744</span> &#125;;</span><br><span class="line">	<span class="type">uint32_t</span> num[] = &#123; <span class="number">2233U</span> ,<span class="number">4455u</span>,<span class="number">6677u</span>,<span class="number">8899u</span> &#125;;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">8</span>; i &gt;= <span class="number">0</span>; i -= <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		decipher(<span class="number">33</span>, &amp;ch[i], num);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">puts</span>(ch);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//hgame&#123;d8c1d7d34573434ea8dfe5db40fbb25c0&#125;</span></span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
   </nav>
 
 
@@ -2491,7 +2421,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2513,7 +2443,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
